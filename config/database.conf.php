@@ -1,10 +1,10 @@
 <?php
-define('DBDEMO',    'DBDEMO');
+define('DBLEAPCODE',    'DBLEAPCODE');
 
 $__c = &Config::configRefForKeyPath('database');
 
 $__c[C_RUNTIME_228] = array(
-    DBDEMO => array(
+    DBLEAPCODE => array(
         'r' => array(
             'hosts' => array(
                 array('h' => '127.0.0.1', 'p' => 3306),

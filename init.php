@@ -8,16 +8,19 @@ define('UI', PRJ.'ui/');
 define('CONFIG', PRJ.'config/');
 define('MODEL', PRJ.'model/');
 
-Config::loadConfig(CONFIG.'route');
 Config::loadConfig(CONFIG.'runtime');
-Config::loadConfig(CONFIG.'database');
 Config::loadConfig(CONFIG.'global');
+Config::loadConfig(CONFIG.'database');
+Config::loadConfig(CONFIG.'route');
 
 DAutoloader::getInstance()->addAutoloadPathArray(
     array(
         dirname(__FILE__).'/dal/',
     )
 );
+
+Dojet::addModule(__DIR__.'/../mod-simpleuser');
+ModuleSimpleUser::module()->setDatabase(DBLEAPCODE);
 
 // Dojet::addModule(__DIR__.'/../mod-simplecms');
 // ModuleSimpleCMS::module()->setDatabase(DBDEMO);
