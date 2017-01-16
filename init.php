@@ -1,5 +1,5 @@
 <?php
-use Mod\SimpleCMS\ModuleSimpleCMS;
+use Mod\SimpleUser\ModuleSimpleUser;
 
 require dirname(__FILE__).'/../be-dojet/dojet.php';
 require dirname(__FILE__).'/../be-global/init.php';
@@ -7,6 +7,7 @@ require dirname(__FILE__).'/../be-global/init.php';
 define('UI', PRJ.'ui/');
 define('CONFIG', PRJ.'config/');
 define('MODEL', PRJ.'model/');
+define('UTIL', PRJ.'util/');
 
 Config::loadConfig(CONFIG.'runtime');
 Config::loadConfig(CONFIG.'global');
@@ -21,6 +22,9 @@ DAutoloader::getInstance()->addAutoloadPathArray(
 
 Dojet::addModule(__DIR__.'/../mod-simpleuser');
 ModuleSimpleUser::module()->setDatabase(DBLEAPCODE);
+Config::loadConfig(SIMPLEUSER_CONFIG.'route');
+
+// Config::loadConfig()
 
 // Dojet::addModule(__DIR__.'/../mod-simplecms');
 // ModuleSimpleCMS::module()->setDatabase(DBDEMO);

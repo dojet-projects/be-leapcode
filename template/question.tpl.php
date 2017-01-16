@@ -66,8 +66,18 @@ $().ready(function() {
   require(['vs/editor/editor.main'], function() {
       window.editor = monaco.editor.create(document.getElementById('container'), {
           value: [
-              '<' + '?php',
-              'echo "ok";'
+            '<' + '?php\nclass Solution {',
+            '',
+                '\t/**',
+                 '\t * @param  array    $nums',
+                 '\t * @param  int      $target',
+                 '\t * @return array',
+                 '\t */',
+                '\tpublic function twoSum($nums, $target) {',
+            '',
+                '\t}',
+            '',
+            '}'
           ].join('\n'),
           language: 'php'
       });
@@ -78,6 +88,7 @@ $().ready(function() {
 
     var data = new FormData();
     data.append('code', code);
+    data.append('qno', <?=safeHtml($tpl_qno)?>);
     $.ajax({
       url: "/ajax/run",
       type: 'POST',

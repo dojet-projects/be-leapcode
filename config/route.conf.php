@@ -2,7 +2,7 @@
 
 Dispatcher::loadRoute(array(
     '/^$/' => UI.'HomeAction',
-    '/^question/' => UI.'QuestionAction',
+    '/^question\/(?<qno>\d+)$/' => UI.'QuestionAction',
     '/^ajax\/run$/' => UI.'ajax/RunAction',
     )
 );

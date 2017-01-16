@@ -11,7 +11,7 @@ $__c[C_RUNTIME_228] = array(
                 ),
             'username' => 'root',
             'password' => 'root',
-            'dbname' => 'demo',
+            'dbname' => 'leap',
             'charset' => 'utf8',
             'timeout' => 1, //sec
         ),
@@ -21,7 +21,7 @@ $__c[C_RUNTIME_228] = array(
                 ),
             'username' => 'root',
             'password' => 'root',
-            'dbname' => 'demo',
+            'dbname' => 'leap',
             'charset' => 'utf8',
             'timeout' => 1, //sec
         ),
