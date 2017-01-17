@@ -8,6 +8,7 @@ define('UI', PRJ.'ui/');
 define('CONFIG', PRJ.'config/');
 define('MODEL', PRJ.'model/');
 define('UTIL', PRJ.'util/');
+define('TEMPLATE', PRJ.'template/');
 
 Config::loadConfig(CONFIG.'runtime');
 Config::loadConfig(CONFIG.'global');

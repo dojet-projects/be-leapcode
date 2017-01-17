@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/favicon.ico">
 
-    <title>Starter Template for Bootstrap</title>
+    <title><?php echo safeHtml($tpl_question['title'])?> | Leapcode</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -23,32 +23,66 @@
 
   <body>
 
-    <nav class="navbar navbar-inverse" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
+<?php include TEMPLATE.'mod/nav.tpl.php'; ?>
 
     <div class="container">
-      <div id="container" style="width:800px;height:400px; border:1px solid grey"></div>
-      <button id="run" class="btn btn-primary">运行</button>
+      <div class="row">
+        <div class="col-xs-12">
+          <h2><?php echo safeHtml($tpl_qno.'. '.$tpl_question['title'])?></h2>
+          <hr />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-9">
+          <div>
+            <?php echo $tpl_brief;?>
+          </div>
+        </div>
+        <div class="col-xs-3">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <hr />
+          <div id="container" style="height:400px; border: solid 1px grey; margin-bottom:1em;"></div>
+          <div class="clearfix">
+            <button id="run" class="btn btn-primary pull-right">运行</button>
+          </div>
+          <div id="run-result" style="display:none;">
+            <hr />
+            <div class="panel panel-default" role="panel">
+              <div class="panel-heading">运行结果</div>
+              <div class="panel-body" style="display:none;" role="compile-error">
+                <div class="col-xs-12">
+                  <div class="well" role="error">
+                  </div>
+                </div>
+              </div>
+              <div class="panel-body" style="display:none;" role="result">
+                <div class="col-xs-12">
+                  <p>输入</p>
+                  <div class="well" role="input">
+                    1,2,3
+                  </div>
+                </div>
+                <div class="col-xs-6">
+                  <p>结果</p>
+                  <div class="well" role="output">
+                    [1,2]
+                  </div>
+                </div>
+                <div class="col-xs-6">
+                  <p>正确结果</p>
+                  <div class="well" role="expect">
+                    [1,2]
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div><!-- /.container -->
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -66,18 +100,13 @@ $().ready(function() {
   require(['vs/editor/editor.main'], function() {
       window.editor = monaco.editor.create(document.getElementById('container'), {
           value: [
-            '<' + '?php\nclass Solution {',
-            '',
-                '\t/**',
-                 '\t * @param  array    $nums',
-                 '\t * @param  int      $target',
-                 '\t * @return array',
-                 '\t */',
-                '\tpublic function twoSum($nums, $target) {',
-            '',
-                '\t}',
-            '',
-            '}'
+<?php
+$lines = explode("\r\n", $tpl_solution);
+array_walk($lines, function(&$item) {
+  $item = sprintf("'%s'", $item);
+});
+print join(',', $lines);
+?>
           ].join('\n'),
           language: 'php'
       });
@@ -102,13 +131,15 @@ $().ready(function() {
         try {
           var result = JSON.parse(data);
           if (result.errno === 0) {
-            var code = result.data;
-            console.log(code);
+            var data = result.data;
+            console.log(data);
+            run_result(data);
           } else {
             console.warn(result);
           }
         } catch (e) {
           alert('八阿哥驾到，请联系研发\n' + data);
+          console.log(e);
         }
       },
       complete: function (jqXHR, textStatus) {
@@ -117,4 +148,43 @@ $().ready(function() {
 
   });
 });
+
+function run_result(data) {
+  var result = data.result;
+  var info = data.info;
+  $('#run-result div[role=panel]').removeClass('panel-success panel-danger');
+  $('#run-result div[role=compile-error]').hide();
+  $('#run-result div[role=result]').hide();
+  if ('success' == result) {
+    $('#run-result div[role=result]').show();
+    $('#run-result div[role=panel]').addClass('panel-success');
+    run_success(info.input, info.output, info.expect, info.runtime);
+  } else if ('fail' == result) {
+    $('#run-result div[role=result]').show();
+    $('#run-result div[role=panel]').addClass('panel-danger');
+    run_fail(info.input, info.output, info.expect, info.runtime);
+  } else if ('error' == result) {
+    $('#run-result div[role=compile-error]').show();
+    $('#run-result div[role=panel]').addClass('panel-danger');
+    run_error(info.error);
+  }
+  $('#run-result').show('slow');
+}
+
+function run_success(input, output, expect, runtime) {
+  $('#run-result div[role=input]').html(input);
+  $('#run-result div[role=output]').html(output);
+  $('#run-result div[role=expect]').html(expect);
+}
+
+function run_fail(input, output, expect, runtime) {
+  $('#run-result div[role=input]').html(input);
+  $('#run-result div[role=output]').html(output);
+  $('#run-result div[role=expect]').html(expect);
+}
+
+function run_error(error) {
+  $('#run-result div[role=error]').html(error);
+}
+
 </script>

@@ -5,12 +5,12 @@
  * Filename: HomeAction.class.php
  *
  * @author setimouse@gmail.com
- * @since 2014 3 14
+ * @since 2017 1 16
  */
 class HomeAction extends XBaseAction {
 
     public function execute() {
-        print 'ok';
+        $this->displayTemplate('home.tpl.php');
     }
 
 }

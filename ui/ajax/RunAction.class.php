@@ -27,9 +27,18 @@ class RunAction extends XBaseAction {
         copy(sprintf('%squestions/%d/code/php/test/testcase.php', $coderoot, $qno),
             $playground_path.'testcase.php');
 
-        $cmd = "sudo docker run -v $playground_path:/phpfile --rm php php /phpfile/main.php";
+        $cmd = "sudo docker run -v $playground_path:/code --rm php php /code/main.php";
         $output = shell_exec($cmd);
         $result = json_decode($output, true);
+        if (is_null($result)) {
+            $result = array(
+                'result' => 'error',
+                'msg' => '编译错误',
+                'info' => array(
+                    'error' => $output,
+                    ),
+                );
+        }
 
         $this->displayJsonSuccess($result);
     }
