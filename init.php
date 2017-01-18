@@ -18,6 +18,7 @@ Config::loadConfig(CONFIG.'route');
 DAutoloader::getInstance()->addAutoloadPathArray(
     array(
         dirname(__FILE__).'/dal/',
+        MODEL,
     )
 );
 

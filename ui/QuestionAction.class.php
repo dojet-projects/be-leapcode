@@ -10,9 +10,9 @@
 require UTIL.'Michelf/Markdown.inc.php';
 use \Michelf\Markdown;
 
-class QuestionAction extends XBaseAction {
+class QuestionAction extends SigninBaseAction {
 
-    public function execute() {
+    protected function pageExecute($is_signin) {
         $qno = MRequest::param('qno');
 
         $coderoot = Config::runtimeConfigForKeyPath('global.coderoot');
