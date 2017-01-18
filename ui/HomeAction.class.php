@@ -7,9 +7,9 @@
  * @author setimouse@gmail.com
  * @since 2017 1 16
  */
-class HomeAction extends XBaseAction {
+class HomeAction extends SigninBaseAction {
 
-    public function execute() {
+    protected function pageExecute($is_signin) {
         $this->displayTemplate('home.tpl.php');
     }
 

@@ -15,6 +15,23 @@
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <?php if ($tpl_is_signin) : ?>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <?php echo safeHtml($tpl_me->username()); ?>
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <!-- <li><a href="#">Action</a></li>
+                  <li class="divider"></li> -->
+                  <li><a href="/signout">登出</a></li>
+                </ul>
+              </li>
+            <?php else : ?>
+              <li><a href="/signin">登入</a></li>
+              <li><a href="/signup">注册</a></li>
+            <?php endif ?>
         </div><!--/.nav-collapse -->
       </div>
     </nav>

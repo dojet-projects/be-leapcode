@@ -32,7 +32,7 @@
           <hr />
         </div>
       </div>
-      <div class="row">
+      <div class="row"> <!-- row brief -->
         <div class="col-xs-9">
           <div>
             <?php echo $tpl_brief;?>
@@ -40,13 +40,18 @@
         </div>
         <div class="col-xs-3">
         </div>
-      </div>
-      <div class="row">
+      </div> <!-- / row brief -->
+      <div class="row"> <!-- row code -->
         <div class="col-xs-12">
           <hr />
           <div id="container" style="height:400px; border: solid 1px grey; margin-bottom:1em;"></div>
           <div class="clearfix">
+            <?php if ($tpl_is_signin) : ?>
             <button id="run" class="btn btn-primary pull-right">运行</button>
+            <?php else : ?>
+            <button class="btn btn-primary pull-left" disabled="disabled">运行</button>
+            <a class="btn btn-link" href="/signin">&raquo; 登录后提交代码</a>
+            <?php endif ?>
           </div>
           <div id="run-result" style="display:none;">
             <hr />
@@ -81,7 +86,8 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> <!-- / row code -->
+      <?php include TEMPLATE.'mod/tail.tpl.php'; ?>
     </div><!-- /.container -->
 
     <!-- Bootstrap core JavaScript
