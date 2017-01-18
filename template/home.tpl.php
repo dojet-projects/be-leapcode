@@ -27,7 +27,7 @@
     <div class="container well">
       <div class="col-xs-12">
 
-        <button class="btn btn-primary btn-lg">开始挑战！</button>
+        <a href="/question/1" class="btn btn-primary btn-lg">开始挑战！</a>
       </div>
     </div><!-- /.container -->
 
