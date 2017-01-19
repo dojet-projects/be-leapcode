@@ -1,3 +1,11 @@
+<?php
+$menu = array(
+  'question' => array(
+    'title' => '问题',
+    'link' => '#',
+    ),
+  );
+?>
     <nav class="navbar navbar-inverse" role="navigation" style="border-radius:0;">
       <div class="container">
         <div class="navbar-header">
@@ -11,9 +19,13 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">问题</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <?php foreach ($menu as $key => $info) : ?>
+            <li<? echo $tpl_topmenu == $key ? ' class="active"' : '' ?>>
+              <a href="<?php echo $info['link']?>">
+                <?php echo safeHtml($info['title']) ?>
+              </a>
+            </li>
+            <?php endforeach ?>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <?php if ($tpl_is_signin) : ?>

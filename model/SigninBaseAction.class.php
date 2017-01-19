@@ -18,6 +18,15 @@ abstract class SigninBaseAction extends SimpleUserSigninBaseAction {
         return TEMPLATE;
     }
 
+    protected function topmenu() {
+        return 'question';
+    }
+
+    function __construct() {
+        parent::__construct();
+        $this->assign('topmenu', $this->topmenu());
+    }
+
     final protected function signinExecute(MSimpleUser $me) {
         $this->me = $me;
         return $this->pageExecute(true);
