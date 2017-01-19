@@ -107,7 +107,7 @@ $().ready(function() {
       window.editor = monaco.editor.create(document.getElementById('container'), {
           value: [
 <?php
-$lines = explode("\r\n", $tpl_solution);
+$lines = explode("\r\n", $tpl_code);
 array_walk($lines, function(&$item) {
   $item = sprintf("'%s'", $item);
 });
@@ -124,6 +124,7 @@ print join(',', $lines);
     var data = new FormData();
     data.append('code', code);
     data.append('qno', <?=safeHtml($tpl_qno)?>);
+    data.append('lang', 'php');
     $.ajax({
       url: "/ajax/run",
       type: 'POST',

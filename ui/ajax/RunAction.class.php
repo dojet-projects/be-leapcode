@@ -7,13 +7,20 @@
  * @author setimouse@gmail.com
  * @since 2017 1 3
  */
-class RunAction extends XBaseAction {
+use Mod\SimpleUser\SimpleUserSigninBaseAction;
+use Mod\SimpleUser\MSimpleUser;
 
-    public function execute() {
+class RunAction extends SimpleUserSigninBaseAction {
+
+    protected function signinExecute(MSimpleUser $me) {
         $code = MRequest::post('code');
         $qno = MRequest::post('qno');
+        $lang = MRequest::post('lang');
 
         $coderoot = Config::runtimeConfigForKeyPath('global.coderoot');
+
+        //  save code
+        DalUserQuestion::setUserQuestion($me->uid(), $qno, $lang, $code);
 
         $playground_path = sprintf('%splayground/%d/php/', $coderoot, $qno);
         if (!file_exists($playground_path)) {

@@ -22,15 +22,23 @@ class QuestionAction extends SigninBaseAction {
         $md = file_get_contents($path);
         $brief = Markdown::defaultTransform($md);
 
-        //  solution
-        $path = sprintf("%squestions/%d/code/php/solution/solution.php", $coderoot, $qno);
-        $solution = file_get_contents($path);
+        //  solution code
+        $code = null;
+        if ($is_signin) {
+            $uid = $this->me->uid();
+            $userQuestion = DalUserQuestion::getUserQuestion($uid, $qno, 'php');
+            $code = $userQuestion['code'];
+        }
+        if (is_null($code)) {
+            $path = sprintf("%squestions/%d/code/php/solution/solution.php", $coderoot, $qno);
+            $code = file_get_contents($path);
+        }
 
         $question = DalQuestion::getQuestion($qno);
 
         $this->assign('qno', $qno);
         $this->assign('question', $question);
-        $this->assign('solution', $solution);
+        $this->assign('code', $code);
         $this->assign('brief', $brief);
         $this->displayTemplate('question.tpl.php');
     }
