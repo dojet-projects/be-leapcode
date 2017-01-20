@@ -20,7 +20,7 @@ class RunAction extends SimpleUserSigninBaseAction {
         $coderoot = Config::runtimeConfigForKeyPath('global.coderoot');
 
         //  save code
-        DalUserQuestion::setUserQuestion($me->uid(), $qno, $lang, $code);
+        DalSolution::setSolution($me->uid(), $qno, $lang, $code);
 
         $playground_path = sprintf('%splayground/%d/php/', $coderoot, $qno);
         if (!file_exists($playground_path)) {

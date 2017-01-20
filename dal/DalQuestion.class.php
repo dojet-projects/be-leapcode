@@ -22,4 +22,13 @@ class DalQuestion extends MysqlDal {
         return self::rs2rowline($sql);
     }
 
+    public static function getQuestionList($ps = 0, $pn = 999999) {
+        DAssert::assertNumeric($ps, $pn);
+        $sql = "SELECT *
+                FROM questions
+                ORDER BY qno
+                LIMIT $ps, $pn";
+        return self::rs2array($sql);
+    }
+
 }

@@ -26,8 +26,8 @@ class QuestionAction extends SigninBaseAction {
         $code = null;
         if ($is_signin) {
             $uid = $this->me->uid();
-            $userQuestion = DalUserQuestion::getUserQuestion($uid, $qno, 'php');
-            $code = $userQuestion['code'];
+            $solution = DalSolution::getSolution($uid, $qno, 'php');
+            $code = $solution['code'];
         }
         if (is_null($code)) {
             $path = sprintf("%squestions/%d/code/php/solution/solution.php", $coderoot, $qno);
