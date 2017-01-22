@@ -44,9 +44,31 @@
         <div class="col-xs-3">
         </div>
       </div> <!-- / row brief -->
-      <div class="row"> <!-- row code -->
+      <div class="row">
         <div class="col-xs-12">
           <hr />
+        </div>
+      </div>
+      <?php
+          $arrLang = array(
+            'php' => 'PHP',
+            'java' => 'Java',
+            );
+      ?>
+      <div class="row" style="margin-bottom:1em;">
+        <div class="col-xs-3">
+          <select class="form-control">
+            <?php foreach ($arrLang as $key => $lang) :
+                    if (in_array($key, $tpl_lang_list)) :
+            ?>
+            <option value="<?php echo $lang; ?>"><?php echo safeHtml($lang); ?></option>
+            <?php   endif; ?>
+            <?php endforeach; ?>
+          </select>
+        </div>
+      </div>
+      <div class="row"> <!-- row code -->
+        <div class="col-xs-12">
           <div id="container" style="height:400px; border: solid 1px grey; margin-bottom:1em;"></div>
           <div class="clearfix">
             <?php if ($tpl_is_signin) : ?>
