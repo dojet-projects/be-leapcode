@@ -124,8 +124,6 @@
   </body>
 </html>
 <script src="/static/monaco-editor/min/vs/loader.js"></script>
-<script>
-</script>
 <script type="text/javascript">
 $().ready(function() {
   require.config({ paths: { 'vs': '/static/monaco-editor/min/vs' }});

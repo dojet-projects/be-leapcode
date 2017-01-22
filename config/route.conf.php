@@ -2,9 +2,9 @@
 
 Dispatcher::loadRoute(array(
     '/^$/' => UI.'HomeAction',
-    '/^question\/(?<qno>\d+)$/' => UI.'QuestionAction',
-    '/^question\-list$/' => UI.'QuestionListAction',
     '/^question\/pick\-one$/' => UI.'PickOneAction',
+    '/^question\/(?<title>.+)$/' => UI.'QuestionAction',
+    '/^question\-list$/' => UI.'QuestionListAction',
     '/^ajax\/run$/' => UI.'ajax/RunAction',
     )
 );

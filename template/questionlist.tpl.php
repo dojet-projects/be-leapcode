@@ -38,7 +38,7 @@
             <tr>
               <td><?php echo $q['qno']; ?></td>
               <td>
-                <a href="/question/<?php echo $q['qno']; ?>">
+                <a href="/question/<?php echo safeHtml($q['seo_title']); ?>">
                   <?php echo safeHtml($q['title']); ?>
                 </a>
               </td>

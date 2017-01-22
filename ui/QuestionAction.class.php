@@ -13,7 +13,15 @@ use \Michelf\Markdown;
 class QuestionAction extends SigninBaseAction {
 
     protected function pageExecute($is_signin) {
-        $qno = MRequest::param('qno');
+        $seo_title = MRequest::param('title');
+        $question = DalQuestion::getQuestionBySeoTitle($seo_title);
+
+        if (is_null($question)) {
+            print 'unknow question';
+            return;
+        }
+
+        $qno = $question['qno'];
 
         $coderoot = Config::runtimeConfigForKeyPath('global.coderoot');
 
@@ -42,12 +50,10 @@ class QuestionAction extends SigninBaseAction {
             $code = $solution['code'];
         }
         if (is_null($code)) {
-            $path = sprintf("%squestions/%d/code/php/solution/solution.php", $coderoot, $qno);
             $lang = 'php';
+            $path = sprintf("%squestions/%d/code/%s/solution/solution.php", $coderoot, $qno, $lang);
             $code = file_get_contents($path);
         }
-
-        $question = DalQuestion::getQuestion($qno);
 
         $this->assign('qno', $qno);
         $this->assign('question', $question);

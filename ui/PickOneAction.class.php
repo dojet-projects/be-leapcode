@@ -11,8 +11,8 @@ class PickOneAction extends SigninBaseAction {
 
     protected function pageExecute($is_signin) {
         $question = DalQuestion::getRandQuestion();
-        $qno = $question['qno'];
-        redirect('/question/'.$qno);
+        $seo_title = $question['seo_title'];
+        redirect('/question/'.$seo_title);
     }
 
 }
