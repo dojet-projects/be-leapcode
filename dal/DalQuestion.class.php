@@ -31,4 +31,12 @@ class DalQuestion extends MysqlDal {
         return self::rs2array($sql);
     }
 
+    public static function getRandQuestion() {
+        $sql = "SELECT *
+                FROM questions
+                ORDER BY RAND()
+                LIMIT 1";
+        return self::rs2rowline($sql);
+    }
+
 }

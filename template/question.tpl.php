@@ -37,6 +37,9 @@
           <div>
             <?php echo $tpl_brief;?>
           </div>
+          <div>
+            <a href="/question/pick-one" class="btn btn-primary pull-right">换一个</a>
+          </div>
         </div>
         <div class="col-xs-3">
         </div>

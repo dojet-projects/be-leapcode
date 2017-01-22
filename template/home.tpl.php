@@ -24,10 +24,12 @@
 
 <?php include TEMPLATE.'mod/nav.tpl.php'; ?>
 
-    <div class="container well">
-      <div class="col-xs-12">
-
-        <a href="/question/1" class="btn btn-primary btn-lg">开始挑战！</a>
+    <div class="container">
+      <div class="row jumbotron">
+        <div class="col-xs-12 ">
+          <h2>Leapcode是一个在线编程网站</h2>
+          <a href="/question/pick-one" class="btn btn-primary btn-lg">开始挑战！</a>
+        </div>
       </div>
     </div><!-- /.container -->
 
