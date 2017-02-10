@@ -12,7 +12,7 @@ define('TEMPLATE', PRJ.'template/');
 
 Config::loadConfig(CONFIG.'runtime');
 Config::loadConfig(CONFIG.'global');
-Config::loadConfig(CONFIG.'database');
+Config::loadConfig(CONFIG.'database/database');
 Config::loadConfig(CONFIG.'route');
 
 DAutoloader::getInstance()->addAutoloadPathArray(

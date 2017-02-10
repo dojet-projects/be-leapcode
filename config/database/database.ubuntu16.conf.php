@@ -7,7 +7,7 @@ $__c[C_RUNTIME_UBUNTU16] = array(
     DBLEAPCODE => array(
         'r' => array(
             'hosts' => array(
-                array('h' => '127.0.0.1', 'p' => 3306),
+                array('h' => '192.168.99.1', 'p' => 3306),
                 ),
             'username' => 'root',
             'password' => 'root',
@@ -17,7 +17,7 @@ $__c[C_RUNTIME_UBUNTU16] = array(
         ),
         'w' => array(
             'hosts' => array(
-                array('h' => '127.0.0.1', 'p' => 3306),
+                array('h' => '192.168.99.1', 'p' => 3306),
                 ),
             'username' => 'root',
             'password' => 'root',
