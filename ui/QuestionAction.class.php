@@ -26,12 +26,12 @@ class QuestionAction extends SigninBaseAction {
         $coderoot = Config::runtimeConfigForKeyPath('global.coderoot');
 
         //  brief
-        $path = sprintf("%squestions/%d/brief.md", $coderoot, $qno);
+        $path = sprintf("%squestions/codes/%d/brief.md", $coderoot, $qno);
         $md = file_get_contents($path);
         $brief = Markdown::defaultTransform($md);
 
         //  code
-        $dh = opendir(sprintf("%squestions/%d/code/", $coderoot, $qno));
+        $dh = opendir(sprintf("%squestions/codes/%d/code/", $coderoot, $qno));
         DAssert::assert($dh, 'read path error!');
         $lang_list = array();
         while (false !== ($file = readdir($dh))) {
@@ -51,7 +51,7 @@ class QuestionAction extends SigninBaseAction {
         }
         if (is_null($code)) {
             $lang = 'php';
-            $path = sprintf("%squestions/%d/code/%s/solution/solution.php", $coderoot, $qno, $lang);
+            $path = sprintf("%squestions/codes/%d/code/%s/solution/solution.php", $coderoot, $qno, $lang);
             $code = file_get_contents($path);
         }
 
