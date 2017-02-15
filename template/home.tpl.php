@@ -33,6 +33,7 @@
       </div>
     </div><!-- /.container -->
 
+    <?php include TEMPLATE.'mod/footer.tpl.php'; ?>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

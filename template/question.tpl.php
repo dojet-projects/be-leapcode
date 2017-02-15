@@ -122,8 +122,8 @@
           </div>
         </div>
       </div> <!-- / row code -->
-      <?php include TEMPLATE.'mod/tail.tpl.php'; ?>
     </div><!-- /.container -->
+    <?php include TEMPLATE.'mod/footer.tpl.php'; ?>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
