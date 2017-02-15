@@ -3,28 +3,28 @@
  * dal
  *
  * DAL code
- * Filename: DalSolution.class.php
+ * Filename: DalAccepted.class.php
  *
  * @author liyan
- * @since 2017 1 19
+ * @since 2017 2 15
  */
-class DalSolution extends MysqlDal {
+class DalAcceptedCode extends MysqlDal {
 
     protected static function defaultDB() {
         return DBLEAPCODE;
     }
 
-    public static function getSolution($uid, $qno, $lang) {
+    public static function getCode($uid, $qno, $lang) {
         DAssert::assertNumeric($uid);
         DAssert::assertNumeric($qno);
         self::escape($lang);
         $sql = "SELECT *
-                FROM solution
-                WHERE qno=$qno AND uid=$uid AND lang='$lang'";
+                FROM accepted_code
+                WHERE qno=$qno AND uid=$uid AND lang=\"$lang\"";
         return self::rs2rowline($sql);
     }
 
-    public static function setSolution($uid, $qno, $lang, $code) {
+    public static function setCode($uid, $qno, $lang, $code) {
         DAssert::assertNumeric($uid);
         DAssert::assertNumeric($qno);
         self::escape($lang);
@@ -41,7 +41,7 @@ class DalSolution extends MysqlDal {
             'code' => $code,
             'updatetime' => datetime(),
         );
-        return self::doInsertUpdate('solution', $arrIns, $arrUpd);
+        return self::doInsertUpdate('accepted_code', $arrIns, $arrUpd);
     }
 
 }

@@ -47,6 +47,15 @@ class RunAction extends SimpleUserSigninBaseAction {
                 'msg' => '编译错误',
                 'error' => $output,
                 );
+        } elseif ($result['result'] === 'success') {
+            DalAccepted::beginTransaction();
+            try {
+                DalAccepted::setAccepted($me->uid(), $qno);
+                DalAcceptedCode::setCode($me->uid(), $qno, $lang, $code);
+                DalAccepted::commit();
+            } catch (Exception $e) {
+                DalAccepted::rollback();
+            }
         }
 
         $this->displayJsonSuccess($result);

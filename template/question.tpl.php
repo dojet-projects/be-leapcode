@@ -90,22 +90,31 @@
                 </div>
               </div>
               <div class="panel-body" style="display:none;" role="result">
-                <div class="col-xs-12">
-                  <p>输入</p>
-                  <div class="well" role="input">
-                    1,2,3
+                <div class="row">
+                  <div class="col-xs-12">
+                    <p>输入</p>
+                    <div class="well" role="input">
+                      1,2,3
+                    </div>
                   </div>
                 </div>
-                <div class="col-xs-6">
-                  <p>你的结果</p>
-                  <div class="well" role="output">
-                    [1,2]
+                <div class="row">
+                  <div class="col-xs-6">
+                    <p>你的结果</p>
+                    <div class="well" role="output">
+                      [1,2]
+                    </div>
+                  </div>
+                  <div class="col-xs-6">
+                    <p>正确结果</p>
+                    <div class="well" role="expect">
+                      [1,2]
+                    </div>
                   </div>
                 </div>
-                <div class="col-xs-6">
-                  <p>正确结果</p>
-                  <div class="well" role="expect">
-                    [1,2]
+                <div class="row">
+                  <div class="col-xs-12">
+                    <p>运行耗时: <span id="runtime"></span></p>
                   </div>
                 </div>
               </div>
@@ -189,11 +198,11 @@ function run_result(data) {
   if ('success' == result) {
     $('#run-result div[role=result]').show();
     $('#run-result div[role=panel]').addClass('panel-success');
-    run_success(data.input_desc, data.output, data.expect_desc, data.runtime);
+    run_success(data.input_desc, data.output, data.expect_desc, data.nice_runtime);
   } else if ('fail' == result) {
     $('#run-result div[role=result]').show();
     $('#run-result div[role=panel]').addClass('panel-danger');
-    run_fail(data.input_desc, data.output, data.expect_desc, data.runtime);
+    run_fail(data.input_desc, data.output, data.expect_desc, data.nice_runtime);
   } else if ('error' == data.result) {
     $('#run-result div[role=compile-error]').show();
     $('#run-result div[role=panel]').addClass('panel-danger');
@@ -206,12 +215,14 @@ function run_success(input, output, expect, runtime) {
   $('#run-result div[role=input]').html(input);
   $('#run-result div[role=output]').html(output);
   $('#run-result div[role=expect]').html(expect);
+  $('#runtime').html(runtime);
 }
 
 function run_fail(input, output, expect, runtime) {
   $('#run-result div[role=input]').html(input);
   $('#run-result div[role=output]').html(output);
   $('#run-result div[role=expect]').html(expect);
+  $('#runtime').html(runtime);
 }
 
 function run_error(error) {
