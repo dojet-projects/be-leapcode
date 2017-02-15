@@ -25,17 +25,28 @@
 <?php include TEMPLATE.'mod/nav.tpl.php'; ?>
 
     <div class="container">
-      <div class="col-xs-9">
+      <div class="col-xs-8">
 
-        <table class="table table-striped">
+        <table class="table table-striped ">
           <thead>
             <tr>
-              <th>#</th><th>标题</th><th>难度</th>
+              <th class="col-xs-1"></th><th class="col-xs-1">#</th><th>标题</th><th>难度</th>
             </tr>
           </thead>
           <tbody>
             <?php foreach ($tpl_questionList as $q) : ?>
             <tr>
+              <td>
+<?php
+if ($tpl_is_signin) :
+  if (key_exists($q['qno'], $tpl_accepted)) :
+?>
+  <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<?php
+  endif;
+endif;
+?>
+              </td>
               <td><?php echo $q['qno']; ?></td>
               <td>
                 <a href="/question/<?php echo safeHtml($q['seo_title']); ?>">
