@@ -45,9 +45,7 @@ class RunAction extends SimpleUserSigninBaseAction {
             $result = array(
                 'result' => 'error',
                 'msg' => '编译错误',
-                'info' => array(
-                    'error' => $output,
-                    ),
+                'error' => $output,
                 );
         }
 

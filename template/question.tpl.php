@@ -82,7 +82,7 @@
           <div id="run-result" style="display:none;">
             <hr />
             <div class="panel panel-default" role="panel">
-              <div class="panel-heading">运行结果</div>
+              <div class="panel-heading" id="result-title">运行结果</div>
               <div class="panel-body" style="display:none;" role="compile-error">
                 <div class="col-xs-12">
                   <div class="well" role="error">
@@ -97,7 +97,7 @@
                   </div>
                 </div>
                 <div class="col-xs-6">
-                  <p>结果</p>
+                  <p>你的结果</p>
                   <div class="well" role="output">
                     [1,2]
                   </div>
@@ -182,22 +182,22 @@ print join(',', $lines);
 
 function run_result(data) {
   var result = data.result;
-  var info = data.info;
   $('#run-result div[role=panel]').removeClass('panel-success panel-danger');
   $('#run-result div[role=compile-error]').hide();
   $('#run-result div[role=result]').hide();
+  $('#result-title').html(data.msg);
   if ('success' == result) {
     $('#run-result div[role=result]').show();
     $('#run-result div[role=panel]').addClass('panel-success');
-    run_success(info.input, info.output, info.expect, info.runtime);
+    run_success(data.input_desc, data.output, data.expect_desc, data.runtime);
   } else if ('fail' == result) {
     $('#run-result div[role=result]').show();
     $('#run-result div[role=panel]').addClass('panel-danger');
-    run_fail(info.input, info.output, info.expect, info.runtime);
-  } else if ('error' == result) {
+    run_fail(data.input_desc, data.output, data.expect_desc, data.runtime);
+  } else if ('error' == data.result) {
     $('#run-result div[role=compile-error]').show();
     $('#run-result div[role=panel]').addClass('panel-danger');
-    run_error(info.error);
+    run_error(data.error);
   }
   $('#run-result').show('slow');
 }
