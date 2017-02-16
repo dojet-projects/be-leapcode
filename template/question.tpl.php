@@ -94,23 +94,23 @@
                 <div class="row">
                   <div class="col-xs-12">
                     <p>输入</p>
-                    <div class="well" role="input">
+                    <pre class="well" role="input">
                       1,2,3
-                    </div>
+                    </pre>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-xs-6">
                     <p>你的结果</p>
-                    <div class="well" role="output">
+                    <pre class="well" role="output">
                       [1,2]
-                    </div>
+                    </pre>
                   </div>
                   <div class="col-xs-6">
                     <p>正确结果</p>
-                    <div class="well" role="expect">
+                    <pre class="well" role="expect">
                       [1,2]
-                    </div>
+                    </pre>
                   </div>
                 </div>
                 <div class="row">
@@ -213,21 +213,27 @@ function run_result(data) {
 }
 
 function run_success(input, output, expect, runtime) {
-  $('#run-result div[role=input]').html(input);
-  $('#run-result div[role=output]').html(output);
-  $('#run-result div[role=expect]').html(expect);
+  // input = pre_str(input);
+  $('#run-result pre[role=input]').html(input);
+  $('#run-result pre[role=output]').html(output);
+  $('#run-result pre[role=expect]').html(expect);
   $('#runtime').html(runtime);
 }
 
 function run_fail(input, output, expect, runtime) {
-  $('#run-result div[role=input]').html(input);
-  $('#run-result div[role=output]').html(output);
-  $('#run-result div[role=expect]').html(expect);
+  // input = pre_str(input);
+  $('#run-result pre[role=input]').html(input);
+  $('#run-result pre[role=output]').html(output);
+  $('#run-result pre[role=expect]').html(expect);
   $('#runtime').html(runtime);
 }
 
 function run_error(error) {
   $('#run-result div[role=error]').html(error);
+}
+
+function pre_str(input) {
+  return input.replace(/ /g, '&nbsp;').replace(/\n/g, "<br />");
 }
 
 </script>
