@@ -22,4 +22,12 @@ class DalUserinfo extends MysqlDal {
         return self::rs2rowline($sql);
     }
 
+    public static function addUserinfo($uid, $nickname) {
+        $arrIns = array(
+            'uid' => $uid,
+            'nickname' => $nickname,
+        );
+        return self::doInsert('user_info', $arrIns);
+    }
+
 }

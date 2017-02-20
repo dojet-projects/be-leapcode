@@ -16,7 +16,9 @@ implements SimpleSignupDelegate, SimpleSignupCommitDelegate {
     }
 
     public function didSignup(MSimpleUser $simpleUser) {
-        # code...
+        $nickname = MRequest::post('nickname');
+        $uid = $simpleUser->uid();
+        DalUserinfo::addUserinfo($uid, $nickname);
     }
 
     public function template() {
