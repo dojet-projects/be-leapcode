@@ -44,7 +44,7 @@ class QuestionAction extends SigninBaseAction {
         //  solution code
         $code = null;
         if ($is_signin) {
-            $uid = $this->me->uid();
+            $uid = $this->me->simpleUser()->uid();
             $solution = DalSolution::getSolution($uid, $qno, 'php');
             $lang = $solution['lang'];
             $code = $solution['code'];

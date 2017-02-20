@@ -14,7 +14,8 @@ class QuestionListAction extends SigninBaseAction {
 
         if ($is_signin) {
             $arrQno = array_column($questionList, 'qno');
-            $accepted = DalAccepted::getUserAccepted($arrQno);
+            $uid = $this->me->uid();
+            $accepted = DalAccepted::getUserAccepted($uid, $arrQno);
             $this->assign('accepted', $accepted);
         }
 

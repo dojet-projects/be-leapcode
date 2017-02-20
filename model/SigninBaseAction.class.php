@@ -25,10 +25,12 @@ abstract class SigninBaseAction extends SimpleUserSigninBaseAction {
     function __construct() {
         parent::__construct();
         $this->assign('topmenu', $this->topmenu());
+        $this->assign('show_sign', true);
     }
 
     final protected function signinExecute(MSimpleUser $me) {
-        $this->me = $me;
+        $this->me = MLeapUser::user($me);
+        $this->assign('me', $this->me);
         return $this->pageExecute(true);
     }
 

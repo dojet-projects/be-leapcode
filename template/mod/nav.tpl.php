@@ -27,11 +27,12 @@ $menu = array(
             </li>
             <?php endforeach ?>
           </ul>
+          <?php if (isset($tpl_show_sign) && $tpl_show_sign) : ?>
           <ul class="nav navbar-nav navbar-right">
-            <?php if ($tpl_is_signin) : ?>
+            <?php if (isset($tpl_is_signin) && $tpl_is_signin) : ?>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <?php echo safeHtml($tpl_me->username()); ?>
+                  <?php echo safeHtml($tpl_me->nickname()); ?>
                   <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
@@ -44,6 +45,8 @@ $menu = array(
               <li><a href="/signin">登入</a></li>
               <li><a href="/signup">注册</a></li>
             <?php endif ?>
+          </ul>
+          <?php endif ?>
         </div><!--/.nav-collapse -->
       </div>
     </nav>

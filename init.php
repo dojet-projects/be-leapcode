@@ -26,8 +26,10 @@ DAutoloader::getInstance()->addAutoloadPathArray(
 Dojet::addModule(__DIR__.'/../mod-simpleuser');
 ModuleSimpleUser::module()->setDatabase(DBLEAPCODE);
 Config::loadConfig(SIMPLEUSER_CONFIG.'route');
-
-// Config::loadConfig()
+ModuleSimpleUser::config('delegate.signin', SingletonFactory::getInstance('SigninDelegate'));
+ModuleSimpleUser::config('delegate.signincommit', SingletonFactory::getInstance('SigninDelegate'));
+ModuleSimpleUser::config('delegate.signup', SingletonFactory::getInstance('SignupDelegate'));
+ModuleSimpleUser::config('delegate.signupcommit', SingletonFactory::getInstance('SignupDelegate'));
 
 // Dojet::addModule(__DIR__.'/../mod-simplecms');
 // ModuleSimpleCMS::module()->setDatabase(DBDEMO);

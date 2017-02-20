@@ -23,12 +23,13 @@ class DalAccepted extends MysqlDal {
         return self::rs2rowline($sql);
     }
 
-    public static function getUserAccepted($arrQno) {
+    public static function getUserAccepted($uid, $arrQno) {
+        DAssert::assertNumeric($uid);
         DAssert::assertNotEmptyNumericArray($arrQno);
         $wherein = join(',', $arrQno);
         $sql = "SELECT *
                 FROM accepted
-                WHERE qno IN ($wherein)";
+                WHERE uid=$uid AND qno IN ($wherein)";
         return self::rs2keyarray($sql, 'qno');
     }
 

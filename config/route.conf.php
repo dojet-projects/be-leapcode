@@ -8,3 +8,12 @@ Dispatcher::loadRoute(array(
     '/^ajax\/run$/' => UI.'ajax/RunAction',
     )
 );
+
+// Dispatcher::loadRoute(array(
+//     '/^signin$/' => UI.'SimpleSigninAction',
+//     '/^signup$/' => UI.'SimpleSignupAction',
+//     '/^signout$/' => UI.'SimpleSignoutAction',
+//     '/^signin\-commit$/' => UI.'SimpleSigninCommitAction',
+//     '/^signup\-commit$/' => UI.'SimpleSignupCommitAction',
+//     )
+// );
