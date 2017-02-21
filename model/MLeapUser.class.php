@@ -26,12 +26,28 @@ class MLeapUser {
         return $this->simpleUser()->uid();
     }
 
-    public function nickname() {
+    protected function userinfo($field) {
         if (!$this->userinfo) {
             $uid = $this->simpleUser->uid();
             $this->userinfo = DalUserinfo::getUserinfoByUID($uid);
         }
-        return $this->userinfo['nickname'];
+        return $this->userinfo[$field];
+    }
+
+    public function nickname() {
+        return $this->userinfo('nickname');
+    }
+
+    public function realname() {
+        return $this->userinfo('realname');
+    }
+
+    public function occupation() {
+        return $this->userinfo('occupation');
+    }
+
+    public function aboutme() {
+        return $this->userinfo('aboutme');
     }
 
 }

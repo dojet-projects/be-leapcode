@@ -39,4 +39,15 @@ class DalUserinfo extends MysqlDal {
         return self::doUpdate('user_info', $arrUpd, $where, 1);
     }
 
+    public static function updatePersonalInfo($uid, $realname, $occupation, $aboutme) {
+        DAssert::assertNumeric($uid);
+        $arrUpd = array(
+            'realname' => $realname,
+            'occupation' => $occupation,
+            'aboutme' => $aboutme,
+        );
+        $where = "uid=$uid";
+        return self::doUpdate('user_info', $arrUpd, $where, 1);
+    }
+
 }

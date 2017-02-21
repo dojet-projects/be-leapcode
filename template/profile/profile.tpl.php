@@ -58,33 +58,36 @@
                 </h3>
             </div>
             <div class="panel-body">
-              <form class="form-horizontal" action="" method="POST">
+              <form class="form-horizontal" action="/profile/save-personalinfo" method="POST">
                 <div class="form-group">
-                   <label class="col-sm-2 control-label">真实姓名</label>
-                   <div class="col-sm-10">
-                     <input id="id_realname" maxlength="512" name="realname" type="text" class="form-control input-xxlarge">
-                   </div>
-                 </div>
-                 <div class="form-group">
-                   <label class="col-sm-2 control-label">职业</label>
-                   <div class="col-sm-10" id="occupation">
-                     <div class="checkbox-inline"><label for="id_occupation_1"><input id="id_occupation_1" name="occupation" type="radio" value="1" class="input-xxlarge"> 学生</label></div>
-
-                     <div class="checkbox-inline"><label for="id_occupation_2"><input id="id_occupation_2" name="occupation" type="radio" value="2" class="input-xxlarge"> 已工作</label></div>
-
-                   </div>
-                 </div>
-                 <div class="form-group">
-                   <label class="col-sm-2 control-label">
-                     自我介绍
-                   </label>
-                   <div class="col-sm-10">
-                     <textarea cols="40" id="id_about_me" name="about_me" rows="10" class="form-control"></textarea>
-                   </div>
-                 </div>
-                 <button class="col-sm-offset-2 col-sm-6 btn btn-primary" type="submit">
-                       保存个人信息
-                 </button>
+                  <label class="col-sm-2 control-label">真实姓名</label>
+                  <div class="col-sm-10">
+                    <input id="id_realname" maxlength="512" name="realname" type="text" class="form-control input-xxlarge" value="<?php echo safeHtml($tpl_me->realname()) ?>">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">身份</label>
+                  <div class="col-sm-10" id="occupation">
+                  <?php foreach (array('student' => '学生', 'perfessional' => '已工作') as $key => $val) :
+                      $checked = $tpl_me->occupation() == $key ? 'checked' : '';
+                  ?>
+                    <div class="checkbox-inline">
+                      <label for="id_occupation_<?=$key?>"><input id="id_occupation_<?=$key?>" <?=$checked?> name="occupation" type="radio" value="<?=$key?>" class="input-xxlarge"> <?=$val?></label>
+                    </div>
+                  <?php endforeach ?>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">
+                    自我介绍
+                  </label>
+                  <div class="col-sm-10">
+                    <textarea cols="40" id="id_about_me" name="aboutme" rows="10" class="form-control"><?php echo safeHtml($tpl_me->aboutme())?></textarea>
+                  </div>
+                </div>
+                <button class="col-sm-offset-2 col-sm-6 btn btn-primary" type="submit">
+                      保存个人信息
+                </button>
               </form>
             </div>
           </div>

@@ -9,5 +9,6 @@ Dispatcher::loadRoute(array(
 
     '/^profile$/' => UI.'profile/ProfileAction',
     '/^profile\/save\-nickname$/' => UI.'profile/SaveNicknameAction',
+    '/^profile\/save\-personalinfo$/' => UI.'profile/SavePersonalInfoAction',
     )
 );
