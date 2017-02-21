@@ -7,7 +7,7 @@
  * @author setimouse@gmail.com
  * @since 2017 1 20
  */
-class PickOneAction extends SigninBaseAction {
+class PickOneAction extends LeapBaseAction {
 
     protected function pageExecute($is_signin) {
         $question = DalQuestion::getRandQuestion();

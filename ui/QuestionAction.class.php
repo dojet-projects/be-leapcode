@@ -10,7 +10,7 @@
 require UTIL.'Michelf/Markdown.inc.php';
 use \Michelf\Markdown;
 
-class QuestionAction extends SigninBaseAction {
+class QuestionAction extends LeapBaseAction {
 
     protected function pageExecute($is_signin) {
         $seo_title = MRequest::param('title');

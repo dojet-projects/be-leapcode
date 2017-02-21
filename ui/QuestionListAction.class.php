@@ -7,7 +7,7 @@
  * @author setimouse@gmail.com
  * @since 2017 1 20
  */
-class QuestionListAction extends SigninBaseAction {
+class QuestionListAction extends LeapBaseAction {
 
     protected function pageExecute($is_signin) {
         $questionList = DalQuestion::getQuestionList();
@@ -21,6 +21,10 @@ class QuestionListAction extends SigninBaseAction {
 
         $this->assign('questionList', $questionList);
         $this->displayTemplate('questionlist.tpl.php');
+    }
+
+    protected function topmenu() {
+        return 'question';
     }
 
 }

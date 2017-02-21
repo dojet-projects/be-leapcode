@@ -6,14 +6,7 @@ Dispatcher::loadRoute(array(
     '/^question\/(?<title>.+)$/' => UI.'QuestionAction',
     '/^question\-list$/' => UI.'QuestionListAction',
     '/^ajax\/run$/' => UI.'ajax/RunAction',
+
+    '/^profile$/' => UI.'profile/ProfileAction',
     )
 );
-
-// Dispatcher::loadRoute(array(
-//     '/^signin$/' => UI.'SimpleSigninAction',
-//     '/^signup$/' => UI.'SimpleSignupAction',
-//     '/^signout$/' => UI.'SimpleSignoutAction',
-//     '/^signin\-commit$/' => UI.'SimpleSigninCommitAction',
-//     '/^signup\-commit$/' => UI.'SimpleSignupCommitAction',
-//     )
-// );
