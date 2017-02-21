@@ -8,8 +8,11 @@
 class SaveNicknameAction extends SigninBaseAction {
 
     protected function signinExecute(MLeapUser $me) {
+        $nickname = MRequest::post('nickname');
 
-        $this->displayTemplate('profile/profile.tpl.php');
+        DalUserinfo::updateNickname($me->uid(), $nickname);
+
+        redirect('/profile');
     }
 
 }

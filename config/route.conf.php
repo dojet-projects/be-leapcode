@@ -8,5 +8,6 @@ Dispatcher::loadRoute(array(
     '/^ajax\/run$/' => UI.'ajax/RunAction',
 
     '/^profile$/' => UI.'profile/ProfileAction',
+    '/^profile\/save\-nickname$/' => UI.'profile/SaveNicknameAction',
     )
 );

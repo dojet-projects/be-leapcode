@@ -40,11 +40,11 @@
                 </h3>
             </div>
             <div class="panel-body">
-              <form class="form-inline" action="" method="POST">
+              <form class="form-inline" action="/profile/save-nickname" method="POST">
                 <div class="form-group">
-                    <label for="input-username" style="display: block;">昵称</label>
-                    <input type="text" name="username" id="input-username" value="setimouse" maxlength="30" class="form-control">
-                    <button type="submit" id="username_save" class="btn btn-primary">保存</button>
+                    <label for="input-nickname" style="display: block;">昵称</label>
+                    <input type="text" name="nickname" id="input-nickname" value="<?php echo safeHtml($tpl_me->nickname()) ?>" maxlength="30" class="form-control">
+                    <button type="submit" id="nickname_save" class="btn btn-primary">保存</button>
                 </div>
               </form>
             </div>

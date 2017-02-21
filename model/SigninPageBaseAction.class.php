@@ -9,6 +9,12 @@
  */
 abstract class SigninPageBaseAction extends SigninBaseAction {
 
+    function __construct() {
+        parent::__construct();
+        $this->assign('topmenu', $this->topmenu());
+        $this->assign('show_sign', true);
+    }
+
     protected function templatePrefix($template) {
         return TEMPLATE;
     }
@@ -18,8 +24,6 @@ abstract class SigninPageBaseAction extends SigninBaseAction {
     }
 
     final protected function signinExecute(MLeapUser $me) {
-        $this->assign('topmenu', $this->topmenu());
-        $this->assign('show_sign', true);
         return $this->signinPageExecute($me);
     }
 

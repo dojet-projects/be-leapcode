@@ -5,7 +5,7 @@
  * Filename: LeapPageBaseAction.class.php
  *
  * @author liyan
- * @since 2017 1 17
+ * @since 2017 2 21
  */
 abstract class LeapPageBaseAction extends SigninPageBaseAction {
 
