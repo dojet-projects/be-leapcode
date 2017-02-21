@@ -5,15 +5,10 @@
  * @author liyan
  * @since 2017 2 20
  */
-class ProfileAction extends LeapBaseAction {
+class ProfileAction extends SigninPageBaseAction {
 
-    protected function pageExecute($is_signin) {
-        if (!$is_signin) {
-            return;
-        }
-        $me = $this->me;
+    protected function signinPageExecute(MLeapUser $me) {
 
         $this->displayTemplate('profile/profile.tpl.php');
     }
-
 }

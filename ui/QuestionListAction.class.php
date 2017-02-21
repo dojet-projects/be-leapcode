@@ -7,7 +7,7 @@
  * @author setimouse@gmail.com
  * @since 2017 1 20
  */
-class QuestionListAction extends LeapBaseAction {
+class QuestionListAction extends LeapPageBaseAction {
 
     protected function pageExecute($is_signin) {
         $questionList = DalQuestion::getQuestionList();

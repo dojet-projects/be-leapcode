@@ -7,12 +7,9 @@
  * @author setimouse@gmail.com
  * @since 2017 1 3
  */
-use Mod\SimpleUser\SimpleUserSigninBaseAction;
-use Mod\SimpleUser\MSimpleUser;
+class RunAction extends SigninBaseAction {
 
-class RunAction extends SimpleUserSigninBaseAction {
-
-    protected function signinExecute(MSimpleUser $me) {
+    protected function signinExecute(MLeapUser $me) {
         $code = MRequest::post('code');
         $qno = MRequest::post('qno');
         $lang = MRequest::post('lang');
