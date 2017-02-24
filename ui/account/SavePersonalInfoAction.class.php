@@ -14,7 +14,7 @@ class SavePersonalInfoAction extends SigninBaseAction {
 
         DalUserinfo::updatePersonalInfo($me->uid(), $realname, $occupation, $aboutme);
 
-        redirect('/profile');
+        redirect('/account');
     }
 
 }

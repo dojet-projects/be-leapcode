@@ -12,7 +12,7 @@ class SaveNicknameAction extends SigninBaseAction {
 
         DalUserinfo::updateNickname($me->uid(), $nickname);
 
-        redirect('/profile');
+        redirect('/account');
     }
 
 }

@@ -7,8 +7,8 @@ Dispatcher::loadRoute(array(
     '/^question\-list$/' => UI.'QuestionListAction',
     '/^ajax\/run$/' => UI.'ajax/RunAction',
 
-    '/^profile$/' => UI.'profile/ProfileAction',
-    '/^profile\/save\-nickname$/' => UI.'profile/SaveNicknameAction',
-    '/^profile\/save\-personalinfo$/' => UI.'profile/SavePersonalInfoAction',
+    '/^account$/' => UI.'account/AccountAction',
+    '/^account\/save\-nickname$/' => UI.'account/SaveNicknameAction',
+    '/^account\/save\-personalinfo$/' => UI.'account/SavePersonalInfoAction',
     )
 );

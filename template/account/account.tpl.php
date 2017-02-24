@@ -40,7 +40,7 @@
                 </h3>
             </div>
             <div class="panel-body">
-              <form class="form-inline" action="/profile/save-nickname" method="POST">
+              <form class="form-inline" action="/account/save-nickname" method="POST">
                 <div class="form-group">
                     <label for="input-nickname" style="display: block;">昵称</label>
                     <input type="text" name="nickname" id="input-nickname" value="<?php echo safeHtml($tpl_me->nickname()) ?>" maxlength="30" class="form-control">
@@ -58,7 +58,7 @@
                 </h3>
             </div>
             <div class="panel-body">
-              <form class="form-horizontal" action="/profile/save-personalinfo" method="POST">
+              <form class="form-horizontal" action="/account/save-personalinfo" method="POST">
                 <div class="form-group">
                   <label class="col-sm-2 control-label">真实姓名</label>
                   <div class="col-sm-10">
