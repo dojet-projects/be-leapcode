@@ -59,7 +59,7 @@
                   <span class="badge progress-bar-info">
                     <?php echo safeHtml($accepted['lang'])?>
                   </span>
-                  <b><?php echo safeHtml($question['seo_title'])?></b> &nbsp;
+                  <b><?php echo safeHtml($question['title'])?></b> &nbsp;
                   <span class="text-muted">
                     <?php echo safeHtml($accepted['updatetime'])?>
                   </span>
