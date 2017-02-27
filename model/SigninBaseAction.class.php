@@ -13,7 +13,7 @@ use Mod\SimpleUser\MSimpleUser;
 abstract class SigninBaseAction extends SimpleUserSigninBaseAction {
 
     final protected function simpleUserSigninExecute(MSimpleUser $simpleUser) {
-        $me = MLeapUser::user($simpleUser);
+        $me = MLeapUser::userFromSimpleUser($simpleUser);
         $this->assign('me', $me);
         return $this->signinExecute($me);
     }

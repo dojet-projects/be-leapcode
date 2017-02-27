@@ -14,25 +14,19 @@ class DalAcceptedCode extends MysqlDal {
         return DBLEAPCODE;
     }
 
-    public static function getCode($uid, $qno, $lang) {
-        DAssert::assertNumeric($uid);
-        DAssert::assertNumeric($qno);
-        self::escape($lang);
+    public static function getCode($id) {
+        DAssert::assertNumeric($id);
         $sql = "SELECT *
                 FROM accepted_code
-                WHERE qno=$qno AND uid=$uid AND lang=\"$lang\"";
+                WHERE id=$id";
         return self::rs2rowline($sql);
     }
 
-    public static function setCode($uid, $qno, $lang, $code) {
-        DAssert::assertNumeric($uid);
-        DAssert::assertNumeric($qno);
-        self::escape($lang);
+    public static function setCode($id, $code) {
+        DAssert::assertNumeric($id);
         self::escape($code);
         $arrIns = array(
-            'uid' => $uid,
-            'qno' => $qno,
-            'lang' => $lang,
+            'id' => $id,
             'code' => $code,
             'createtime' => datetime(),
             'updatetime' => datetime(),

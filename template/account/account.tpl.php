@@ -28,7 +28,11 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12 ">
-          <h3 style="margin-bottom: 1em;">我的信息</h3>
+          <h3 style="margin-bottom: 1em;">
+            我的信息
+            <a href="/profile/<?php echo safeHtml($tpl_me->nickname()) ?>" class="btn btn-default">我的主页</a>
+          </h3>
+
         </div>
       </div>
       <div class="row">

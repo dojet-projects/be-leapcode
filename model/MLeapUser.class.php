@@ -14,8 +14,13 @@ class MLeapUser {
         $this->simpleUser = $simpleUser;
     }
 
-    public static function user(MSimpleUser $simpleUser) {
+    public static function userFromSimpleUser(MSimpleUser $simpleUser) {
         return new MLeapUser($simpleUser);
+    }
+
+    public static function userFromUID($uid) {
+        $simpleUser = MSimpleUser::simpleUserByUID($uid);
+        return MLeapUser::userFromSimpleUser($simpleUser);
     }
 
     public function simpleUser() {

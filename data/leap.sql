@@ -26,11 +26,12 @@ CREATE TABLE `accepted` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL,
   `qno` int(11) NOT NULL,
+  `lang` varchar(16) NOT NULL,
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uid` (`uid`,`qno`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COMMENT='正确提交';
+  UNIQUE KEY `uid` (`uid`,`qno`,`lang`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COMMENT='正确提交';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +40,7 @@ CREATE TABLE `accepted` (
 
 LOCK TABLES `accepted` WRITE;
 /*!40000 ALTER TABLE `accepted` DISABLE KEYS */;
-INSERT INTO `accepted` VALUES (1,1,1,'2017-02-15 08:38:24','2017-02-16 08:37:54'),(9,1,4,'2017-02-16 08:45:14','2017-02-16 08:45:45'),(12,1,2,'2017-02-17 03:24:49','2017-02-17 03:24:49');
+INSERT INTO `accepted` VALUES (5,1,1,'php','2017-02-15 08:38:24','2017-02-16 08:37:54'),(9,2,4,'php','2017-02-16 08:45:14','2017-02-16 08:45:45'),(12,1,2,'php','2017-02-17 03:24:49','2017-02-17 06:35:46'),(14,1,4,'php','2017-02-21 03:10:25','2017-02-21 03:10:25');
 /*!40000 ALTER TABLE `accepted` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -51,16 +52,13 @@ DROP TABLE IF EXISTS `accepted_code`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `accepted_code` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` int(11) NOT NULL,
-  `qno` int(11) NOT NULL,
-  `lang` varchar(32) NOT NULL,
+  `id` int(11) NOT NULL,
   `code` text NOT NULL,
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uid` (`uid`,`qno`,`lang`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COMMENT='正确提交_代码';
+  CONSTRAINT `accepted_code_ibfk_1` FOREIGN KEY (`id`) REFERENCES `accepted` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='正确提交_代码';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +67,7 @@ CREATE TABLE `accepted_code` (
 
 LOCK TABLES `accepted_code` WRITE;
 /*!40000 ALTER TABLE `accepted_code` DISABLE KEYS */;
-INSERT INTO `accepted_code` VALUES (2,1,1,'php','<?php\\r\\nclass Solution {\\r\\n\\r\\n    /**\\r\\n     * @param  array    $nums\\r\\n     * @param  int      $target\\r\\n     * @return array\\r\\n     */\\r\\n    public function twoSum($nums, $target) {\\r\\n        for ($i = 0; $i < count($nums); $i++) {\\r\\n            for ($j = $i + 1; $j < count($nums); $j++) {\\r\\n                if ($nums[$i] + $nums[$j] == $target) {\\r\\n                    return [$j, $i];\\r\\n                }\\r\\n            }\\r\\n        }\\r\\n        return false;\\r\\n    }\\r\\n\\r\\n}\\r\\n','2017-02-15 08:40:45','2017-02-16 08:37:54'),(9,1,4,'php','<?php\\r\\nclass Solution {\\r\\n\\r\\n    /**\\r\\n     * @param  int  m\\r\\n     * @param  int  n\\r\\n     * @return int\\r\\n     */\\r\\n    public function howManyPath($m, $n) {\\r\\n        $dp = [];\\r\\n        for ($y = 0; $y < $n; $y++) {\\r\\n            for ($x = 0; $x < $m; $x++) {\\r\\n                if (0 === $x || 0 === $y) {\\r\\n                    $dp[$y][$x] = 1;\\r\\n                } else {\\r\\n                    $dp[$y][$x] = $dp[$y - 1][$x] + $dp[$y][$x - 1];\\r\\n                }\\r\\n            }\\r\\n        }\\r\\n        return $dp[$n - 1][$m - 1];\\r\\n    }\\r\\n\\r\\n}\\r\\n','2017-02-16 08:45:14','2017-02-16 08:45:45'),(12,1,2,'php','<?php\\r\\n/**\\r\\n * 已定义的链表节点类\\r\\n * class ListNode {\\r\\n *     public $val;\\r\\n *     public $next;\\r\\n *     function __construct($val, $next = null) {\\r\\n *         $this->val = $val;\\r\\n *         $this->next = $next;\\r\\n *     }\\r\\n * }\\r\\n */\\r\\nclass Solution {\\r\\n\\r\\n    /**\\r\\n     * @param  ListNode $listA\\r\\n     * @param  ListNode $listB\\r\\n     * @return ListNode\\r\\n     */\\r\\n    public function getIntersectionNode(ListNode $listA, ListNode $listB) {\\r\\n        $tailA = $listA;\\r\\n        while ($tailA->next) {\\r\\n            $tailA = $tailA->next;\\r\\n        }\\r\\n        \\r\\n        $tailB = $listB;\\r\\n        while ($tailB->next) {\\r\\n            $tailB = $tailB->next;\\r\\n        }\\r\\n        \\r\\n        if ($tailB == $tailA) {\\r\\n            return $listA->next->next;\\r\\n        }\\r\\n        return null;\\r\\n    }\\r\\n\\r\\n}\\r\\n','2017-02-17 03:24:49','2017-02-17 03:24:49');
+INSERT INTO `accepted_code` VALUES (5,'<?php\\r\\nclass Solution {\\r\\n\\r\\n    /**\\r\\n     * @param  array    $nums\\r\\n     * @param  int      $target\\r\\n     * @return array\\r\\n     */\\r\\n    public function twoSum($nums, $target) {\\r\\n        for ($i = 0; $i < count($nums); $i++) {\\r\\n            for ($j = $i + 1; $j < count($nums); $j++) {\\r\\n                if ($nums[$i] + $nums[$j] == $target) {\\r\\n                    return [$j, $i];\\r\\n                }\\r\\n            }\\r\\n        }\\r\\n        return false;\\r\\n    }\\r\\n\\r\\n}\\r\\n','2017-02-27 06:54:03','2017-02-27 06:54:03');
 /*!40000 ALTER TABLE `accepted_code` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,7 +114,7 @@ CREATE TABLE `simple_user` (
   `createtime` int(10) unsigned NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`uid`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='用户';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,7 +123,7 @@ CREATE TABLE `simple_user` (
 
 LOCK TABLES `simple_user` WRITE;
 /*!40000 ALTER TABLE `simple_user` DISABLE KEYS */;
-INSERT INTO `simple_user` VALUES (1,'setimouse@qq.com','a96a2799c347f82332c7b1d6d148146f',1484728318);
+INSERT INTO `simple_user` VALUES (1,'setimouse@qq.com','a96a2799c347f82332c7b1d6d148146f',1484728318),(5,'werq','a96a2799c347f82332c7b1d6d148146f',1487576554);
 /*!40000 ALTER TABLE `simple_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,7 +144,7 @@ CREATE TABLE `solution` (
   `updatetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uid` (`uid`,`qno`,`lang`)
-) ENGINE=InnoDB AUTO_INCREMENT=179 DEFAULT CHARSET=utf8mb4 COMMENT='用户提交代码';
+) ENGINE=InnoDB AUTO_INCREMENT=196 DEFAULT CHARSET=utf8mb4 COMMENT='用户提交代码';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,8 +153,36 @@ CREATE TABLE `solution` (
 
 LOCK TABLES `solution` WRITE;
 /*!40000 ALTER TABLE `solution` DISABLE KEYS */;
-INSERT INTO `solution` VALUES (1,1,1,'php','<?php\\r\\nclass Solution {\\r\\n\\r\\n    /**\\r\\n     * @param  array    $nums\\r\\n     * @param  int      $target\\r\\n     * @return array\\r\\n     */\\r\\n    public function twoSum($nums, $target) {\\r\\n        for ($i = 0; $i < count($nums); $i++) {\\r\\n            for ($j = $i + 1; $j < count($nums); $j++) {\\r\\n                if ($nums[$i] + $nums[$j] == $target) {\\r\\n                    return [$j, $i];\\r\\n                }\\r\\n            }\\r\\n        }\\r\\n        return false;\\r\\n    }\\r\\n\\r\\n}\\r\\n','2017-01-19 03:31:42','2017-02-16 08:37:54'),(7,1,2,'php','<?php\\r\\n/**\\r\\n * 已定义的链表节点类\\r\\n * class ListNode {\\r\\n *     public $val;\\r\\n *     public $next;\\r\\n *     function __construct($val, $next = null) {\\r\\n *         $this->val = $val;\\r\\n *         $this->next = $next;\\r\\n *     }\\r\\n * }\\r\\n */\\r\\nclass Solution {\\r\\n\\r\\n    /**\\r\\n     * @param  ListNode $listA\\r\\n     * @param  ListNode $listB\\r\\n     * @return ListNode\\r\\n     */\\r\\n    public function getIntersectionNode(ListNode $listA, ListNode $listB) {\\r\\n        $tailA = $listA;\\r\\n        while ($tailA->next) {\\r\\n            $tailA = $tailA->next;\\r\\n        }\\r\\n        \\r\\n        $tailB = $listB;\\r\\n        while ($tailB->next) {\\r\\n            $tailB = $tailB->next;\\r\\n        }\\r\\n        \\r\\n        if ($tailB == $tailA) {\\r\\n            return $listA->next->next;\\r\\n        }\\r\\n        return null;\\r\\n    }\\r\\n\\r\\n}\\r\\n','2017-01-22 03:15:17','2017-02-17 03:24:47'),(37,1,3,'php','<?php\\r\\nclass Solution {\\r\\n\\r\\n    /**\\r\\n     * @param  Array $array\\r\\n     * @return int\\r\\n     */\\r\\n    public function maxProduct($array) {\\r\\n\\r\\n    }\\r\\n\\r\\n}\\r\\n','2017-01-22 09:00:31','2017-01-22 09:13:10'),(142,1,4,'php','<?php\\r\\nclass Solution {\\r\\n\\r\\n    /**\\r\\n     * @param  int  m\\r\\n     * @param  int  n\\r\\n     * @return int\\r\\n     */\\r\\n    public function howManyPath($m, $n) {\\r\\n        $dp = [];\\r\\n        for ($y = 0; $y < $n; $y++) {\\r\\n            for ($x = 0; $x < $m; $x++) {\\r\\n                if (0 === $x || 0 === $y) {\\r\\n                    $dp[$y][$x] = 1;\\r\\n                } else {\\r\\n                    $dp[$y][$x] = $dp[$y - 1][$x] + $dp[$y][$x - 1];\\r\\n                }\\r\\n            }\\r\\n        }\\r\\n        return $dp[$n - 1][$m - 1];\\r\\n    }\\r\\n\\r\\n}\\r\\n','2017-02-16 08:37:19','2017-02-16 08:45:44');
+INSERT INTO `solution` VALUES (1,1,1,'php','<?php\\r\\nclass Solution {\\r\\n\\r\\n    /**\\r\\n     * @param  array    $nums\\r\\n     * @param  int      $target\\r\\n     * @return array\\r\\n     */\\r\\n    public function twoSum($nums, $target) {\\r\\n        for ($i = 0; $i < count($nums); $i++) {\\r\\n            for ($j = $i + 1; $j < count($nums); $j++) {\\r\\n                if ($nums[$i] + $nums[$j] == $target) {\\r\\n                    return [$j, $i];\\r\\n                }\\r\\n            }\\r\\n        }\\r\\n        return false;\\r\\n    }\\r\\n\\r\\n}\\r\\n','2017-01-19 03:31:42','2017-02-27 06:54:02'),(7,1,2,'php','<?php\\r\\n/**\\r\\n * 已定义的链表节点类\\r\\n * class ListNode {\\r\\n *     public $val;\\r\\n *     public $next;\\r\\n *     function __construct($val, $next = null) {\\r\\n *         $this->val = $val;\\r\\n *         $this->next = $next;\\r\\n *     }\\r\\n * }\\r\\n */\\r\\nclass Solution {\\r\\n\\r\\n    /**\\r\\n     * @param  ListNode $listA\\r\\n     * @param  ListNode $listB\\r\\n     * @return ListNode\\r\\n     */\\r\\n    public function getIntersectionNode(ListNode $listA, ListNode $listB) {\\r\\n        $tailA = $listA;\\r\\n        while ($tailA->next) {\\r\\n            $tailA = $tailA->next;\\r\\n        }\\r\\n        \\r\\n        $tailB = $listB;\\r\\n        while ($tailB->next) {\\r\\n            $tailB = $tailB->next;\\r\\n        }\\r\\n        \\r\\n        if ($tailB == $tailA) {\\r\\n            return $listA->next->next;\\r\\n        }\\r\\n        return null;\\r\\n    }\\r\\n\\r\\n}\\r\\n','2017-01-22 03:15:17','2017-02-17 06:37:21'),(37,1,3,'php','<?php\\r\\nclass Solution {\\r\\n\\r\\n    /**\\r\\n     * @param  Array $array\\r\\n     * @return int\\r\\n     */\\r\\n    public function maxProduct($array) {\\r\\n\\r\\n    }\\r\\n\\r\\n}\\r\\n','2017-01-22 09:00:31','2017-01-22 09:13:10'),(142,1,4,'php','<?php\\r\\nclass Solution {\\r\\n\\r\\n    /**\\r\\n     * @param  int  m\\r\\n     * @param  int  n\\r\\n     * @return int\\r\\n     */\\r\\n    public function howManyPath($m, $n) {\\r\\n        $dp = [];\\r\\n        for ($y = 0; $y < $n; $y++) {\\r\\n            for ($x = 0; $x < $m; $x++) {\\r\\n                if (0 === $x || 0 === $y) {\\r\\n                    $dp[$y][$x] = 1;\\r\\n                } else {\\r\\n                    $dp[$y][$x] = $dp[$y - 1][$x] + $dp[$y][$x - 1];\\r\\n                }\\r\\n            }\\r\\n        }\\r\\n        return $dp[$n - 1][$m - 1];\\r\\n    }\\r\\n\\r\\n}\\r\\n','2017-02-16 08:37:19','2017-02-21 03:10:21');
 /*!40000 ALTER TABLE `solution` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_info`
+--
+
+DROP TABLE IF EXISTS `user_info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_info` (
+  `uid` int(11) NOT NULL,
+  `nickname` varchar(64) NOT NULL,
+  `realname` varchar(32) NOT NULL COMMENT '真实姓名',
+  `occupation` enum('','student','professional') NOT NULL COMMENT '身份',
+  `aboutme` text NOT NULL COMMENT '关于我',
+  PRIMARY KEY (`uid`),
+  UNIQUE KEY `nickname` (`nickname`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户信息';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_info`
+--
+
+LOCK TABLES `user_info` WRITE;
+/*!40000 ALTER TABLE `user_info` DISABLE KEYS */;
+INSERT INTO `user_info` VALUES (1,'setimouse','lee','student','a'),(5,'setimouse@qq.com','','','');
+/*!40000 ALTER TABLE `user_info` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -168,4 +194,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-17 13:40:22
+-- Dump completed on 2017-02-27 14:59:14

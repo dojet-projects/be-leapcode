@@ -14,12 +14,13 @@ class DalAccepted extends MysqlDal {
         return DBLEAPCODE;
     }
 
-    public static function getAccepted($uid, $qno) {
+    public static function getAccepted($uid, $qno, $lang) {
         DAssert::assertNumeric($uid);
         DAssert::assertNumeric($qno);
+        self::escape($lang);
         $sql = "SELECT *
                 FROM accepted
-                WHERE qno=$qno AND uid=$uid";
+                WHERE qno=$qno AND uid=$uid AND lang=\"$lang\"";
         return self::rs2rowline($sql);
     }
 
@@ -33,12 +34,14 @@ class DalAccepted extends MysqlDal {
         return self::rs2keyarray($sql, 'qno');
     }
 
-    public static function setAccepted($uid, $qno) {
+    public static function setAccepted($uid, $qno, $lang) {
         DAssert::assertNumeric($uid);
         DAssert::assertNumeric($qno);
+        self::escape($lang);
         $arrIns = array(
             'uid' => $uid,
             'qno' => $qno,
+            'lang' => $lang,
             'createtime' => datetime(),
             'updatetime' => datetime(),
         );

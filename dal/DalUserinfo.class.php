@@ -22,6 +22,14 @@ class DalUserinfo extends MysqlDal {
         return self::rs2rowline($sql);
     }
 
+    public static function getUserinfoByNickname($nickname) {
+        self::escape($nickname);
+        $sql = "SELECT *
+                FROM user_info
+                WHERE nickname=\"$nickname\"";
+        return self::rs2rowline($sql);
+    }
+
     public static function addUserinfo($uid, $nickname) {
         $arrIns = array(
             'uid' => $uid,

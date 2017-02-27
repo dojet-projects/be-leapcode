@@ -16,10 +16,12 @@ class RunAction extends SigninBaseAction {
 
         $coderoot = Config::runtimeConfigForKeyPath('global.coderoot');
 
-        //  save code
-        DalSolution::setSolution($me->uid(), $qno, $lang, $code);
+        $uid = $me->uid();
 
-        $playground_path = sprintf('%splayground/%d/php/%s/', $coderoot, $qno, md5($me->uid()));
+        //  save code
+        DalSolution::setSolution($uid, $qno, $lang, $code);
+
+        $playground_path = sprintf('%splayground/%d/php/%s/', $coderoot, $qno, md5($uid));
         if (!file_exists($playground_path)) {
             mkdir($playground_path, 0777, true);
         }
@@ -45,14 +47,7 @@ class RunAction extends SigninBaseAction {
                 'error' => $output,
                 );
         } elseif ($result['result'] === 'success') {
-            DalAccepted::beginTransaction();
-            try {
-                DalAccepted::setAccepted($me->uid(), $qno);
-                DalAcceptedCode::setCode($me->uid(), $qno, $lang, $code);
-                DalAccepted::commit();
-            } catch (Exception $e) {
-                DalAccepted::rollback();
-            }
+            LibAccepted::setAcceptedCode($uid, $qno, $lang, $code);
         }
 
         $this->displayJsonSuccess($result);
