@@ -15,7 +15,7 @@ class QuestionListAction extends LeapPageBaseAction {
         if ($is_signin) {
             $arrQno = array_column($questionList, 'qno');
             $uid = $this->me->uid();
-            $accepted = DalAccepted::getUserAccepted($uid, $arrQno);
+            $accepted = DalAccepted::getUserQuestionAccepted($uid, $arrQno);
             $this->assign('accepted', $accepted);
         }
 

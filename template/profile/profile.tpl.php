@@ -47,18 +47,24 @@
               </h3>
             </div>
             <ul class="list-group">
-                <a href="/problems/two-sum/" class="list-group-item">
-                  <span class="badge progress-bar-success">
+            <?php foreach ($tpl_latestAccepted as $accepted) : ?>
+              <?php
+                    $qno = $accepted['qno'];
+                    $question = $tpl_questions[$qno];
+              ?>
+                <a href="/question/<?php echo safeHtml($question['seo_title'])?>" class="list-group-item">
+                  <!-- <span class="badge progress-bar-success">
                     Accepted
-                  </span>
+                  </span> -->
                   <span class="badge progress-bar-info">
-                    javascript
+                    <?php echo safeHtml($accepted['lang'])?>
                   </span>
-                  <b>Two Sum</b> &nbsp;
+                  <b><?php echo safeHtml($question['seo_title'])?></b> &nbsp;
                   <span class="text-muted">
-                    1&nbsp;month, 1&nbsp;week ago
+                    <?php echo safeHtml($accepted['updatetime'])?>
                   </span>
                 </a>
+            <?php endforeach ?>
             </ul>
           </div>
         </div>

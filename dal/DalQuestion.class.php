@@ -47,4 +47,13 @@ class DalQuestion extends MysqlDal {
         return self::rs2rowline($sql);
     }
 
+    public static function getMultiQuestions($arrQno) {
+        DAssert::assertNotEmptyNumericArray($arrQno);
+        $qnos = join(',', $arrQno);
+        $sql = "SELECT *
+                FROM questions
+                WHERE qno IN ($qnos)";
+        return self::rs2keyarray($sql, 'qno');
+    }
+
 }

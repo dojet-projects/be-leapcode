@@ -16,10 +16,20 @@ class ProfileAction extends LeapPageBaseAction {
             print 'user not exists';
             return ;
         }
-        $leapUser = MLeapUser::userFromUID($userinfo['uid']);
+        $uid = $userinfo['uid'];
+        $leapUser = MLeapUser::userFromUID($uid);
 
         //  accepted questions
+        $latestAccepted = DalAccepted::getUserLatestAccepted($uid, 10);
+        if (is_null($latestAccepted)) {
+            $latestAccepted = array();
+        }
+        $arrQno = array_column($latestAccepted, 'qno');
+        $questions = DalQuestion::getMultiQuestions($arrQno);
+
         $this->assign('leapUser', $leapUser);
+        $this->assign('latestAccepted', $latestAccepted);
+        $this->assign('questions', $questions);
 
         $this->displayTemplate('profile/profile.tpl.php');
     }

@@ -24,7 +24,7 @@ class DalAccepted extends MysqlDal {
         return self::rs2rowline($sql);
     }
 
-    public static function getUserAccepted($uid, $arrQno) {
+    public static function getUserQuestionAccepted($uid, $arrQno) {
         DAssert::assertNumeric($uid);
         DAssert::assertNotEmptyNumericArray($arrQno);
         $wherein = join(',', $arrQno);
@@ -32,6 +32,17 @@ class DalAccepted extends MysqlDal {
                 FROM accepted
                 WHERE uid=$uid AND qno IN ($wherein)";
         return self::rs2keyarray($sql, 'qno');
+    }
+
+    public static function getUserLatestAccepted($uid, $num = 10) {
+        DAssert::assertNumeric($uid);
+        DAssert::assertNumeric($num);
+        $sql = "SELECT *
+                FROM accepted
+                WHERE uid=$uid
+                ORDER BY updatetime
+                LIMIT $num";
+        return self::rs2array($sql);
     }
 
     public static function setAccepted($uid, $qno, $lang) {
