@@ -10,10 +10,11 @@ class LibAccepted {
         try {
             $accepted = DalAccepted::getAccepted($uid, $qno, $lang);
             if (is_null($accepted)) {
-                DalAccepted::setAccepted($uid, $qno, $lang);
+                DalAccepted::insertAccepted($uid, $qno, $lang);
                 $id = DalAccepted::insertID();
             } else {
                 $id = $accepted['id'];
+                DalAccepted::updateAccepted($id);
             }
             DalAcceptedCode::setCode($id, $code);
         } catch (Exception $e) {

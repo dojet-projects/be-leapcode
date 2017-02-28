@@ -45,7 +45,7 @@ class DalAccepted extends MysqlDal {
         return self::rs2array($sql);
     }
 
-    public static function setAccepted($uid, $qno, $lang) {
+    public static function insertAccepted($uid, $qno, $lang) {
         DAssert::assertNumeric($uid);
         DAssert::assertNumeric($qno);
         self::escape($lang);
@@ -56,10 +56,16 @@ class DalAccepted extends MysqlDal {
             'createtime' => datetime(),
             'updatetime' => datetime(),
         );
+        return self::doInsert('accepted', $arrIns);
+    }
+
+    public static function updateAccepted($id) {
+        DAssert::assertNumeric($id);
         $arrUpd = array(
             'updatetime' => datetime(),
         );
-        return self::doInsertUpdate('accepted', $arrIns, $arrUpd);
+        $where = "id=$id";
+        return self::doUpdate('accepted', $arrUpd, $where, 1);
     }
 
 }

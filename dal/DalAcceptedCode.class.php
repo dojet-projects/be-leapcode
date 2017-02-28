@@ -28,12 +28,9 @@ class DalAcceptedCode extends MysqlDal {
         $arrIns = array(
             'id' => $id,
             'code' => $code,
-            'createtime' => datetime(),
-            'updatetime' => datetime(),
         );
         $arrUpd = array(
             'code' => $code,
-            'updatetime' => datetime(),
         );
         return self::doInsertUpdate('accepted_code', $arrIns, $arrUpd);
     }

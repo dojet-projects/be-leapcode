@@ -18,7 +18,7 @@ class DalQuestion extends MysqlDal {
         DAssert::assertNumeric($qno);
         $sql = "SELECT *
                 FROM questions
-                WHERE qno=$qno";
+                WHERE qno=$qno AND pub=1";
         return self::rs2rowline($sql);
     }
 
@@ -34,6 +34,7 @@ class DalQuestion extends MysqlDal {
         DAssert::assertNumeric($ps, $pn);
         $sql = "SELECT *
                 FROM questions
+                WHERE pub=1
                 ORDER BY qno
                 LIMIT $ps, $pn";
         return self::rs2array($sql);
@@ -42,6 +43,7 @@ class DalQuestion extends MysqlDal {
     public static function getRandQuestion() {
         $sql = "SELECT *
                 FROM questions
+                WHERE pub=1
                 ORDER BY RAND()
                 LIMIT 1";
         return self::rs2rowline($sql);
