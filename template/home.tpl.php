@@ -28,8 +28,31 @@
     <div class="container">
       <div class="row jumbotron">
         <div class="col-xs-12 ">
-          <h2>Leapcode是一个在线编程网站</h2>
+          <h2>Leapcode在线编程</h2>
+          <p>这里汇集了一些算法编程的挑战试题。</p>
+          <p>一些公司面试的编程问题。</p>
+          <p>以及一些可能用到的算法技巧。</p>
+<?php if ($tpl_is_signin) : ?>
+          <p class="text-muted">点击下方按钮开始吧！</p>
           <a href="/question/pick-one" class="btn btn-primary btn-lg">开始挑战！</a>
+<?php else : ?>
+          <div class="row">
+            <form class="form signup-form" method="POST" action="/">
+              <div class="col-md-3 no-padding-left-md">
+                <div class="form-group"><input autofocus="autofocus" id="id_username" maxlength="150" minlength="1" name="nickname" placeholder="昵称" type="text" required="" class="form-control input-lg"></div>
+              </div>
+              <div class="col-md-3 no-padding-left-md">
+                <div class="form-group"><input id="id_email" name="email" placeholder="邮箱" type="email" required="" class="form-control input-lg"></div>
+              </div>
+              <div class="col-md-3 no-padding-left-md">
+                <div class="form-group"><input id="id_password1" name="password" placeholder="密码" type="password" required="" class="form-control input-lg"></div>
+              </div>
+              <div class="col-md-3 no-padding-left-md">
+                <button class="btn btn-primary btn-lg" type="submit">注册<span class="hidden-md"> Leapcode</span></button>
+              </div>
+            </form>
+          </div>
+<?php endif ?>
         </div>
       </div>
     </div><!-- /.container -->
