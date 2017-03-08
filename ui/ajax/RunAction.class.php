@@ -14,32 +14,18 @@ class RunAction extends SigninBaseAction {
         $qno = MRequest::post('qno');
         $lang = MRequest::post('lang');
 
-        $coderoot = Config::runtimeConfigForKeyPath('global.coderoot');
-
         $uid = $me->uid();
 
         //  save code
         DalSolution::setSolution($uid, $qno, $lang, $code);
 
-        $playground_path = sprintf('%splayground/%d/php/%s/', $coderoot, $qno, md5($uid));
-        if (!file_exists($playground_path)) {
-            mkdir($playground_path, 0777, true);
+        $result = null;
+        if ('php' === $lang) {
+            $result = $this->run_php($code, $qno, $uid);
+        } elseif ('java' === $lang) {
+            $result = $this->run_java($code, $qno, $uid);
         }
-        $filename = $playground_path.'solution.php';
-        file_put_contents($filename, $code);
 
-        copy(sprintf('%squestions/codes/%d/code/php/test/main.php', $coderoot, $qno),
-            $playground_path.'main.php');
-        // copy(sprintf('%squestions/codes/%d/code/php/test/testcase.php', $coderoot, $qno),
-        //     $playground_path.'testcase.php');
-        copyr(sprintf('%squestions/codes/%d/code/php/test/testcase', $coderoot, $qno),
-            $playground_path.'testcase');
-        copyr(sprintf('%squestions/utils/php', $coderoot),
-            $playground_path.'/utils');
-
-        $cmd = "sudo docker run -v $playground_path:/code --rm php php /code/main.php";
-        $output = shell_exec($cmd);
-        $result = json_decode($output, true);
         if (is_null($result)) {
             $result = array(
                 'result' => 'error',
@@ -51,6 +37,43 @@ class RunAction extends SigninBaseAction {
         }
 
         $this->displayJsonSuccess($result);
+    }
+
+    protected function playground_path($qno, $uid, $lang) {
+        $coderoot = Config::runtimeConfigForKeyPath('global.coderoot');
+        $md5uid = md5($uid);
+        $playground_path = sprintf('%splayground/%d/php/%s/%s/', $coderoot, $qno,
+            substr($md5uid, 0, 2), substr($md5uid, 2));
+        if (!file_exists($playground_path)) {
+            mkdir($playground_path, 0777, true);
+        }
+        return $playground_path;
+    }
+
+    protected function run_java($code, $qno, $uid) {
+        return null;
+    }
+
+    protected function run_php($code, $qno, $uid) {
+        $coderoot = Config::runtimeConfigForKeyPath('global.coderoot');
+        $playground_path = $this->playground_path($qno, $uid, 'php');
+
+        // 写入solution文件
+        $filename = $playground_path.'solution.php';
+        file_put_contents($filename, $code);
+
+        copy(sprintf('%squestions/codes/%d/code/php/test/main.php', $coderoot, $qno),
+            $playground_path.'main.php');
+        copyr(sprintf('%squestions/codes/%d/code/php/test/testcase', $coderoot, $qno),
+            $playground_path.'testcase');
+        copyr(sprintf('%squestions/utils/php', $coderoot),
+            $playground_path.'/utils');
+
+        $cmd = "sudo docker run -v $playground_path:/code --rm php:leapcode";
+        $output = shell_exec($cmd);
+        $result = json_decode($output, true);
+
+        return $result;
     }
 
 }
