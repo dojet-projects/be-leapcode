@@ -45,7 +45,7 @@ class QuestionAction extends LeapPageBaseAction {
         $code = null;
         if ($is_signin) {
             $uid = $this->me->simpleUser()->uid();
-            $solution = DalSolution::getSolution($uid, $qno, 'php');
+            $solution = DalSolution::getUserLatestSolution($uid, $qno);
             $lang = $solution['lang'];
             $code = $solution['code'];
         }

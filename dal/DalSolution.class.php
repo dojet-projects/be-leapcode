@@ -24,6 +24,17 @@ class DalSolution extends MysqlDal {
         return self::rs2rowline($sql);
     }
 
+    public static function getUserLatestSolution($uid, $qno) {
+        DAssert::assertNumeric($uid);
+        DAssert::assertNumeric($qno);
+        $sql = "SELECT *
+                FROM solution
+                WHERE qno=$qno AND uid=$uid
+                ORDER BY updatetime DESC
+                LIMIT 1";
+        return self::rs2rowline($sql);
+    }
+
     public static function setSolution($uid, $qno, $lang, $code) {
         DAssert::assertNumeric($uid);
         DAssert::assertNumeric($qno);

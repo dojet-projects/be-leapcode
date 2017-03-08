@@ -6,6 +6,7 @@ Dispatcher::loadRoute(array(
     '/^question\/(?<title>.+)$/' => UI.'QuestionAction',
     '/^question\-list$/' => UI.'QuestionListAction',
     '/^ajax\/run$/' => UI.'ajax/RunAction',
+    '/^ajax\/get\-lang\-code$/' => UI.'ajax/AjaxGetUserLangSolutionAction',
 
     '/^profile\/(?<nickname>.+)$/' => UI.'profile/ProfileAction',
 

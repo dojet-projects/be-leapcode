@@ -136,20 +136,42 @@
 <script src="/static/monaco-editor/min/vs/loader.js"></script>
 <script type="text/javascript">
 $().ready(function() {
+  function changeLang(lang) {
+    var data = new FormData();
+    data.append('qno', <?=safeHtml($tpl_qno)?>);
+    data.append('lang', lang);
+    $.ajax({
+      url: "/ajax/get-lang-code",
+      type: 'POST',
+      data: data,
+      mimeType: "multipart/form-data",
+      cache: false,
+      contentType: false,
+      processData: false,
+      context: null,
+      success: function (data, textStatus, jqXHR) {
+        try {
+          var result = JSON.parse(data);
+          if (result.errno === 0) {
+            var data = result.data;
+            console.log(data);
+            change_code(data.code, data.lang);
+          } else {
+            console.warn(result);
+          }
+        } catch (e) {
+          alert('八阿哥驾到，请联系研发\n' + data);
+          console.log(e);
+        }
+      },
+      complete: function (jqXHR, textStatus) {
+      }
+    });
+  }
+
   require.config({ paths: { 'vs': '/static/monaco-editor/min/vs' }});
   require(['vs/editor/editor.main'], function() {
-      window.editor = monaco.editor.create(document.getElementById('container'), {
-          value: [
-<?php
-$lines = explode("\r\n", $tpl_code);
-array_walk($lines, function(&$item) {
-  $item = sprintf("'%s'", $item);
-});
-print join(',', $lines);
-?>
-          ].join('\n'),
-          language: 'php'
-      });
+    change_code('<?php echo $tpl_code ?>', '<?php echo $tpl_lang ?>');
   });
 
   $('#run').click(function() {
@@ -236,4 +258,12 @@ function pre_str(input) {
   return input.replace(/ /g, '&nbsp;').replace(/\n/g, "<br />");
 }
 
+function change_code(code, lang) {
+  $('#container').html('');
+  window.editor = monaco.editor.create(document.getElementById('container'), {
+      value: code.split("\\r\\n").join("\n"),
+      language: lang,
+      scrollBeyondLastLine: false
+  });
+}
 </script>
