@@ -19,13 +19,14 @@ class RunAction extends SigninBaseAction {
         //  save code
         DalSolution::setSolution($uid, $qno, $lang, $code);
 
-        $result = null;
+        $output = '';
         if ('php' === $lang) {
-            $result = $this->run_php($code, $qno, $uid);
+            $output = $this->run_php($code, $qno, $uid);
         } elseif ('java' === $lang) {
-            $result = $this->run_java($code, $qno, $uid);
+            $output = $this->run_java($code, $qno, $uid);
         }
 
+        $result = json_decode($output, true);
         if (is_null($result)) {
             $result = array(
                 'result' => 'error',
@@ -51,7 +52,24 @@ class RunAction extends SigninBaseAction {
     }
 
     protected function run_java($code, $qno, $uid) {
-        return null;
+        $coderoot = Config::runtimeConfigForKeyPath('global.coderoot');
+        $playground_path = $this->playground_path($qno, $uid, 'java');
+
+        // 写入solution文件
+        $filename = $playground_path.'solution.java';
+        file_put_contents($filename, $code);
+
+        copy(sprintf('%squestions/codes/%d/code/java/test/main.java', $coderoot, $qno),
+            $playground_path.'main.java');
+        // copyr(sprintf('%squestions/codes/%d/code/java/test/testcase', $coderoot, $qno),
+        //     $playground_path.'testcase');
+        // copyr(sprintf('%squestions/utils/java', $coderoot),
+        //     $playground_path.'/utils');
+
+        $cmd = "sudo docker run -v $playground_path:/code --rm java:leapcode";
+        $output = shell_exec($cmd);
+
+        return $output;
     }
 
     protected function run_php($code, $qno, $uid) {
@@ -71,9 +89,8 @@ class RunAction extends SigninBaseAction {
 
         $cmd = "sudo docker run -v $playground_path:/code --rm php:leapcode";
         $output = shell_exec($cmd);
-        $result = json_decode($output, true);
 
-        return $result;
+        return $output;
     }
 
 }

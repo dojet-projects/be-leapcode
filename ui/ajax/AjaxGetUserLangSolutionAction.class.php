@@ -26,11 +26,29 @@ class AjaxGetUserLangSolutionAction extends LeapPageBaseAction {
         if (is_null($code)) {
             // 读取默认的solution代码
             $coderoot = Config::runtimeConfigForKeyPath('global.coderoot');
-            $path = sprintf("%squestions/codes/%d/code/%s/solution/solution.php", $coderoot, $qno, $lang);
-            $code = file_get_contents($path);
+            if ('php' === $lang) {
+                $solution = $this->phpSolution($coderoot, $qno);
+            } elseif ('java' === $lang) {
+                $solution = $this->javaSolution($coderoot, $qno);
+            } else {
+                $solution = null;
+            }
+
+            $code = null;
+            if (!is_null($solution)) {
+                $code = file_get_contents($solution);
+            }
         }
 
         return $this->displayJsonSuccess(['code' => $code, 'lang' => $lang]);
+    }
+
+    protected function phpSolution($coderoot, $qno) {
+        return sprintf("%squestions/codes/%d/code/php/solution/solution.php", $coderoot, $qno);
+    }
+
+    protected function javaSolution($coderoot, $qno) {
+        return sprintf("%squestions/codes/%d/code/java/solution/solution.java", $coderoot, $qno);
     }
 
 }

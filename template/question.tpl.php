@@ -59,11 +59,11 @@
       ?>
       <div class="row" style="margin-bottom:1em;">
         <div class="col-xs-3">
-          <select class="form-control">
+          <select id="sel-lang" class="form-control">
             <?php foreach ($arrLang as $key => $lang) :
                     if (in_array($key, $tpl_lang_list)) :
             ?>
-            <option value="<?php echo $lang; ?>"><?php echo safeHtml($lang); ?></option>
+            <option value="<?php echo $key; ?>"><?php echo safeHtml($lang); ?></option>
             <?php   endif; ?>
             <?php endforeach; ?>
           </select>
@@ -171,7 +171,12 @@ $().ready(function() {
 
   require.config({ paths: { 'vs': '/static/monaco-editor/min/vs' }});
   require(['vs/editor/editor.main'], function() {
-    change_code('<?php echo $tpl_code ?>', '<?php echo $tpl_lang ?>');
+    change_code('<?php echo str_replace("\r\n", '\r\n', $tpl_code) ?>', '<?php echo $tpl_lang ?>');
+  });
+
+  $('#sel-lang').change(function() {
+    var lang = $(this).val();
+    changeLang(lang);
   });
 
   $('#run').click(function() {
@@ -180,7 +185,7 @@ $().ready(function() {
     var data = new FormData();
     data.append('code', code);
     data.append('qno', <?=safeHtml($tpl_qno)?>);
-    data.append('lang', 'php');
+    data.append('lang', $('#sel-lang').val());
     $.ajax({
       url: "/ajax/run",
       type: 'POST',
@@ -260,6 +265,10 @@ function pre_str(input) {
 
 function change_code(code, lang) {
   $('#container').html('');
+  if (null == code) {
+    return;
+  }
+  console.log(lang);
   window.editor = monaco.editor.create(document.getElementById('container'), {
       value: code.split("\\r\\n").join("\n"),
       language: lang,
