@@ -43,7 +43,7 @@ class RunAction extends SigninBaseAction {
     protected function playground_path($qno, $uid, $lang) {
         $coderoot = Config::runtimeConfigForKeyPath('global.coderoot');
         $md5uid = md5($uid);
-        $playground_path = sprintf('%splayground/%d/php/%s/%s/', $coderoot, $qno,
+        $playground_path = sprintf('%splayground/%d/%s/%s/%s/', $coderoot, $qno, $lang,
             substr($md5uid, 0, 2), substr($md5uid, 2));
         if (!file_exists($playground_path)) {
             mkdir($playground_path, 0777, true);
@@ -61,6 +61,9 @@ class RunAction extends SigninBaseAction {
 
         copy(sprintf('%squestions/codes/%d/code/java/test/main.java', $coderoot, $qno),
             $playground_path.'main.java');
+        copy(sprintf('%squestions/codes/%d/code/java/test/run.sh', $coderoot, $qno),
+            $playground_path.'run.sh');
+        chmod($playground_path.'run.sh', 0755);
         // copyr(sprintf('%squestions/codes/%d/code/java/test/testcase', $coderoot, $qno),
         //     $playground_path.'testcase');
         // copyr(sprintf('%squestions/utils/java', $coderoot),
