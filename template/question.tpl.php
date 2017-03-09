@@ -169,6 +169,8 @@ $().ready(function() {
     });
   }
 
+  $('#sel-lang').val('<?php echo $tpl_lang?>');
+
   require.config({ paths: { 'vs': '/static/monaco-editor/min/vs' }});
   require(['vs/editor/editor.main'], function() {
     change_code('<?php echo str_replace("\r\n", '\r\n', $tpl_code) ?>', '<?php echo $tpl_lang ?>');
