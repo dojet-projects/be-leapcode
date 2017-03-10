@@ -86,8 +86,8 @@
               <div class="panel-heading" id="result-title">运行结果</div>
               <div class="panel-body" style="display:none;" role="compile-error">
                 <div class="col-xs-12">
-                  <div class="well" role="error">
-                  </div>
+                  <pre role="error">
+                  </pre>
                 </div>
               </div>
               <div class="panel-body" style="display:none;" role="result">
@@ -258,7 +258,7 @@ function run_fail(input, output, expect, runtime) {
 }
 
 function run_error(error) {
-  $('#run-result div[role=error]').html(error);
+  $('#run-result pre[role=error]').html(error);
 }
 
 function pre_str(input) {

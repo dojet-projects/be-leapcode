@@ -48,7 +48,7 @@ class AjaxGetUserLangSolutionAction extends LeapPageBaseAction {
     }
 
     protected function javaSolution($coderoot, $qno) {
-        return sprintf("%squestions/codes/%d/code/java/solution/solution.java", $coderoot, $qno);
+        return sprintf("%squestions/codes/%d/code/java/solution/Solution.java", $coderoot, $qno);
     }
 
 }

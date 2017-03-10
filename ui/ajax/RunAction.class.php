@@ -56,11 +56,11 @@ class RunAction extends SigninBaseAction {
         $playground_path = $this->playground_path($qno, $uid, 'java');
 
         // 写入solution文件
-        $filename = $playground_path.'solution.java';
+        $filename = $playground_path.'Solution.java';
         file_put_contents($filename, $code);
 
-        copy(sprintf('%squestions/codes/%d/code/java/test/main.java', $coderoot, $qno),
-            $playground_path.'main.java');
+        copy(sprintf('%squestions/codes/%d/code/java/test/Main.java', $coderoot, $qno),
+            $playground_path.'Main.java');
         copy(sprintf('%squestions/codes/%d/code/java/test/run.sh', $coderoot, $qno),
             $playground_path.'run.sh');
         chmod($playground_path.'run.sh', 0755);
@@ -69,7 +69,7 @@ class RunAction extends SigninBaseAction {
         // copyr(sprintf('%squestions/utils/java', $coderoot),
         //     $playground_path.'/utils');
 
-        $cmd = "sudo docker run -v $playground_path:/code --rm java:leapcode";
+        $cmd = "sudo docker run -v $playground_path:/code -t --rm java:leapcode";
         $output = shell_exec($cmd);
 
         return $output;
