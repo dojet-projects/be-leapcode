@@ -54,20 +54,28 @@ class RunAction extends SigninBaseAction {
     protected function run_java($code, $qno, $uid) {
         $coderoot = Config::runtimeConfigForKeyPath('global.coderoot');
         $playground_path = $this->playground_path($qno, $uid, 'java');
+        if (!file_exists($playground_path.'src')) {
+            mkdir($playground_path.'src/leapcode', 0777, true);
+        }
+
+        if (!file_exists($playground_path.'bin')) {
+            mkdir($playground_path.'bin', 0777, true);
+        }
 
         // 写入solution文件
-        $filename = $playground_path.'Solution.java';
+        $filename = $playground_path.'src/leapcode/Solution.java';
+        $code = sprintf("package leapcode;\r\n%s", $code);
         file_put_contents($filename, $code);
 
-        copy(sprintf('%squestions/codes/%d/code/java/test/Main.java', $coderoot, $qno),
-            $playground_path.'Main.java');
-        copy(sprintf('%squestions/codes/%d/code/java/test/run.sh', $coderoot, $qno),
+        copy(sprintf('%squestions/codes/%d/code/java/Main.java', $coderoot, $qno),
+            $playground_path.'src/Main.java');
+        copy(sprintf('%squestions/codes/%d/code/java/run.sh', $coderoot, $qno),
             $playground_path.'run.sh');
         chmod($playground_path.'run.sh', 0755);
-        // copyr(sprintf('%squestions/codes/%d/code/java/test/testcase', $coderoot, $qno),
-        //     $playground_path.'testcase');
-        // copyr(sprintf('%squestions/utils/java', $coderoot),
-        //     $playground_path.'/utils');
+        copyr(sprintf('%squestions/codes/%d/code/java/testcase', $coderoot, $qno),
+            $playground_path.'src/leapcode/testcase');
+        copyr(sprintf('%squestions/utils/java', $coderoot),
+            $playground_path.'src/leapcode/utils');
 
         $cmd = "sudo docker run -v $playground_path:/code -t --rm java:leapcode";
         $output = shell_exec($cmd);
