@@ -44,6 +44,11 @@
           </div>
         </div>
         <div class="col-xs-3">
+          <p>难度：
+              <?php for ($i = 0; $i < (int)$tpl_question['difficulty']; $i++) : ?>
+                <span style="color: orange" class="glyphicon glyphicon-star"></span>
+              <?php endfor ?>
+          </p>
         </div>
       </div> <!-- / row brief -->
       <div class="row">

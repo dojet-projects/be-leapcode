@@ -54,7 +54,11 @@ endif;
                   <?php echo safeHtml($q['title']); ?>
                 </a>
               </td>
-              <td><?php echo $q['difficulty']; ?></td>
+              <td>
+              <?php for ($i = 0; $i < (int)$q['difficulty']; $i++) : ?>
+                <span style="color: orange" class="glyphicon glyphicon-star"></span>
+              <?php endfor ?>
+              </td>
             </tr>
             <?php endforeach; ?>
           </tbody>
