@@ -41,7 +41,7 @@ class DalAccepted extends MysqlDal {
                 FROM accepted
                 WHERE uid=$uid
                 GROUP BY qno
-                ORDER BY updatetime
+                ORDER BY updatetime DESC
                 LIMIT $num";
         return self::rs2keyarray($sql, 'qno');
     }
