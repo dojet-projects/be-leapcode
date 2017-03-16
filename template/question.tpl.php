@@ -38,12 +38,12 @@
         </div>
       </div>
       <div class="row"> <!-- row brief -->
-        <div class="col-xs-9">
+        <div class="col-sm-9 col-sm-12">
           <div>
             <?php echo $tpl_brief;?>
           </div>
         </div>
-        <div class="col-xs-3">
+        <div class="col-sm-3">
           <p>难度：
               <?php for ($i = 0; $i < (int)$tpl_question['difficulty']; $i++) : ?>
                 <span style="color: orange" class="glyphicon glyphicon-star"></span>
@@ -75,8 +75,8 @@
         </div>
       </div>
       <div class="row"> <!-- row code -->
-        <div class="col-xs-12">
-          <div id="container" style="height:400px; border: solid 1px grey; margin-bottom:1em;"></div>
+        <div class="col-md-12">
+          <div id="container" style="height:20em; border: solid 1px lightgrey; margin-bottom:1em;"></div>
           <div class="clearfix">
             <?php if ($tpl_is_signin) : ?>
             <button id="run" class="btn btn-primary pull-right">运行</button>

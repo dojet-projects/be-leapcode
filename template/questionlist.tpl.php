@@ -26,12 +26,12 @@
 <?php include TEMPLATE.'mod/nav.tpl.php'; ?>
 
     <div class="container">
-      <div class="col-xs-8">
+      <div class="col-md-8">
 
         <table class="table table-striped ">
           <thead>
             <tr>
-              <th class="col-xs-1"></th><th class="col-xs-1">#</th><th>标题</th><th>难度</th>
+              <th></th><th>#</th><th>标题</th><th>难度</th>
             </tr>
           </thead>
           <tbody>
