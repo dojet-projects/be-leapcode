@@ -20,7 +20,7 @@ class ProfileAction extends LeapPageBaseAction {
         $leapUser = MLeapUser::userFromUID($uid);
 
         //  accepted questions
-        $latestAccepted = DalAccepted::getUserLatestAccepted($uid, 10);
+        $latestAccepted = LibAccepted::getUserLatestAccepted($uid, 10);
         if (is_null($latestAccepted)) {
             $latestAccepted = array();
         }

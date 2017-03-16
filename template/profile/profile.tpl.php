@@ -56,9 +56,11 @@
                   <!-- <span class="badge progress-bar-success">
                     Accepted
                   </span> -->
+                  <?php foreach ($accepted['lang'] as $lang) : ?>
                   <span class="badge progress-bar-info">
-                    <?php echo safeHtml($accepted['lang'])?>
+                    <?php echo safeHtml($lang)?>
                   </span>
+                  <?php endforeach ?>
                   <b><?php echo safeHtml($question['title'])?></b> &nbsp;
                   <span class="text-muted">
                     <?php echo safeHtml($accepted['updatetime'])?>

@@ -23,4 +23,19 @@ class LibAccepted {
         return DalAccepted::commit();
     }
 
+    public static function getUserLatestAccepted($uid, $num = 10) {
+        $latestAccepted = DalAccepted::getUserLatestAccepted($uid, $num);
+
+        $arrQno = array_keys($latestAccepted);
+        $lang_map = DalAccepted::getUserAcceptedLangs($uid, $arrQno);
+
+        foreach ($latestAccepted as &$accepted) {
+            $qno = $accepted['qno'];
+            $accepted['lang'] = array_column($lang_map[$qno], 'lang');
+        }
+        unset($accepted);
+
+        return $latestAccepted;
+    }
+
 }

@@ -40,9 +40,20 @@ class DalAccepted extends MysqlDal {
         $sql = "SELECT *
                 FROM accepted
                 WHERE uid=$uid
+                GROUP BY qno
                 ORDER BY updatetime
                 LIMIT $num";
-        return self::rs2array($sql);
+        return self::rs2keyarray($sql, 'qno');
+    }
+
+    public static function getUserAcceptedLangs($uid, $arrQno) {
+        DAssert::assertNumeric($uid);
+        DAssert::assertNotEmptyNumericArray($arrQno);
+        $wherein = join(',', $arrQno);
+        $sql = "SELECT qno, lang
+                FROM accepted
+                WHERE uid=$uid AND qno IN ($wherein)";
+        return self::rs2grouparray($sql, 'qno');
     }
 
     public static function insertAccepted($uid, $qno, $lang) {
