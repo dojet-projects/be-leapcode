@@ -3,6 +3,7 @@ define('C_RUNTIME_LOCAL', 'runtime_local');
 define('C_RUNTIME_228', 'runtime_228');
 define('C_RUNTIME_MAC2010', 'mac2010');
 define('C_RUNTIME_UBUNTU16', 'ubuntu16');
+define('C_RUNTIME_UBUNTUHOME', 'ubuntuhome');
 define('C_RUNTIME_BWG', 'bwg');
 define('C_RUNTIME_ALIYUN', 'aliyun');
 
@@ -18,6 +19,8 @@ if (defined('RUNTIME')) {
     $__c = C_RUNTIME_228;
 } elseif (file_exists('/var/.iammac2010')) {
     $__c = C_RUNTIME_MAC2010;
+} elseif (file_exists('/var/.iamubuntuhome')) {
+    $__c = C_RUNTIME_UBUNTUHOME;
 } elseif (file_exists('/var/.iamubuntu16')) {
     $__c = C_RUNTIME_UBUNTU16;
 } else {
