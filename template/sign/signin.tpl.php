@@ -32,7 +32,7 @@
             <h2>登录</h2>
             <div class="form-group">
               <label for="username">邮箱</label>
-              <input type="text" name="username" class="form-control" id="username" placeholder="E-mail">
+              <input type="email" name="username" class="form-control" id="username" placeholder="E-mail">
             </div>
             <div class="form-group">
               <label for="password">密码</label>
