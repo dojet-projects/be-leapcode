@@ -13,4 +13,8 @@ class HomeAction extends LeapPageBaseAction {
         $this->displayTemplate('home.tpl.php');
     }
 
+    protected function topmenu() {
+        return '';
+    }
+
 }

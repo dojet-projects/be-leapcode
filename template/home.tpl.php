@@ -37,7 +37,7 @@
           <a href="/question/pick-one" class="btn btn-primary btn-lg">开始挑战！</a>
 <?php else : ?>
           <div class="row">
-            <form class="form signup-form" method="POST" action="/">
+            <form class="form signup-form" method="POST" action="/signup-commit">
               <div class="col-md-3 no-padding-left-md">
                 <div class="form-group"><input autofocus="autofocus" id="id_username" maxlength="150" minlength="1" name="nickname" placeholder="昵称" type="text" required="" class="form-control input-lg"></div>
               </div>
