@@ -3,6 +3,8 @@ define('DBLEAPCODE',    'DBLEAPCODE');
 
 $__c = &Config::configRefForKeyPath('database');
 
+$db_pass = file_get_contents('/var/db_pass');
+
 $__c[C_RUNTIME_ALIYUN] = array(
     DBLEAPCODE => array(
         'r' => array(
@@ -10,7 +12,7 @@ $__c[C_RUNTIME_ALIYUN] = array(
                 array('h' => '127.0.0.1', 'p' => 3306),
                 ),
             'username' => 'root',
-            'password' => file_get_contents('/var/db_pass'),
+            'password' => $db_pass,
             'dbname' => 'leap',
             'charset' => 'utf8',
             'timeout' => 1, //sec
@@ -20,7 +22,7 @@ $__c[C_RUNTIME_ALIYUN] = array(
                 array('h' => '127.0.0.1', 'p' => 3306),
                 ),
             'username' => 'root',
-            'password' => file_get_contents('/var/db_pass'),
+            'password' => $db_pass,
             'dbname' => 'leap',
             'charset' => 'utf8',
             'timeout' => 1, //sec
@@ -28,3 +30,4 @@ $__c[C_RUNTIME_ALIYUN] = array(
     ),
 );
 
+unset($__c);
