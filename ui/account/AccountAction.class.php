@@ -8,7 +8,7 @@
 class AccountAction extends SigninPageBaseAction {
 
     protected function signinPageExecute(MLeapUser $me) {
-
         $this->displayTemplate('account/account.tpl.php');
     }
+
 }

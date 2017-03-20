@@ -25,7 +25,10 @@ class ProfileAction extends LeapPageBaseAction {
             $latestAccepted = array();
         }
         $arrQno = array_column($latestAccepted, 'qno');
-        $questions = DalQuestion::getMultiQuestions($arrQno);
+        $questions = array();
+        if (!empty($arrQno)) {
+            $questions = DalQuestion::getMultiQuestions($arrQno);
+        }
 
         $this->assign('leapUser', $leapUser);
         $this->assign('latestAccepted', $latestAccepted);
@@ -33,4 +36,5 @@ class ProfileAction extends LeapPageBaseAction {
 
         $this->displayTemplate('profile/profile.tpl.php');
     }
+
 }

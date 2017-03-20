@@ -20,7 +20,7 @@ abstract class SigninPageBaseAction extends SigninBaseAction {
     }
 
     protected function topmenu() {
-        return 'question';
+        return '';
     }
 
     final protected function signinExecute(MLeapUser $me) {

@@ -15,4 +15,8 @@ class PickOneAction extends LeapPageBaseAction {
         redirect('/question/'.$seo_title);
     }
 
+    protected function topmenu() {
+        return 'question';
+    }
+
 }

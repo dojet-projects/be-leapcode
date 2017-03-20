@@ -36,7 +36,7 @@
             </div>
             <div class="form-group">
               <label for="nickname">昵称</label>
-              <input type="text" name="nickname" class="form-control" id="nickname" placeholder="Username">
+              <input type="text" name="nickname" class="form-control" id="nickname" placeholder="你在网站上的称呼">
             </div>
             <div class="form-group">
               <label for="password">密码</label>

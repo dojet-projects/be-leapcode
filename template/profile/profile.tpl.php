@@ -46,28 +46,34 @@
                 最近完成的问题
               </h3>
             </div>
-            <ul class="list-group">
-            <?php foreach ($tpl_latestAccepted as $accepted) : ?>
-              <?php
-                    $qno = $accepted['qno'];
-                    $question = $tpl_questions[$qno];
-              ?>
-                <a href="/question/<?php echo safeHtml($question['seo_title'])?>" class="list-group-item">
-                  <!-- <span class="badge progress-bar-success">
-                    Accepted
-                  </span> -->
-                  <?php foreach ($accepted['lang'] as $lang) : ?>
-                  <span class="badge progress-bar-info">
-                    <?php echo safeHtml($lang)?>
-                  </span>
-                  <?php endforeach ?>
-                  <b><?php echo safeHtml($question['title'])?></b> &nbsp;
-                  <span class="text-muted">
-                    <?php echo safeHtml($accepted['updatetime'])?>
-                  </span>
-                </a>
-            <?php endforeach ?>
-            </ul>
+            <?php if ($tpl_latestAccepted) : ?>
+              <ul class="list-group">
+              <?php foreach ($tpl_latestAccepted as $accepted) : ?>
+                <?php
+                      $qno = $accepted['qno'];
+                      $question = $tpl_questions[$qno];
+                ?>
+                  <a href="/question/<?php echo safeHtml($question['seo_title'])?>" class="list-group-item">
+                    <!-- <span class="badge progress-bar-success">
+                      Accepted
+                    </span> -->
+                    <?php foreach ($accepted['lang'] as $lang) : ?>
+                    <span class="badge progress-bar-info">
+                      <?php echo safeHtml($lang)?>
+                    </span>
+                    <?php endforeach ?>
+                    <b><?php echo safeHtml($question['title'])?></b> &nbsp;
+                    <span class="text-muted">
+                      <?php echo safeHtml($accepted['updatetime'])?>
+                    </span>
+                  </a>
+              <?php endforeach ?>
+              </ul>
+            <?php else : ?>
+              <div class="panel-body">
+                <p class="text-muted">还没有...</p>
+              </div>
+            <?php endif ?>
           </div>
         </div>
       </div> <!-- /.row -->

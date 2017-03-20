@@ -31,8 +31,8 @@
           <form action="/signin-commit" method="post">
             <h2>登录</h2>
             <div class="form-group">
-              <label for="username">用户名</label>
-              <input type="text" name="username" class="form-control" id="username" placeholder="Username">
+              <label for="username">邮箱</label>
+              <input type="text" name="username" class="form-control" id="username" placeholder="E-mail">
             </div>
             <div class="form-group">
               <label for="password">密码</label>

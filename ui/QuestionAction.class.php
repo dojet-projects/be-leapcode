@@ -64,4 +64,8 @@ class QuestionAction extends LeapPageBaseAction {
         $this->displayTemplate('question.tpl.php');
     }
 
+    protected function topmenu() {
+        return 'question';
+    }
+
 }

@@ -8,10 +8,22 @@ use Mod\SimpleUser\SimpleSignupCommitDelegate;
 use Mod\SimpleUser\SimpleSignupAction;
 use Mod\SimpleUser\MSimpleUser;
 
-class SignupDelegate
+class SignupDelegate extends LeapPageBaseAction
 implements SimpleSignupDelegate, SimpleSignupCommitDelegate {
 
+    protected function pageExecute($is_signin) {
+        ## do nothing
+    }
+
     public function willSignup(&$username, &$password) {
+        $nickname = MRequest::post('nickname');
+        $userinfo = DalUserinfo::getUserinfoByNickname($nickname);
+        if (!is_null($userinfo)) {
+            $this->assign('notice', '该昵称已被占用，请换一个昵称！');
+            $this->assign('links', ['/signup' => '重新注册']);
+            $this->displayTemplate('misc/notice.tpl.php');
+            return false;
+        }
         $username = MRequest::post('email');
     }
 
@@ -27,6 +39,12 @@ implements SimpleSignupDelegate, SimpleSignupCommitDelegate {
 
     public function beforeDisplay(SimpleSignupAction $action) {
         $action->assign('topmenu', '');
+    }
+
+    public function userAlreadyExists($username) {
+        $this->assign('notice', '该邮箱已被注册，请使用其他邮箱注册，或直接登录！');
+        $this->assign('links', ['/signup' => '重新注册', '/signin' => '立即登录']);
+        $this->displayTemplate('misc/notice.tpl.php');
     }
 
 }
