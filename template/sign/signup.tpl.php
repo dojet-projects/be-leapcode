@@ -32,15 +32,15 @@
             <h2>注册</h2>
             <div class="form-group">
               <label for="email">邮箱</label>
-              <input type="text" name="email" class="form-control" id="email" placeholder="E-mail">
+              <input type="email" name="email" class="form-control" id="email" placeholder="将用此邮箱名登录" required="">
             </div>
             <div class="form-group">
               <label for="nickname">昵称</label>
-              <input type="text" name="nickname" class="form-control" id="nickname" placeholder="你在网站上的称呼">
+              <input type="text" name="nickname" class="form-control" id="nickname" placeholder="你在网站上的称呼" required="">
             </div>
             <div class="form-group">
               <label for="password">密码</label>
-              <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+              <input type="password" name="password" class="form-control" id="password" placeholder="登录密码" required="">
             </div>
             <button type="submit" class="btn btn-primary">注册Leapcode</button>
             <a href="/signin" class="btn pull-right">&raquo; 已注册，登录</a>

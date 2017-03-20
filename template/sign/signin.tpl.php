@@ -32,11 +32,11 @@
             <h2>登录</h2>
             <div class="form-group">
               <label for="username">邮箱</label>
-              <input type="email" name="username" class="form-control" id="username" placeholder="E-mail">
+              <input type="email" name="username" class="form-control" id="username" placeholder="E-mail" required="">
             </div>
             <div class="form-group">
               <label for="password">密码</label>
-              <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+              <input type="password" name="password" class="form-control" id="password" placeholder="Password" required="">
             </div>
             <button type="submit" class="btn btn-default">登录</button>
             <a href="/signup" class="btn pull-right">&raquo; 去注册</a>
