@@ -10,7 +10,7 @@ $__c[C_RUNTIME_ALIYUN] = array(
                 array('h' => '127.0.0.1', 'p' => 3306),
                 ),
             'username' => 'root',
-            'password' => 'fTwd201$',
+            'password' => file_get_contents('/var/db_pass'),
             'dbname' => 'leap',
             'charset' => 'utf8',
             'timeout' => 1, //sec
@@ -20,7 +20,7 @@ $__c[C_RUNTIME_ALIYUN] = array(
                 array('h' => '127.0.0.1', 'p' => 3306),
                 ),
             'username' => 'root',
-            'password' => 'fTwd201$',
+            'password' => file_get_contents('/var/db_pass'),
             'dbname' => 'leap',
             'charset' => 'utf8',
             'timeout' => 1, //sec

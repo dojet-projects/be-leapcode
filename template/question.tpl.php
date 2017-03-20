@@ -275,7 +275,6 @@ function change_code(code, lang) {
   if (null == code) {
     return;
   }
-  console.log(lang);
   window.editor = monaco.editor.create(document.getElementById('container'), {
       value: code.split("\\r\\n").join("\n"),
       language: lang,
