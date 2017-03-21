@@ -15,9 +15,7 @@ implements SimpleSigninDelegate, SimpleSigninCommitDelegate {
         $email = MRequest::post('email');
         $username = $email;
         if (empty($username) or empty($password)) {
-            $this->assign('notice', '登录邮箱和密码不能为空！');
-            $this->assign('links', ['/signup' => '重新注册']);
-            $this->displayTemplate('misc/notice.tpl.php');
+            $this->displayNotice('登录邮箱和密码不能为空！', ['/signup' => '重新注册']);
             return false;
         }
     }
@@ -35,9 +33,7 @@ implements SimpleSigninDelegate, SimpleSigninCommitDelegate {
     }
 
     public function signinFailed(Exception $e) {
-        $this->assign('notice', $e->getMessage());
-        $this->assign('links', ['/signin' => '重新登录']);
-        $this->displayTemplate('misc/notice.tpl.php');
+        $this->displayNotice($e->getMessage(), ['/signup' => '重新注册']);
     }
 
 }
