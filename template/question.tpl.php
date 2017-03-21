@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="row"> <!-- row brief -->
-        <div class="col-sm-9 col-sm-12">
+        <div class="col-sm-9 col-xs-12">
           <div>
             <?php echo $tpl_brief;?>
           </div>
@@ -84,48 +84,58 @@
             <a class="btn btn-link" href="/signin">&raquo; 登录后提交代码</a>
             <?php endif ?>
           </div>
-          <div id="run-result" style="display:none;">
-            <hr />
-            <div class="panel panel-default" role="panel">
-              <div class="panel-heading" id="result-title">运行结果</div>
-              <div class="panel-body" style="display:none;" role="compile-error">
+        </div>
+      </div>
+
+      <div class="row" id="compiling">
+        <div class="col-xs-12">
+          <p class="text-muted" style="font-size: 150%">正在编译……</p>
+        </div>
+      </div>
+
+      <!-- 运行结果 -->
+      <div class="row" id="run-result" style="display:none;">
+        <div class="col-md-12">
+          <hr />
+          <div class="panel panel-default" role="panel">
+            <div class="panel-heading" id="result-title">运行结果</div>
+            <div class="panel-body" style="display:none;" role="compile-error">
+              <div class="col-xs-12">
+                <pre role="error">
+                </pre>
+              </div>
+            </div>
+            <div class="panel-body" style="display:none;" role="result">
+              <div class="row">
                 <div class="col-xs-12">
-                  <pre role="error">
+                  <p>输入</p>
+                  <pre class="well" role="input">
+                    1,2,3
                   </pre>
                 </div>
               </div>
-              <div class="panel-body" style="display:none;" role="result">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <p>输入</p>
-                    <pre class="well" role="input">
-                      1,2,3
-                    </pre>
-                  </div>
+              <div class="row">
+                <div class="col-xs-6">
+                  <p>你的结果</p>
+                  <pre class="well" role="output">
+                    [1,2]
+                  </pre>
                 </div>
-                <div class="row">
-                  <div class="col-xs-6">
-                    <p>你的结果</p>
-                    <pre class="well" role="output">
-                      [1,2]
-                    </pre>
-                  </div>
-                  <div class="col-xs-6">
-                    <p>正确结果</p>
-                    <pre class="well" role="expect">
-                      [1,2]
-                    </pre>
-                  </div>
+                <div class="col-xs-6">
+                  <p>正确结果</p>
+                  <pre class="well" role="expect">
+                    [1,2]
+                  </pre>
                 </div>
-                <div class="row">
-                  <div class="col-xs-12">
-                    <p>运行耗时: <span id="runtime"></span></p>
-                  </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <p>运行耗时: <span id="runtime"></span></p>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </div> <!-- -->
       </div> <!-- / row code -->
     </div><!-- /.container -->
     <?php include TEMPLATE.'mod/footer.tpl.php'; ?>

@@ -34,7 +34,7 @@
           <p>以及一些可能用到的算法技巧。</p>
 <?php if ($tpl_is_signin) : ?>
           <p class="text-muted">点击下方按钮开始吧！</p>
-          <a href="/question/pick-one" class="btn btn-primary btn-lg">开始挑战！</a>
+          <a href="/question-list" class="btn btn-primary btn-lg">开始挑战！</a>
 <?php else : ?>
           <div class="row">
             <form class="form signup-form" method="POST" action="/signup-commit">

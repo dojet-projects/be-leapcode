@@ -31,7 +31,7 @@
         <table class="table table-striped ">
           <thead>
             <tr>
-              <th></th><th>#</th><th>标题</th><th>难度</th>
+              <th style="width: 3em;"></th><th style="width: 2em;">#</th><th>标题</th><th>难度</th>
             </tr>
           </thead>
           <tbody>
