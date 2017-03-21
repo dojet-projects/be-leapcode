@@ -15,8 +15,15 @@ implements SimpleSigninDelegate, SimpleSigninCommitDelegate {
 
     }
 
-    public function willSignin($username, $password) {
-
+    public function shouldSignin(&$username, &$password) {
+        $email = MRequest::post('email');
+        $username = $email;
+        if (empty($username) or empty($password)) {
+            $this->assign('notice', '登录邮箱和密码不能为空！');
+            $this->assign('links', ['/signup' => '重新注册']);
+            $this->displayTemplate('misc/notice.tpl.php');
+            return false;
+        }
     }
 
     public function didSignin(MSimpleUser $simpleUser) {

@@ -15,8 +15,15 @@ implements SimpleSignupDelegate, SimpleSignupCommitDelegate {
         ## do nothing
     }
 
-    public function willSignup(&$username, &$password) {
+    public function shouldSignup(&$username, &$password) {
         $nickname = MRequest::post('nickname');
+        if (empty($username) or empty($password) or empty($nickname)) {
+            $this->assign('notice', '注册信息填写不完整，请重新注册！');
+            $this->assign('links', ['/signup' => '重新注册']);
+            $this->displayTemplate('misc/notice.tpl.php');
+            return false;
+        }
+
         $userinfo = DalUserinfo::getUserinfoByNickname($nickname);
         if (!is_null($userinfo)) {
             $this->assign('notice', '该昵称已被占用，请换一个昵称！');
