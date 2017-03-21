@@ -8,12 +8,8 @@ use Mod\SimpleUser\SimpleSigninCommitDelegate;
 use Mod\SimpleUser\SimpleSigninAction;
 use Mod\SimpleUser\MSimpleUser;
 
-class SigninDelegate extends LeapPageBaseAction
+class SigninDelegate extends NoticeBaseAction
 implements SimpleSigninDelegate, SimpleSigninCommitDelegate {
-
-    protected function pageExecute($is_signin) {
-
-    }
 
     public function shouldSignin(&$username, &$password) {
         $email = MRequest::post('email');
