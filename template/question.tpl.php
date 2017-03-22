@@ -55,6 +55,9 @@
           <hr />
         </div>
       </div>
+    </div>
+
+    <div class="container hidden" id="container-coding">
       <?php
           $arrLang = array(
             'php' => 'PHP',
@@ -86,9 +89,11 @@
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- 运行结果 -->
-      <div class="row" id="run-result" style="display:none;">
+    <!-- 运行结果 -->
+    <div class="container" id="run-result" style="display:none;">
+      <div class="row">
         <div class="col-md-12">
           <hr />
           <div class="panel panel-default" role="panel">
@@ -132,6 +137,7 @@
         </div> <!-- -->
       </div> <!-- / row code -->
     </div><!-- /.container -->
+
     <?php include TEMPLATE.'mod/footer.tpl.php'; ?>
 
     <!-- Bootstrap core JavaScript
@@ -144,6 +150,9 @@
 <script src="/static/monaco-editor/min/vs/loader.js"></script>
 <script type="text/javascript">
 $().ready(function() {
+
+  $('<p class="lead text-muted text-center" id="loading">载入中...</p>').insertBefore("#container-coding");
+
   function changeLang(lang) {
     var data = new FormData();
     data.append('qno', <?=safeHtml($tpl_qno)?>);
@@ -180,7 +189,10 @@ $().ready(function() {
   $('#sel-lang').val('<?php echo $tpl_lang?>');
 
   require.config({ paths: { 'vs': '/static/monaco-editor/min/vs' }});
+
   require(['vs/editor/editor.main'], function() {
+    $('#loading').remove();
+    $('#container-coding').removeClass("hidden");
     change_code('<?php echo str_replace("\r\n", '\r\n', $tpl_code) ?>', '<?php echo $tpl_lang ?>');
   });
 
@@ -231,11 +243,16 @@ $().ready(function() {
   });
 });
 
-function run_result(data) {
-  var result = data.result;
+function reset_run_result() {
+  $('#run-result').hide();
   $('#run-result div[role=panel]').removeClass('panel-success panel-danger');
   $('#run-result div[role=compile-error]').hide();
   $('#run-result div[role=result]').hide();
+}
+
+function run_result(data) {
+  reset_run_result();
+  var result = data.result;
   $('#result-title').html(data.msg);
   if ('success' == result) {
     $('#run-result div[role=result]').show();
@@ -279,9 +296,11 @@ function pre_str(input) {
 
 function change_code(code, lang) {
   $('#container').html('');
+  reset_run_result();
   if (null == code) {
     return;
   }
+
   window.editor = monaco.editor.create(document.getElementById('container'), {
       value: code.split("\\r\\n").join("\n"),
       language: lang,
