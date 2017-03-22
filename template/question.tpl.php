@@ -75,7 +75,7 @@
       </div>
       <div class="row"> <!-- row code -->
         <div class="col-md-12">
-          <div id="container" style="height:20em; border: solid 1px lightgrey; margin-bottom:1em;"></div>
+          <div id="container" style="height:30em; border: solid 1px lightgrey; margin-bottom:1em;"></div>
           <div class="clearfix">
             <?php if ($tpl_is_signin) : ?>
             <button id="run" data-loading-text="正在编译..." class="btn btn-primary pull-right">运行</button>
