@@ -78,18 +78,12 @@
           <div id="container" style="height:20em; border: solid 1px lightgrey; margin-bottom:1em;"></div>
           <div class="clearfix">
             <?php if ($tpl_is_signin) : ?>
-            <button id="run" class="btn btn-primary pull-right">运行</button>
+            <button id="run" data-loading-text="正在编译..." class="btn btn-primary pull-right">运行</button>
             <?php else : ?>
             <button class="btn btn-primary pull-left" disabled="disabled">运行</button>
             <a class="btn btn-link" href="/signin">&raquo; 登录后提交代码</a>
             <?php endif ?>
           </div>
-        </div>
-      </div>
-
-      <div class="row" id="compiling">
-        <div class="col-xs-12">
-          <p class="text-muted" style="font-size: 150%">正在编译……</p>
         </div>
       </div>
 
@@ -196,6 +190,8 @@ $().ready(function() {
   });
 
   $('#run').click(function() {
+    var button = $(this);
+    button.button('loading');
     var code = window.editor.getValue();
 
     var data = new FormData();
@@ -225,8 +221,10 @@ $().ready(function() {
           alert('八阿哥驾到，请联系研发\n' + data);
           console.log(e);
         }
+        $('html,body').animate({scrollTop: $('#run-result').offset().top}, 350);
       },
       complete: function (jqXHR, textStatus) {
+        button.button('reset');
       }
     });
 
@@ -252,7 +250,7 @@ function run_result(data) {
     $('#run-result div[role=panel]').addClass('panel-danger');
     run_error(data.error);
   }
-  $('#run-result').show('slow');
+  $('#run-result').show();
 }
 
 function run_success(input, output, expect, runtime) {
