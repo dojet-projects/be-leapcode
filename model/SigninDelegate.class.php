@@ -19,7 +19,7 @@ implements SimpleSigninDelegate, SimpleSigninCommitDelegate {
             return false;
         }
 
-        if (empty($username) or empty($password)) {
+        if (empty($email) or empty($password)) {
             $this->displayNotice('登录邮箱和密码不能为空！', ['/signin' => '重新登录']);
             return false;
         }
