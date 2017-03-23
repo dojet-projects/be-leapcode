@@ -13,8 +13,15 @@ implements SimpleSignupDelegate, SimpleSignupCommitDelegate {
 
     public function shouldSignup(&$username, &$password) {
         $nickname = MRequest::post('nickname');
-        if (empty($username) or empty($password) or empty($nickname)) {
+        $email = MRequest::post('email');
+        if (empty($email) or empty($password) or empty($nickname)) {
             $this->displayNotice('注册信息填写不完整，请重新注册！',
+                ['/signup' => '重新注册']);
+            return false;
+        }
+
+        if (false === filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $this->displayNotice('输入的邮箱格式不正确！',
                 ['/signup' => '重新注册']);
             return false;
         }
@@ -25,7 +32,8 @@ implements SimpleSignupDelegate, SimpleSignupCommitDelegate {
                 ['/signup' => '重新注册']);
             return false;
         }
-        $username = MRequest::post('email');
+
+        $username = $email;
     }
 
     public function didSignup(MSimpleUser $simpleUser) {

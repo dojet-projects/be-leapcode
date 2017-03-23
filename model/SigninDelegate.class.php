@@ -13,11 +13,18 @@ implements SimpleSigninDelegate, SimpleSigninCommitDelegate {
 
     public function shouldSignin(&$username, &$password) {
         $email = MRequest::post('email');
-        $username = $email;
-        if (empty($username) or empty($password)) {
-            $this->displayNotice('登录邮箱和密码不能为空！', ['/signup' => '重新注册']);
+        if (false === filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $this->displayNotice('输入的邮箱格式不正确！',
+                ['/signin' => '重新登录']);
             return false;
         }
+
+        if (empty($username) or empty($password)) {
+            $this->displayNotice('登录邮箱和密码不能为空！', ['/signin' => '重新登录']);
+            return false;
+        }
+
+        $username = $email;
     }
 
     public function didSignin(MSimpleUser $simpleUser) {
@@ -33,7 +40,7 @@ implements SimpleSigninDelegate, SimpleSigninCommitDelegate {
     }
 
     public function signinFailed(Exception $e) {
-        $this->displayNotice($e->getMessage(), ['/signup' => '重新注册']);
+        $this->displayNotice($e->getMessage(), ['/signin' => '重新登录']);
     }
 
 }

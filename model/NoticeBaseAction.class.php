@@ -14,8 +14,8 @@ abstract class NoticeBaseAction extends LeapPageBaseAction {
     }
 
     protected function displayNotice($notice, $links) {
-        $this->assign('notice', '注册信息填写不完整，请重新注册！');
-        $this->assign('links', ['/signup' => '重新注册']);
+        $this->assign('notice', $notice);
+        $this->assign('links', $links);
         $this->displayTemplate('misc/notice.tpl.php');
     }
 
