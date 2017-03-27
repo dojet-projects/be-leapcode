@@ -1,1 +1,1 @@
-mysqldump -hmac -uroot -proot leap > leap.sql
+mysqldump -hmac -uroot -proot -B leap > leap.sql
