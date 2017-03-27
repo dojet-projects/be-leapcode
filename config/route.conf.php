@@ -13,5 +13,8 @@ Dispatcher::loadRoute(array(
     '/^account$/' => UI.'account/AccountAction',
     '/^account\/save\-nickname$/' => UI.'account/SaveNicknameAction',
     '/^account\/save\-personalinfo$/' => UI.'account/SavePersonalInfoAction',
+
+    '/^tag\/(?<seo_tagname>.+)$/' => UI.'tag/TagAction',
+
     )
 );

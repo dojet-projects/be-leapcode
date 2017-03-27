@@ -55,12 +55,16 @@ class QuestionAction extends LeapPageBaseAction {
             $code = file_get_contents($path);
         }
 
+        // tags
+        $tags = LibTag::getQuestionTags($qno);
+
         $this->assign('qno', $qno);
         $this->assign('question', $question);
         $this->assign('lang_list', $lang_list);
         $this->assign('lang', $lang);
         $this->assign('code', $code);
         $this->assign('brief', $brief);
+        $this->assign('tags', $tags);
         $this->displayTemplate('question.tpl.php');
     }
 

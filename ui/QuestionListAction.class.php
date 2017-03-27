@@ -19,7 +19,10 @@ class QuestionListAction extends LeapPageBaseAction {
             $this->assign('accepted', $accepted);
         }
 
+        $tags = DalTags::getAllTags();
+
         $this->assign('questionList', $questionList);
+        $this->assign('tags', $tags);
         $this->displayTemplate('questionlist.tpl.php');
     }
 

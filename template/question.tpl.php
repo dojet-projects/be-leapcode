@@ -48,6 +48,15 @@
                 <span style="color: orange" class="glyphicon glyphicon-star"></span>
               <?php endfor ?>
           </p>
+          <?php if (count($tpl_tags) > 0) : ?>
+          <p>标签：
+            <?php foreach ($tpl_tags as $tag) : ?>
+              <a href="/tag/<?php echo $tag['seo_tagname']?>" class="label label-info">
+                <?php echo safeHtml($tag['tagname']); ?>
+              </a>
+            <?php endforeach ?>
+          </p>
+          <?php endif ?>
         </div>
       </div> <!-- / row brief -->
       <div class="row">

@@ -26,8 +26,8 @@
 <?php include TEMPLATE.'mod/nav.tpl.php'; ?>
 
     <div class="container">
-      <div class="col-md-8">
-
+      <div class="col-md-12">
+        <h3><span class="glyphicon glyphicon-tag"></span> <?php echo safeHtml($tpl_tag['tagname']); ?></h3>
         <table class="table table-striped ">
           <thead>
             <tr>
@@ -63,20 +63,6 @@
             <?php endforeach; ?>
           </tbody>
         </table>
-      </div>
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">标签</h3>
-          </div>
-          <div class="panel-body">
-<?php foreach ($tpl_tags as $tag) : ?>
-    <a href="/tag/<?php echo $tag['seo_tagname']?>" class="label label-info">
-      <?php echo safeHtml($tag['tagname']); ?>
-    </a>
-<?php endforeach ?>
-          </div>
-        </div>
       </div>
     </div><!-- /.container -->
     <?php include TEMPLATE.'mod/footer.tpl.php'; ?>

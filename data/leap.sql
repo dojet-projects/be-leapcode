@@ -78,6 +78,35 @@ INSERT INTO `accepted_code` VALUES (16,'<?php\\r\\nclass Solution {\\r\\n\\r\\n 
 UNLOCK TABLES;
 
 --
+-- Table structure for table `question_tag`
+--
+
+DROP TABLE IF EXISTS `question_tag`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `question_tag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `qno` int(11) NOT NULL COMMENT '问题id',
+  `tid` int(11) NOT NULL COMMENT '标签id',
+  `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `updatetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `qno` (`qno`,`tid`),
+  KEY `tid` (`tid`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='问题与标签关系';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `question_tag`
+--
+
+LOCK TABLES `question_tag` WRITE;
+/*!40000 ALTER TABLE `question_tag` DISABLE KEYS */;
+INSERT INTO `question_tag` VALUES (1,2,1,'2017-03-27 08:45:52','2017-03-27 08:45:52'),(2,4,1,'2017-03-27 08:45:52','2017-03-27 08:45:52');
+/*!40000 ALTER TABLE `question_tag` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `questions`
 --
 
@@ -166,6 +195,37 @@ INSERT INTO `solution` VALUES (7,1,3,'php','<?php\\r\\n/**\\r\\n * 已定义的�
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tags`
+--
+
+DROP TABLE IF EXISTS `tags`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tags` (
+  `tid` int(11) NOT NULL AUTO_INCREMENT,
+  `tagname` varchar(64) NOT NULL COMMENT '标签名',
+  `seo_tagname` varchar(128) NOT NULL COMMENT 'SEO标签名',
+  `vol` int(11) NOT NULL DEFAULT '0' COMMENT '标签数量',
+  `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `updatetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '更新时间',
+  PRIMARY KEY (`tid`),
+  UNIQUE KEY `seo_tagname` (`seo_tagname`),
+  UNIQUE KEY `tagname` (`tagname`),
+  KEY `vol` (`vol`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='标签';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tags`
+--
+
+LOCK TABLES `tags` WRITE;
+/*!40000 ALTER TABLE `tags` DISABLE KEYS */;
+INSERT INTO `tags` VALUES (1,'动态规划','dynamic-programming',0,'2017-03-27 08:39:53','2017-03-27 08:39:53');
+/*!40000 ALTER TABLE `tags` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user_info`
 --
 
@@ -202,4 +262,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-27 16:03:49
+-- Dump completed on 2017-03-27 18:08:02
