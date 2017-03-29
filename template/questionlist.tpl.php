@@ -71,9 +71,9 @@
           </div>
           <div class="panel-body">
 <?php foreach ($tpl_tags as $tag) : ?>
-    <a href="/tag/<?php echo $tag['seo_tagname']?>" class="label label-info">
+    <span style="display: inline-block;"><a href="/tag/<?php echo $tag['seo_tagname']?>" class="label label-info">
       <?php echo safeHtml($tag['tagname']); ?>
-    </a>
+    </a></span>
 <?php endforeach ?>
           </div>
         </div>

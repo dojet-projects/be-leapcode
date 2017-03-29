@@ -74,7 +74,7 @@
             );
       ?>
       <div class="row" style="margin-bottom:1em;">
-        <div class="col-sm-3 col-lg-2">
+        <div class="col-sm-4 col-lg-3 col-xs-6">
           <select id="sel-lang" class="form-control">
             <?php foreach ($arrLang as $key => $lang) :
                     if (in_array($key, $tpl_lang_list)) :
