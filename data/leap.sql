@@ -2,7 +2,7 @@
 --
 -- Host: mysqlserver    Database: leap
 -- ------------------------------------------------------
--- Server version	5.7.17-0ubuntu0.16.10.1
+-- Server version	5.5.28
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -93,7 +93,7 @@ CREATE TABLE `question_tag` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `qno` (`qno`,`tid`),
   KEY `tid` (`tid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='问题与标签关系';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='问题与标签关系';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +102,7 @@ CREATE TABLE `question_tag` (
 
 LOCK TABLES `question_tag` WRITE;
 /*!40000 ALTER TABLE `question_tag` DISABLE KEYS */;
-INSERT INTO `question_tag` VALUES (1,2,1,'2017-03-27 08:45:52','2017-03-27 08:45:52'),(2,4,1,'2017-03-27 08:45:52','2017-03-27 08:45:52'),(3,6,1,'2017-03-28 10:15:54','2017-03-28 10:15:54');
+INSERT INTO `question_tag` VALUES (1,2,1,'2017-03-27 08:45:52','2017-03-27 08:45:52'),(2,4,1,'2017-03-27 08:45:52','2017-03-27 08:45:52'),(3,6,1,'2017-03-28 10:15:54','2017-03-28 10:15:54'),(4,7,2,'2017-03-29 03:02:31','2017-03-29 03:02:31');
 /*!40000 ALTER TABLE `question_tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -124,7 +124,7 @@ CREATE TABLE `questions` (
   UNIQUE KEY `seo_title` (`seo_title`),
   UNIQUE KEY `qno` (`qno`),
   KEY `pub` (`pub`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COMMENT='问题';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COMMENT='问题';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,7 +133,7 @@ CREATE TABLE `questions` (
 
 LOCK TABLES `questions` WRITE;
 /*!40000 ALTER TABLE `questions` DISABLE KEYS */;
-INSERT INTO `questions` VALUES (1,1,'两数之和',1,'two-sum',1),(2,3,'链表的交点',2,'linked-list-intersection',1),(3,999,'子数组的最大乘积',5,'max-product-of-sub-array',0),(4,2,'共有多少条路径',3,'how-many-path',1),(5,4,'股票交易的最大收益',2,'max-transaction-profit',1),(6,5,'质数判断',1,'prime-number',1),(7,6,'经典爬楼梯',1,'climb-stairs',1);
+INSERT INTO `questions` VALUES (1,1,'两数之和',1,'two-sum',1),(2,3,'链表的交点',2,'linked-list-intersection',1),(3,999,'子数组的最大乘积',5,'max-product-of-sub-array',0),(4,2,'共有多少条路径',3,'how-many-path',1),(5,4,'股票交易的最大收益',2,'max-transaction-profit',1),(6,5,'质数判断',1,'prime-number',1),(7,6,'经典爬楼梯',1,'climb-stairs',1),(8,7,'数组跳跃游戏',2,'array-jump',1);
 /*!40000 ALTER TABLE `questions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -181,7 +181,7 @@ CREATE TABLE `solution` (
   `updatetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uid` (`uid`,`qno`,`lang`)
-) ENGINE=InnoDB AUTO_INCREMENT=493 DEFAULT CHARSET=utf8mb4 COMMENT='用户提交代码';
+) ENGINE=InnoDB AUTO_INCREMENT=494 DEFAULT CHARSET=utf8mb4 COMMENT='用户提交代码';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -190,7 +190,7 @@ CREATE TABLE `solution` (
 
 LOCK TABLES `solution` WRITE;
 /*!40000 ALTER TABLE `solution` DISABLE KEYS */;
-INSERT INTO `solution` VALUES (7,1,3,'php','<?php\\r\\n/**\\r\\n * 已定义的链表节点类\\r\\n * class ListNode {\\r\\n *     public $val;\\r\\n *     public $next;\\r\\n *     function __construct($val, $next = null) {\\r\\n *         $this->val = $val;\\r\\n *         $this->next = $next;\\r\\n *     }\\r\\n * }\\r\\n */\\r\\nclass Solution {\\r\\n\\r\\n    /**\\r\\n     * @param  ListNode $listA\\r\\n     * @param  ListNode $listB\\r\\n     * @return ListNode\\r\\n     */\\r\\n    public function getIntersectionNode(ListNode $listA, ListNode $listB) {\\r\\n        $tailA = $listA;\\r\\n        while ($tailA->next) {\\r\\n            $tailA = $tailA->next;\\r\\n        }\\r\\n        \\r\\n        $tailB = $listB;\\r\\n        while ($tailB->next) {\\r\\n            $tailB = $tailB->next;\\r\\n        }\\r\\n        \\r\\n        if ($tailB == $tailA) {\\r\\n            return $listA->next->next;\\r\\n        }\\r\\n        return null;\\r\\n    }\\r\\n\\r\\n}\\r\\n','2017-01-22 03:15:17','2017-03-15 09:17:50'),(142,1,2,'php','<?php\\r\\nclass Solution {\\r\\n\\r\\n    /**\\r\\n     * @param  int  m\\r\\n     * @param  int  n\\r\\n     * @return int\\r\\n     */\\r\\n    public function howManyPath($m, $n) {\\r\\n        $dp = [];\\r\\n        for ($y = 0; $y < $n; $y++) {\\r\\n            for ($x = 0; $x < $m; $x++) {\\r\\n                if (0 === $x || 0 === $y) {\\r\\n                    $dp[$y][$x] = 1;\\r\\n                } else {\\r\\n                    $dp[$y][$x] = $dp[$y - 1][$x] + $dp[$y][$x - 1];\\r\\n                }\\r\\n            }\\r\\n        }\\r\\n        return $dp[$n - 1][$m - 1];\\r\\n    }\\r\\n\\r\\n}\\r\\n','2017-02-16 08:37:19','2017-03-08 05:36:26'),(233,1,1,'php','<?php\\r\\nclass Solution {\\r\\n\\r\\n    /**\\r\\n     * @param  array    $nums\\r\\n     * @param  int      $target\\r\\n     * @return array\\r\\n     */\\r\\n    public function twoSum($nums, $target) {\\r\\n        for ($i = 0; $i < count($nums); $i++) {\\r\\n            for ($j = 0; $j < $i; $j++) {\\r\\n                if ($nums[$i] + $nums[$j] == $target) {\\r\\n                    return [$i, $j];\\r\\n                }\\r\\n            }\\r\\n        }\\r\\n\\r\\n    }\\r\\n\\r\\n}\\r\\n','2017-03-08 09:05:11','2017-03-22 07:52:20'),(235,1,1,'java','public class Solution {\\r\\n\\r\\n    public int[] twoSum(int[] nums, int target) {\\r\\n        for (int i = 0; i < nums.length; i++) {\\r\\n            for (int j = 0; j < i; j++) {\\r\\n                if (nums[i] + nums[j] == target) {\\r\\n                    return new int[]{i, j};\\r\\n                }\\r\\n            }\\r\\n        }\\r\\n        return new int[]{};\\r\\n    }\\r\\n\\r\\n}','2017-03-08 09:06:15','2017-03-22 07:52:11'),(401,1,2,'java','public class Solution {\\r\\n\\r\\n    /**\\r\\n     * @param  int  m\\r\\n     * @param  int  n\\r\\n     * @return int\\r\\n     */\\r\\n    public int howManyPath(int m, int n) {\\r\\n        int[][] dp = new int[n][m];\\r\\n        for (int y = 0; y < n; y++) {\\r\\n            for (int x = 0; x < m; x++) {\\r\\n                if (0 == x || 0 == y) {\\r\\n                    dp[y][x] = 1;\\r\\n                } else {\\r\\n                    dp[y][x] = dp[y - 1][x] + dp[y][x - 1];\\r\\n                }\\r\\n            }\\r\\n        }\\r\\n        return dp[n - 1][m - 1];\\r\\n    }\\r\\n\\r\\n}','2017-03-14 02:31:06','2017-03-21 06:01:59'),(412,1,3,'java','/**\\r\\n * Definition for singly-linked list.\\r\\n * public class ListNode {\\r\\n *     int val;\\r\\n *     ListNode next;\\r\\n *     ListNode(int x) {\\r\\n *         val = x;\\r\\n *         next = null;\\r\\n *     }\\r\\n * }\\r\\n */\\r\\npublic class Solution {\\r\\n\\r\\n    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {\\r\\n        ListNode p1 = headA, p2 = headB;\\r\\n        int len1 = 0, len2 = 0;\\r\\n        while (null != (p1 = p1.next())) {\\r\\n            len1++;\\r\\n        }\\r\\n        while (null != (p2 = p2.next())) {\\r\\n            len2++;\\r\\n        }\\r\\n\\r\\n        p1 = len1 > len2 ? headA : headB;\\r\\n        p2 = len1 > len2 ? headB : headA;\\r\\n\\r\\n        for (int i = 0; i < Math.abs(len1 - len2); i++) {\\r\\n            p1 = p1.next();\\r\\n        }\\r\\n\\r\\n        while (p1 != p2 && p1 != null && p2 != null) {\\r\\n            p1 = p1.next();\\r\\n            p2 = p2.next();\\r\\n        }\\r\\n\\r\\n        return p1;\\r\\n    }\\r\\n\\r\\n}\\r\\n','2017-03-15 06:53:40','2017-03-23 08:40:28'),(485,1,4,'php','<?php\\r\\n/**\\r\\n * 股票交易的最大收益\\r\\n */\\r\\nclass Solution {\\r\\n\\r\\n    /**\\r\\n     * @param  array[int] $prices\\r\\n     * @return int\\r\\n     */\\r\\n    public function maxProfit($prices) {\\r\\n        return 5;\\r\\n    }\\r\\n\\r\\n}\\r\\n','2017-03-23 07:19:56','2017-03-27 07:51:37'),(487,1,4,'java','public class Solution {\\r\\n    public int maxProfit(int[] prices) {\\r\\n        return 1;\\r\\n    }\\r\\n}','2017-03-23 07:51:46','2017-03-23 08:39:33'),(488,1,6,'java','/**\\r\\n * @author liyan\\r\\n * @since 2017 3 28\\r\\n */\\r\\npublic class Solution {\\r\\n\\r\\n    public int climb(int n) {\\r\\n        int f0 = 1;\\r\\n        int f1 = 1;\\r\\n        int fn = f0 + f1;\\r\\n        if (0 == n) {\\r\\n            return f0;\\r\\n        } else if (1 == n) {\\r\\n            return f1;\\r\\n        }\\r\\n        for (int i = 2; i <= n; i++) {\\r\\n            fn = f0 + f1;\\r\\n            f0 = f1;\\r\\n            f1 = fn; \\r\\n        }\\r\\n        return fn;\\r\\n    }\\r\\n\\r\\n}','2017-03-28 10:23:29','2017-03-28 10:31:35');
+INSERT INTO `solution` VALUES (7,1,3,'php','<?php\\r\\n/**\\r\\n * 已定义的链表节点类\\r\\n * class ListNode {\\r\\n *     public $val;\\r\\n *     public $next;\\r\\n *     function __construct($val, $next = null) {\\r\\n *         $this->val = $val;\\r\\n *         $this->next = $next;\\r\\n *     }\\r\\n * }\\r\\n */\\r\\nclass Solution {\\r\\n\\r\\n    /**\\r\\n     * @param  ListNode $listA\\r\\n     * @param  ListNode $listB\\r\\n     * @return ListNode\\r\\n     */\\r\\n    public function getIntersectionNode(ListNode $listA, ListNode $listB) {\\r\\n        $tailA = $listA;\\r\\n        while ($tailA->next) {\\r\\n            $tailA = $tailA->next;\\r\\n        }\\r\\n        \\r\\n        $tailB = $listB;\\r\\n        while ($tailB->next) {\\r\\n            $tailB = $tailB->next;\\r\\n        }\\r\\n        \\r\\n        if ($tailB == $tailA) {\\r\\n            return $listA->next->next;\\r\\n        }\\r\\n        return null;\\r\\n    }\\r\\n\\r\\n}\\r\\n','2017-01-22 03:15:17','2017-03-15 09:17:50'),(142,1,2,'php','<?php\\r\\nclass Solution {\\r\\n\\r\\n    /**\\r\\n     * @param  int  m\\r\\n     * @param  int  n\\r\\n     * @return int\\r\\n     */\\r\\n    public function howManyPath($m, $n) {\\r\\n        $dp = [];\\r\\n        for ($y = 0; $y < $n; $y++) {\\r\\n            for ($x = 0; $x < $m; $x++) {\\r\\n                if (0 === $x || 0 === $y) {\\r\\n                    $dp[$y][$x] = 1;\\r\\n                } else {\\r\\n                    $dp[$y][$x] = $dp[$y - 1][$x] + $dp[$y][$x - 1];\\r\\n                }\\r\\n            }\\r\\n        }\\r\\n        return $dp[$n - 1][$m - 1];\\r\\n    }\\r\\n\\r\\n}\\r\\n','2017-02-16 08:37:19','2017-03-08 05:36:26'),(233,1,1,'php','<?php\\r\\nclass Solution {\\r\\n\\r\\n    /**\\r\\n     * @param  array    $nums\\r\\n     * @param  int      $target\\r\\n     * @return array\\r\\n     */\\r\\n    public function twoSum($nums, $target) {\\r\\n        for ($i = 0; $i < count($nums); $i++) {\\r\\n            for ($j = 0; $j < $i; $j++) {\\r\\n                if ($nums[$i] + $nums[$j] == $target) {\\r\\n                    return [$i, $j];\\r\\n                }\\r\\n            }\\r\\n        }\\r\\n\\r\\n    }\\r\\n\\r\\n}\\r\\n','2017-03-08 09:05:11','2017-03-22 07:52:20'),(235,1,1,'java','public class Solution {\\r\\n\\r\\n    public int[] twoSum(int[] nums, int target) {\\r\\n        for (int i = 0; i < nums.length; i++) {\\r\\n            for (int j = 0; j < i; j++) {\\r\\n                if (nums[i] + nums[j] == target) {\\r\\n                    return new int[]{i, j};\\r\\n                }\\r\\n            }\\r\\n        }\\r\\n        return new int[]{};\\r\\n    }\\r\\n\\r\\n}','2017-03-08 09:06:15','2017-03-22 07:52:11'),(401,1,2,'java','public class Solution {\\r\\n\\r\\n    /**\\r\\n     * @param  int  m\\r\\n     * @param  int  n\\r\\n     * @return int\\r\\n     */\\r\\n    public int howManyPath(int m, int n) {\\r\\n        int[][] dp = new int[n][m];\\r\\n        for (int y = 0; y < n; y++) {\\r\\n            for (int x = 0; x < m; x++) {\\r\\n                if (0 == x || 0 == y) {\\r\\n                    dp[y][x] = 1;\\r\\n                } else {\\r\\n                    dp[y][x] = dp[y - 1][x] + dp[y][x - 1];\\r\\n                }\\r\\n            }\\r\\n        }\\r\\n        return dp[n - 1][m - 1];\\r\\n    }\\r\\n\\r\\n}','2017-03-14 02:31:06','2017-03-21 06:01:59'),(412,1,3,'java','/**\\r\\n * Definition for singly-linked list.\\r\\n * public class ListNode {\\r\\n *     int val;\\r\\n *     ListNode next;\\r\\n *     ListNode(int x) {\\r\\n *         val = x;\\r\\n *         next = null;\\r\\n *     }\\r\\n * }\\r\\n */\\r\\npublic class Solution {\\r\\n\\r\\n    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {\\r\\n        ListNode p1 = headA, p2 = headB;\\r\\n        int len1 = 0, len2 = 0;\\r\\n        while (null != (p1 = p1.next())) {\\r\\n            len1++;\\r\\n        }\\r\\n        while (null != (p2 = p2.next())) {\\r\\n            len2++;\\r\\n        }\\r\\n\\r\\n        p1 = len1 > len2 ? headA : headB;\\r\\n        p2 = len1 > len2 ? headB : headA;\\r\\n\\r\\n        for (int i = 0; i < Math.abs(len1 - len2); i++) {\\r\\n            p1 = p1.next();\\r\\n        }\\r\\n\\r\\n        while (p1 != p2 && p1 != null && p2 != null) {\\r\\n            p1 = p1.next();\\r\\n            p2 = p2.next();\\r\\n        }\\r\\n\\r\\n        return p1;\\r\\n    }\\r\\n\\r\\n}\\r\\n','2017-03-15 06:53:40','2017-03-23 08:40:28'),(485,1,4,'php','<?php\\r\\n/**\\r\\n * 股票交易的最大收益\\r\\n */\\r\\nclass Solution {\\r\\n\\r\\n    /**\\r\\n     * @param  array[int] $prices\\r\\n     * @return int\\r\\n     */\\r\\n    public function maxProfit($prices) {\\r\\n        return 5;\\r\\n    }\\r\\n\\r\\n}\\r\\n','2017-03-23 07:19:56','2017-03-27 07:51:37'),(487,1,4,'java','public class Solution {\\r\\n    public int maxProfit(int[] prices) {\\r\\n        return 1;\\r\\n    }\\r\\n}','2017-03-23 07:51:46','2017-03-23 08:39:33'),(488,1,6,'java','/**\\r\\n * @author liyan\\r\\n * @since 2017 3 28\\r\\n */\\r\\npublic class Solution {\\r\\n\\r\\n    public int climb(int n) {\\r\\n        int f0 = 1;\\r\\n        int f1 = 1;\\r\\n        int fn = f0 + f1;\\r\\n        if (0 == n) {\\r\\n            return f0;\\r\\n        } else if (1 == n) {\\r\\n            return f1;\\r\\n        }\\r\\n        for (int i = 2; i <= n; i++) {\\r\\n            fn = f0 + f1;\\r\\n            f0 = f1;\\r\\n            f1 = fn; \\r\\n        }\\r\\n        return fn;\\r\\n    }\\r\\n\\r\\n}','2017-03-28 10:23:29','2017-03-28 10:31:35'),(493,1,7,'java','/**\\r\\n * @author liyan\\r\\n * @since 2017 3 29\\r\\n */\\r\\npublic class Solution {\\r\\n\\r\\n    public boolean canJump(int[] A) {\\r\\n        // write your code here\\r\\n        return true;\\r\\n    }\\r\\n\\r\\n}','2017-03-29 03:31:07','2017-03-29 03:31:07');
 /*!40000 ALTER TABLE `solution` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,7 +212,7 @@ CREATE TABLE `tags` (
   UNIQUE KEY `seo_tagname` (`seo_tagname`),
   UNIQUE KEY `tagname` (`tagname`),
   KEY `vol` (`vol`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='标签';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='标签';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -221,7 +221,7 @@ CREATE TABLE `tags` (
 
 LOCK TABLES `tags` WRITE;
 /*!40000 ALTER TABLE `tags` DISABLE KEYS */;
-INSERT INTO `tags` VALUES (1,'动态规划','dynamic-programming',0,'2017-03-27 08:39:53','2017-03-27 08:39:53');
+INSERT INTO `tags` VALUES (1,'动态规划','dynamic-programming',0,'2017-03-27 08:39:53','2017-03-27 08:39:53'),(2,'贪心','greedy',0,'2017-03-29 03:02:11','2017-03-29 03:02:11');
 /*!40000 ALTER TABLE `tags` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -262,4 +262,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-28 18:35:28
+-- Dump completed on 2017-03-30 13:20:24

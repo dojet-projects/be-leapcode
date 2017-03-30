@@ -30,7 +30,9 @@
         <div class="col-xs-12">
           <h2>
             <?php echo safeHtml($tpl_qno.'. '.$tpl_question['title'])?>
-            <a href="/question/pick-one" class="btn btn-primary pull-right">换一个</a>
+            <a href="/question/pick-one" class="btn btn-default pull-right">
+              <i class="glyphicon glyphicon-random" style="margin-right: .7em;"></i>换一个
+            </a>
           </h2>
 
           <hr />
