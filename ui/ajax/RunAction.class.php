@@ -19,11 +19,13 @@ class RunAction extends SigninBaseAction {
         //  save code
         DalSolution::setSolution($uid, $qno, $lang, $code);
 
+        $manifest = $this->getManifest($qno, $lang);
+
         $output = '';
         if ('php' === $lang) {
-            $output = $this->run_php($code, $qno, $uid);
+            $output = $this->run_php($code, $qno, $uid, $manifest);
         } elseif ('java' === $lang) {
-            $output = $this->run_java($code, $qno, $uid);
+            $output = $this->run_java($code, $qno, $uid, $manifest);
         }
 
         $result = json_decode($output, true);
@@ -40,6 +42,20 @@ class RunAction extends SigninBaseAction {
         $this->displayJsonSuccess($result);
     }
 
+    protected function getManifest($qno, $lang) {
+        $manifest = array();
+        $coderoot = Config::runtimeConfigForKeyPath('global.coderoot');
+        $manifest_file = sprintf('%squestions/codes/%d/code/java/manifest', $coderoot, $qno);
+        if (file_exists($manifest_file)) {
+            $content = file_get_contents($manifest_file);
+            $json = json_decode($content, true);
+            if (is_array($json)) {
+                $manifest = $json;
+            }
+        }
+        return $manifest;
+    }
+
     protected function playground_path($qno, $uid, $lang) {
         $coderoot = Config::runtimeConfigForKeyPath('global.coderoot');
         $md5uid = md5(serialize([uniqid(), $uid, microtime()]));
@@ -52,7 +68,7 @@ class RunAction extends SigninBaseAction {
         return $playground_path;
     }
 
-    protected function run_java($code, $qno, $uid) {
+    protected function run_java($code, $qno, $uid, $manifest) {
         $coderoot = Config::runtimeConfigForKeyPath('global.coderoot');
         $playground_path = $this->playground_path($qno, $uid, 'java');
         if (!file_exists($playground_path.'src')) {
@@ -64,7 +80,8 @@ class RunAction extends SigninBaseAction {
         }
 
         // 写入solution文件
-        $filename = $playground_path.'src/leapcode/Solution.java';
+        $solution_name = array_val('solution', $manifest, 'Solution.java');
+        $filename = sprintf('%ssrc/leapcode/%s', $playground_path, $solution_name);
         $code = sprintf("package leapcode;\r\n%s", $code);
         file_put_contents($filename, $code);
 
@@ -84,12 +101,13 @@ class RunAction extends SigninBaseAction {
         return $output;
     }
 
-    protected function run_php($code, $qno, $uid) {
+    protected function run_php($code, $qno, $uid, $manifest) {
         $coderoot = Config::runtimeConfigForKeyPath('global.coderoot');
         $playground_path = $this->playground_path($qno, $uid, 'php');
 
         // 写入solution文件
-        $filename = $playground_path.'solution.php';
+        $solution_name = array_val('solution', $manifest, 'solution.php');
+        $filename = sprintf('%s%s', $playground_path, $solution_name);
         file_put_contents($filename, $code);
 
         copy(sprintf('%squestions/codes/%d/code/php/test/main.php', $coderoot, $qno),

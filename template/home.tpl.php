@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="description" content="">
+    <meta name="description" content="Leapcode在线编程 | 这里汇集了一些算法编程的挑战试题。一些公司面试的编程问题。以及一些可能用到的算法技巧。">
+    <meta name="keywords" content="编程, 面试题, 在线评测, 算法, 数据结构, 面试, 代码">
     <meta name="author" content="">
     <link rel="icon" href="/favicon.ico">
 
