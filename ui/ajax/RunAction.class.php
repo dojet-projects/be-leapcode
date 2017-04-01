@@ -80,7 +80,7 @@ class RunAction extends SigninBaseAction {
         }
 
         // 写入solution文件
-        $solution_name = array_val('solution', $manifest, 'Solution.java');
+        $solution_name = Config::configForKeyPath('java.solution', $manifest, 'Solution.java');
         $filename = sprintf('%ssrc/leapcode/%s', $playground_path, $solution_name);
         $code = sprintf("package leapcode;\r\n%s", $code);
         file_put_contents($filename, $code);
@@ -106,7 +106,7 @@ class RunAction extends SigninBaseAction {
         $playground_path = $this->playground_path($qno, $uid, 'php');
 
         // 写入solution文件
-        $solution_name = array_val('solution', $manifest, 'solution.php');
+        $solution_name = Config::configForKeyPath('php.solution', $manifest, 'solution.php');
         $filename = sprintf('%s%s', $playground_path, $solution_name);
         file_put_contents($filename, $code);
 
