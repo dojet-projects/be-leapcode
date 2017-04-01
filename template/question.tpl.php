@@ -54,9 +54,11 @@
           <?php if (count($tpl_tags) > 0) : ?>
           <p>标签：
             <?php foreach ($tpl_tags as $tag) : ?>
-              <a href="/tag/<?php echo $tag['seo_tagname']?>" class="label label-info">
-                <?php echo safeHtml($tag['tagname']); ?>
-              </a>
+              <span style="display: inline-block;">
+                <a href="/tag/<?php echo $tag['seo_tagname']?>" class="label label-info">
+                  <?php echo safeHtml($tag['tagname']); ?>
+                </a>
+              </span>
             <?php endforeach ?>
           </p>
           <?php endif ?>

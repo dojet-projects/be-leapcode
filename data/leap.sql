@@ -93,7 +93,7 @@ CREATE TABLE `question_tag` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `qno` (`qno`,`tid`),
   KEY `tid` (`tid`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COMMENT='问题与标签关系';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COMMENT='问题与标签关系';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +102,7 @@ CREATE TABLE `question_tag` (
 
 LOCK TABLES `question_tag` WRITE;
 /*!40000 ALTER TABLE `question_tag` DISABLE KEYS */;
-INSERT INTO `question_tag` VALUES (1,2,1,'2017-03-27 08:45:52','2017-03-27 08:45:52'),(2,4,1,'2017-03-27 08:45:52','2017-03-27 08:45:52'),(3,6,1,'2017-03-28 10:15:54','2017-03-28 10:15:54'),(4,7,2,'2017-03-29 03:02:31','2017-03-29 03:02:31'),(5,3,3,'2017-03-30 05:39:42','2017-03-30 05:39:42');
+INSERT INTO `question_tag` VALUES (1,2,1,'2017-03-27 08:45:52','2017-03-27 08:45:52'),(2,4,1,'2017-03-27 08:45:52','2017-03-27 08:45:52'),(3,6,1,'2017-03-28 10:15:54','2017-03-28 10:15:54'),(4,7,2,'2017-03-29 03:02:31','2017-03-29 03:02:31'),(5,3,3,'2017-03-30 05:39:42','2017-03-30 05:39:42'),(6,9,4,'2017-04-01 09:13:57','2017-04-01 09:13:57'),(7,9,5,'2017-04-01 10:15:50','2017-04-01 10:15:50');
 /*!40000 ALTER TABLE `question_tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,7 +212,7 @@ CREATE TABLE `tags` (
   UNIQUE KEY `seo_tagname` (`seo_tagname`),
   UNIQUE KEY `tagname` (`tagname`),
   KEY `vol` (`vol`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='标签';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COMMENT='标签';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -221,7 +221,7 @@ CREATE TABLE `tags` (
 
 LOCK TABLES `tags` WRITE;
 /*!40000 ALTER TABLE `tags` DISABLE KEYS */;
-INSERT INTO `tags` VALUES (1,'动态规划','dynamic-programming',0,'2017-03-27 08:39:53','2017-03-27 08:39:53'),(2,'贪心','greedy',0,'2017-03-29 03:02:11','2017-03-29 03:02:11'),(3,'链表','linked-list',0,'2017-03-30 05:39:10','2017-03-30 05:39:10');
+INSERT INTO `tags` VALUES (1,'动态规划','dynamic-programming',0,'2017-03-27 08:39:53','2017-03-27 08:39:53'),(2,'贪心','greedy',0,'2017-03-29 03:02:11','2017-03-29 03:02:11'),(3,'链表','linked-list',0,'2017-03-30 05:39:10','2017-03-30 05:39:10'),(4,'并查集','union-find',0,'2017-04-01 09:13:36','2017-04-01 09:13:36'),(5,'AC自动机','ac-automaton',0,'2017-04-01 10:15:21','2017-04-01 10:15:21');
 /*!40000 ALTER TABLE `tags` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -262,4 +262,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-01 17:07:13
+-- Dump completed on 2017-04-01 18:18:11
