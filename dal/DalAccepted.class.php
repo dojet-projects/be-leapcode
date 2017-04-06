@@ -37,7 +37,7 @@ class DalAccepted extends MysqlDal {
     public static function getUserLatestAccepted($uid, $num = 10) {
         DAssert::assertNumeric($uid);
         DAssert::assertNumeric($num);
-        $sql = "SELECT qno, lang, createtime, updatetime
+        $sql = "SELECT qno, MAX(updatetime) AS updatetime
                 FROM accepted
                 WHERE uid=$uid
                 GROUP BY qno
