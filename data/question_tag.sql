@@ -64,7 +64,7 @@ CREATE TABLE `questions` (
   UNIQUE KEY `seo_title` (`seo_title`),
   UNIQUE KEY `qno` (`qno`),
   KEY `pub` (`pub`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COMMENT='问题';
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COMMENT='问题';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +73,7 @@ CREATE TABLE `questions` (
 
 LOCK TABLES `questions` WRITE;
 /*!40000 ALTER TABLE `questions` DISABLE KEYS */;
-INSERT INTO `questions` VALUES (1,1,'两数之和',1,'two-sum',1),(2,3,'链表的交点',2,'linked-list-intersection',1),(3,999,'子数组的最大乘积',5,'max-product-of-sub-array',0),(4,2,'共有多少条路径',3,'how-many-path',1),(5,4,'股票交易的最大收益',2,'max-transaction-profit',1),(6,5,'质数判断',1,'prime-number',1),(7,6,'经典爬楼梯',1,'climb-stairs',1),(8,7,'数组跳跃游戏',2,'array-jump',1),(9,8,'LFU缓存',5,'lfu-cache',1),(10,9,'岛屿数量',4,'number-of-islands',1);
+INSERT INTO `questions` VALUES (1,1,'两数之和',1,'two-sum',1),(2,3,'链表的交点',2,'linked-list-intersection',1),(3,999,'子数组的最大乘积',5,'max-product-of-sub-array',0),(4,2,'共有多少条路径',3,'how-many-path',1),(5,4,'股票交易的最大收益',2,'max-transaction-profit',1),(6,5,'质数判断',1,'prime-number',1),(7,6,'经典爬楼梯',1,'climb-stairs',1),(8,7,'数组跳跃游戏',2,'array-jump',1),(9,8,'LFU缓存',5,'lfu-cache',1),(10,9,'岛屿数量',4,'number-of-islands',1),(11,10,'螺旋遍历数组',3,'spiral-matrix',1);
 /*!40000 ALTER TABLE `questions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,4 +115,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-01 18:18:11
+-- Dump completed on 2017-04-06 13:07:46
