@@ -17,6 +17,7 @@ abstract class LeapPageBaseAction extends SigninPageBaseAction {
     }
 
     final protected function notSignin() {
+        // redirect('/you-should-be-invited');
         return $this->pageExecute(false);
     }
 

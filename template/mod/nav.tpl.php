@@ -18,6 +18,7 @@ $menu = array(
           <a class="navbar-brand" href="/">Leapcode</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
+          <?php if (isset($tpl_topmenu)) : ?>
           <ul class="nav navbar-nav">
             <?php foreach ($menu as $key => $info) : ?>
             <li<? echo $tpl_topmenu == $key ? ' class="active"' : '' ?>>
@@ -27,6 +28,7 @@ $menu = array(
             </li>
             <?php endforeach ?>
           </ul>
+          <?php endif ?>
           <?php if (isset($tpl_show_sign) && $tpl_show_sign) : ?>
           <ul class="nav navbar-nav navbar-right">
             <?php if (isset($tpl_is_signin) && $tpl_is_signin) : ?>

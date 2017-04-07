@@ -16,5 +16,7 @@ Dispatcher::loadRoute(array(
 
     '/^tag\/(?<seo_tagname>.+)$/' => UI.'tag/TagAction',
 
+    '/^you\-should\-be\-invited$/' => UI.'invite/YouShouldBeInvitedAction',
+    '/^invite\/commit$/' => UI.'invite/InviteCommitAction',
     )
 );
