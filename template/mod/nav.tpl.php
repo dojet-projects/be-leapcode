@@ -1,10 +1,14 @@
 <?php
-$menu = array(
-  'question' => array(
+$menu = [
+  'question' => [
     'title' => '问题',
-    'link' => '/question-list',
-    ),
-  );
+    'link' => '/questions',
+  ],
+  // 'room' => [
+  //   'title' => '考场',
+  //   'link' => '/rooms',
+  // ],
+];
 ?>
     <nav class="navbar navbar-inverse" role="navigation" style="border-radius:0;">
       <div class="container">

@@ -4,7 +4,7 @@ Dispatcher::loadRoute(array(
     '/^$/' => UI.'HomeAction',
     '/^question\/pick\-one$/' => UI.'PickOneAction',
     '/^question\/(?<title>.+)$/' => UI.'QuestionAction',
-    '/^question\-list$/' => UI.'QuestionListAction',
+    '/^questions$/' => UI.'QuestionListAction',
     '/^ajax\/run$/' => UI.'ajax/RunAction',
     '/^ajax\/get\-lang\-code$/' => UI.'ajax/AjaxGetUserLangSolutionAction',
 
