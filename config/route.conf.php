@@ -2,9 +2,9 @@
 
 Dispatcher::loadRoute(array(
     '/^$/' => UI.'HomeAction',
-    '/^question\/pick\-one$/' => UI.'PickOneAction',
-    '/^question\/(?<title>.+)$/' => UI.'QuestionAction',
-    '/^questions$/' => UI.'QuestionListAction',
+    '/^question\/pick\-one$/' => UI.'question/PickOneAction',
+    '/^question\/(?<title>.+)$/' => UI.'question/QuestionAction',
+    '/^questions$/' => UI.'question/QuestionListAction',
     '/^ajax\/run$/' => UI.'ajax/RunAction',
     '/^ajax\/get\-lang\-code$/' => UI.'ajax/AjaxGetUserLangSolutionAction',
 
