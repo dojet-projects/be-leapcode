@@ -1,6 +1,7 @@
 <?php
 
-Dispatcher::loadRoute(array(
+Dispatcher::loadRoute(
+    [
     '/^$/' => UI.'HomeAction',
     '/^question\/pick\-one$/' => UI.'question/PickOneAction',
     '/^question\/(?<title>.+)$/' => UI.'question/QuestionAction',
@@ -18,5 +19,9 @@ Dispatcher::loadRoute(array(
 
     '/^you\-should\-be\-invited$/' => UI.'invite/YouShouldBeInvitedAction',
     '/^invite\/commit$/' => UI.'invite/InviteCommitAction',
-    )
+
+    '/^papers$/' => UI.'paper/PaperListAction',
+    '/^papers\/new$/' => UI.'paper/NewPaperAction',
+    '/^papers\/new\/question$/' => UI.'paper/NewPaperQuestionAction',
+    ]
 );

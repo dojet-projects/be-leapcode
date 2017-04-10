@@ -65,7 +65,7 @@ class QuestionAction extends LeapPageBaseAction {
         $this->assign('code', $code);
         $this->assign('brief', $brief);
         $this->assign('tags', $tags);
-        $this->displayTemplate('question.tpl.php');
+        $this->displayTemplate('question/question.tpl.php');
     }
 
     protected function topmenu() {

@@ -26,7 +26,7 @@
 <?php include TEMPLATE.'mod/nav.tpl.php'; ?>
 
     <div class="container">
-      <div class="col-md-8">
+      <div class="col-md-9">
 
         <table class="table table-striped ">
           <thead>
@@ -64,12 +64,12 @@
           </tbody>
         </table>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">标签</h3>
           </div>
-          <div class="panel-body">
+          <div class="panel-body" style="line-height: 2em;">
 <?php foreach ($tpl_tags as $tag) : ?>
     <span style="display: inline-block;"><a href="/tag/<?php echo $tag['seo_tagname']?>" class="label label-info">
       <?php echo safeHtml($tag['tagname']); ?>

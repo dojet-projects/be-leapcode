@@ -4,9 +4,9 @@ $menu = [
     'title' => '问题',
     'link' => '/questions',
   ],
-  // 'room' => [
-  //   'title' => '考场',
-  //   'link' => '/rooms',
+  // 'paper' => [
+  //   'title' => '试卷',
+  //   'link' => '/papers',
   // ],
 ];
 ?>

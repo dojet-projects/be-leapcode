@@ -23,7 +23,7 @@ class QuestionListAction extends LeapPageBaseAction {
 
         $this->assign('questionList', $questionList);
         $this->assign('tags', $tags);
-        $this->displayTemplate('questionlist.tpl.php');
+        $this->displayTemplate('question/questionlist.tpl.php');
     }
 
     protected function topmenu() {
