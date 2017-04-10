@@ -19,8 +19,26 @@ class DalPaperQuestion extends MysqlDal {
         $sql = "SELECT qno
                 FROM paper_question
                 WHERE pid=$pid
+                ORDER BY orderno
                 LIMIT $ps, $pn";
         return self::rs2oneColumnArray($sql);
+    }
+
+    public static function addPaperQno($pid, $qno, $orderno) {
+        DAssert::assertNumeric($pid, $qno, $orderno);
+        $arrIns = array(
+            'pid' => $pid,
+            'qno' => $qno,
+            'orderno' => $orderno,
+        );
+        return self::doInsert('paper_question', $arrIns);
+    }
+
+    public static function deletePaperQnos($pid) {
+        DAssert::assertNumeric($pid);
+        $sql = "DELETE FROM paper_question
+                WHERE pid=$pid";
+        return self::doDelete($sql);
     }
 
 }

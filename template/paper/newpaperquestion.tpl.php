@@ -37,7 +37,7 @@
             <h3 class="panel-title">问题</h3>
           </div>
           <div class="panel-body" style="line-height: 2em;">
-            <p class="text-center">还没有添加问题，从下面列表中选择问题。</p>
+            <p class="text-center" id="pmt-choose">还没有添加问题，从下面列表中选择问题。</p>
             <table class="table table-hover table-striped" id="paper-qlist">
               <thead>
                 <tr>
@@ -49,6 +49,13 @@
             </table>
           </div>
         </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <button class="btn btn-primary" id="btn-create">创建试卷</button>
+            <a href="/papers/new" class="btn btn-link">上一步</a>
+          </div>
+        </div>
+        <hr />
         <h4>从下面列表中选择问题</h4>
         <table class="table table-striped table-hover" id="qlist">
           <thead>
@@ -83,6 +90,12 @@
       </div>
     </div><!-- /.container -->
 
+    <form id="frm-new" action="/papers/new/commit" method="post" style="display: none;">
+      <input type="hidden" name="papername" />
+      <input type="hidden" name="paperintro" />
+      <input type="hidden" name="qnos" />
+    </form>
+
     <?php include TEMPLATE.'mod/footer.tpl.php'; ?>
 
     <!-- Bootstrap core JavaScript
@@ -93,11 +106,15 @@
   </body>
 </html>
 <style type="text/css">
+#paper-qlist {display: none;}
 #qlist button[role=btn-add], #paper-qlist button[role=btn-add] {display: none;}
 #qlist tr:hover button[role=btn-add], #paper-qlist tr:hover button[role=btn-add] {display: inline;}
 </style>
 <script type="text/javascript">
+var papername = "<?php echo addslashes($tpl_papername)?>";
+var paperintro = "<?php echo addslashes($tpl_paperintro)?>";
 $().ready(function() {
+  $("#paper-qlist").hide();
   $('#qlist button[role=btn-add]').click(function() {
     var tr = $(this).parents('tr');
     var newtr = tr.clone();
@@ -111,7 +128,25 @@ $().ready(function() {
       var qno = tr.attr("data-qno");
       $("#qlist tr[data-qno=" + qno + "]").show();
       tr.remove();
+      if ($('#paper-qlist tbody tr').length <= 0) {
+        $("#pmt-choose").show();
+        $('#paper-qlist').hide();
+      }
     });
+    $("#pmt-choose").hide();
+    $("#paper-qlist").show();
   });
+
+  $("#btn-create").click(function() {
+    var qnos = [];
+    $("#paper-qlist tbody tr").each(function(i, e) {
+      qnos.push($(e).attr("data-qno"));
+    });
+    $("#frm-new input[name=papername]").val(papername);
+    $("#frm-new input[name=paperintro]").val(paperintro);
+    $("#frm-new input[name=qnos]").val(qnos);
+    $("#frm-new").submit();
+  });
+
 });
 </script>
