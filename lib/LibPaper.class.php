@@ -5,10 +5,10 @@
  */
 class LibPaper {
 
-    public static function addPaper($papername, $paperintro, $owner_uid, $qnos) {
+    public static function addPaper($papername, $paperintro, $papertype, $owner_uid, $qnos) {
         DalPaper::beginTransaction();
 
-        DalPaper::addPaper($papername, $paperintro, $owner_uid);
+        DalPaper::addPaper($papername, $paperintro, $papertype, $owner_uid);
         $pid = DalPaper::insertID();
 
         DalPaperQuestion::deletePaperQnos($pid);

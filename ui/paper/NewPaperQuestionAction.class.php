@@ -10,11 +10,13 @@ class NewPaperQuestionAction extends SigninPageBaseAction {
     protected function signinPageExecute(MLeapUser $me) {
         $papername = MRequest::post('papername');
         $paperintro = MRequest::post('paperintro');
+        $papertype = MRequest::post('papertype');
 
         $questionList = DalQuestion::getQuestionList();
 
         $this->assign('papername', $papername);
         $this->assign('paperintro', $paperintro);
+        $this->assign('papertype', $papertype);
         $this->assign('questionList', $questionList);
 
         $this->displayTemplate('paper/newpaperquestion.tpl.php');

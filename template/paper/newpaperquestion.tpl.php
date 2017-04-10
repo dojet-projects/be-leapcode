@@ -93,6 +93,7 @@
     <form id="frm-new" action="/papers/new/commit" method="post" style="display: none;">
       <input type="hidden" name="papername" />
       <input type="hidden" name="paperintro" />
+      <input type="hidden" name="papertype" />
       <input type="hidden" name="qnos" />
     </form>
 
@@ -113,6 +114,7 @@
 <script type="text/javascript">
 var papername = "<?php echo addslashes($tpl_papername)?>";
 var paperintro = "<?php echo addslashes($tpl_paperintro)?>";
+var papertype = "<?php echo addslashes($tpl_papertype)?>";
 $().ready(function() {
   $("#paper-qlist").hide();
   $('#qlist button[role=btn-add]').click(function() {
@@ -144,6 +146,7 @@ $().ready(function() {
     });
     $("#frm-new input[name=papername]").val(papername);
     $("#frm-new input[name=paperintro]").val(paperintro);
+    $("#frm-new input[name=papertype]").val(papertype);
     $("#frm-new input[name=qnos]").val(qnos);
     $("#frm-new").submit();
   });

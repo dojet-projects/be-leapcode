@@ -43,6 +43,19 @@
             </div>
           </div>
           <div class="form-group">
+            <label for="papertype" class="col-sm-2 control-label">试卷类型</label>
+            <div class="col-sm-10">
+              <label class="radio-inline col-xs-5">
+                <input type="radio" name="papertype" value="public" /> 开放试卷
+                <p class="text-muted help-block">任何人都可见。</p>
+              </label>
+              <label class="radio-inline col-xs-5">
+                <input type="radio" name="papertype" value="private" /> 私有试卷
+                <p class="text-muted help-block">只有被邀请的人才可打开试卷。</p>
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
               <button type="submit" class="btn btn-default">下一步</button>
             </div>

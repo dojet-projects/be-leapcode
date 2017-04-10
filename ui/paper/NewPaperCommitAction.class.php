@@ -10,9 +10,12 @@ class NewPaperCommitAction extends SigninBaseAction {
     protected function signinExecute(MLeapUser $me) {
         $papername = MRequest::post('papername');
         $paperintro = MRequest::post('paperintro');
+        $papertype = MRequest::post('papertype');
         $qnos = MRequest::post('qnos');
 
-        LibPaper::addPaper($papername, $paperintro, $me->uid(), $qnos);
+        LibPaper::addPaper($papername, $paperintro, $papertype, $me->uid(), $qnos);
+
+        redirect('/papers');
     }
 
 }

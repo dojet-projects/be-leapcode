@@ -14,13 +14,14 @@ class DalPaper extends MysqlDal {
         return DBLEAPCODE;
     }
 
-    public static function addPaper($papername, $paperintro, $owner_uid) {
+    public static function addPaper($papername, $paperintro, $papertype, $owner_uid) {
         DAssert::assertNumeric($owner_uid);
         $arrIns = array(
             'papername' => $papername,
             'paperintro' => $paperintro,
+            'papertype' => $papertype,
             'owner_uid' => $owner_uid,
-            'updatetime' => time(),
+            'updatetime' => datetime(),
         );
         return self::doInsert('paper', $arrIns);
     }
