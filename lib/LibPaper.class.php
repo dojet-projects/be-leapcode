@@ -22,4 +22,13 @@ class LibPaper {
         DalPaper::commit();
     }
 
+    public static function getRecommends($ps = 0, $pn = 10) {
+        $arrPids = DalPaperRecommend::getRecommendPids($ps, $pn);
+        if (empty($arrPids)) {
+            return [];
+        }
+        $arrPapers = DalPaper::getPaperList($arrPids);
+        return $arrPapers;
+    }
+
 }

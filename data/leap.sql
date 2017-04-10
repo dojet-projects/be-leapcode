@@ -78,6 +78,116 @@ INSERT INTO `accepted_code` VALUES (16,'<?php\\r\\nclass Solution {\\r\\n\\r\\n 
 UNLOCK TABLES;
 
 --
+-- Table structure for table `invitecode`
+--
+
+DROP TABLE IF EXISTS `invitecode`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `invitecode` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` char(32) NOT NULL COMMENT '邀请码',
+  `is_used` tinyint(1) NOT NULL COMMENT '是否已使用',
+  `usedtime` datetime DEFAULT NULL COMMENT '使用时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='邀请码';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `invitecode`
+--
+
+LOCK TABLES `invitecode` WRITE;
+/*!40000 ALTER TABLE `invitecode` DISABLE KEYS */;
+/*!40000 ALTER TABLE `invitecode` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `paper`
+--
+
+DROP TABLE IF EXISTS `paper`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `paper` (
+  `pid` int(11) NOT NULL AUTO_INCREMENT,
+  `papername` varchar(255) NOT NULL COMMENT '试卷名称',
+  `paperintro` text NOT NULL COMMENT '试卷说明',
+  `papertype` enum('','public','private') NOT NULL COMMENT '试卷类型',
+  `owner_uid` int(11) NOT NULL COMMENT '所有者uid',
+  `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updatetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`pid`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='试卷';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `paper`
+--
+
+LOCK TABLES `paper` WRITE;
+/*!40000 ALTER TABLE `paper` DISABLE KEYS */;
+INSERT INTO `paper` VALUES (2,'test\"\"','','',1,'2017-04-10 09:34:25','0000-00-00 00:00:00'),(3,'test\"\"','','',1,'2017-04-10 09:41:11','0000-00-00 00:00:00'),(4,'test\"\"','','',1,'2017-04-10 09:41:53','2017-04-10 09:38:52'),(5,'test\"\"','','',1,'2017-04-10 09:42:16','2017-04-10 09:39:15'),(6,'测试','这是一个测试','private',1,'2017-04-10 09:59:56','2017-04-10 09:59:57');
+/*!40000 ALTER TABLE `paper` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `paper_question`
+--
+
+DROP TABLE IF EXISTS `paper_question`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `paper_question` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pid` int(11) NOT NULL COMMENT '试卷id',
+  `qno` int(11) NOT NULL COMMENT '问题id',
+  `orderno` int(11) NOT NULL COMMENT '顺序',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `pid` (`pid`,`qno`),
+  KEY `pid_2` (`pid`,`orderno`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COMMENT='试卷问题关系表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `paper_question`
+--
+
+LOCK TABLES `paper_question` WRITE;
+/*!40000 ALTER TABLE `paper_question` DISABLE KEYS */;
+INSERT INTO `paper_question` VALUES (1,2,1,0),(2,2,3,1),(3,3,1,0),(4,3,3,1),(5,4,1,0),(6,4,3,1),(7,5,1,0),(8,5,3,1),(9,6,1,0),(10,6,2,1);
+/*!40000 ALTER TABLE `paper_question` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `paper_recommend`
+--
+
+DROP TABLE IF EXISTS `paper_recommend`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `paper_recommend` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pid` int(11) NOT NULL COMMENT '试卷id',
+  `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+  `updatetime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `pid` (`pid`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='推荐试卷';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `paper_recommend`
+--
+
+LOCK TABLES `paper_recommend` WRITE;
+/*!40000 ALTER TABLE `paper_recommend` DISABLE KEYS */;
+INSERT INTO `paper_recommend` VALUES (1,4,'2017-04-10 10:25:12','2017-04-10 10:25:12'),(2,5,'2017-04-10 10:25:12','2017-04-10 10:25:12');
+/*!40000 ALTER TABLE `paper_recommend` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `question_tag`
 --
 
@@ -151,7 +261,7 @@ CREATE TABLE `simple_user` (
   `createtime` int(10) unsigned NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`uid`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +270,7 @@ CREATE TABLE `simple_user` (
 
 LOCK TABLES `simple_user` WRITE;
 /*!40000 ALTER TABLE `simple_user` DISABLE KEYS */;
-INSERT INTO `simple_user` VALUES (1,'setimouse@qq.com','0ece28b8a297c556eda7295ee3d836a5',1490259814);
+INSERT INTO `simple_user` VALUES (1,'setimouse@qq.com','0ece28b8a297c556eda7295ee3d836a5',1490259814),(2,'setimouse1@qq.com','60952a87cef734575e293574fdf976e4',1491542005);
 /*!40000 ALTER TABLE `simple_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,9 +345,9 @@ DROP TABLE IF EXISTS `user_info`;
 CREATE TABLE `user_info` (
   `uid` int(11) NOT NULL,
   `nickname` varchar(64) NOT NULL,
-  `realname` varchar(32) NOT NULL COMMENT '真实姓名',
-  `occupation` enum('','student','professional') NOT NULL COMMENT '身份',
-  `aboutme` text NOT NULL COMMENT '关于我',
+  `realname` varchar(32) DEFAULT NULL COMMENT '真实姓名',
+  `occupation` enum('','student','professional') NOT NULL DEFAULT '' COMMENT '身份',
+  `aboutme` text COMMENT '关于我',
   PRIMARY KEY (`uid`),
   UNIQUE KEY `nickname` (`nickname`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户信息';
@@ -249,7 +359,7 @@ CREATE TABLE `user_info` (
 
 LOCK TABLES `user_info` WRITE;
 /*!40000 ALTER TABLE `user_info` DISABLE KEYS */;
-INSERT INTO `user_info` VALUES (1,'setimouse','','','');
+INSERT INTO `user_info` VALUES (1,'setimouse','','',''),(2,'a','','','');
 /*!40000 ALTER TABLE `user_info` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -262,4 +372,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-06 13:07:45
+-- Dump completed on 2017-04-10 18:27:43

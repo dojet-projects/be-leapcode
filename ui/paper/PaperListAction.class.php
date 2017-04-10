@@ -10,6 +10,8 @@
 class PaperListAction extends LeapPageBaseAction {
 
     protected function pageExecute($is_signin) {
+        $recommend_papers = LibPaper::getRecommends();
+        $this->assign('recommend_papers', $recommend_papers);
         $this->displayTemplate('paper/paperlist.tpl.php');
     }
 

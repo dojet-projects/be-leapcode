@@ -29,13 +29,25 @@
       <div class="col-md-9">
         <div class="row">
           <div class="col-xs-12">
-            <form class="form-group-lg">
-              <label for="paper-code">试卷码</label>
-              <div class="form-group form-inline">
-                <input type="text" class="form-control" id="paper-code" placeholder="">
-                <button type="submit" class="btn btn-success btn-lg">进入</button>
-              </div>
-            </form>
+            <table class="table table-striped ">
+              <thead>
+                <tr>
+                  <th style="width: 2em;">#</th><th>标题</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($tpl_recommend_papers as $pid => $p) : ?>
+                <tr>
+                  <td><?php echo $pid; ?></td>
+                  <td>
+                    <a href="/paper/<?php echo $pid; ?>">
+                      <?php echo safeHtml($p['papername']); ?>
+                    </a>
+                  </td>
+                </tr>
+                <?php endforeach; ?>
+              </tbody>
+            </table>
           </div>
         </div>
         <div class="row">

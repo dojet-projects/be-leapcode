@@ -26,4 +26,14 @@ class DalPaper extends MysqlDal {
         return self::doInsert('paper', $arrIns);
     }
 
+    public static function getPaperList($arrPids) {
+        $wherein = self::wherein('pid', $arrPids);
+        $order_by_field = sprintf("pid, %s", join(',', $arrPids));
+        $sql = "SELECT *
+                FROM paper
+                WHERE $wherein
+                ORDER BY FIELD(pid, $order_by_field)";
+        return self::rs2keyarray($sql, 'pid');
+    }
+
 }
