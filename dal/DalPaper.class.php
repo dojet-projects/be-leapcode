@@ -14,16 +14,12 @@ class DalPaper extends MysqlDal {
         return DBLEAPCODE;
     }
 
-    public static function addPaper($papername, $paperintro, $papertype, $owner_uid) {
-        DAssert::assertNumeric($owner_uid);
-        $arrIns = array(
-            'papername' => $papername,
-            'paperintro' => $paperintro,
-            'papertype' => $papertype,
-            'owner_uid' => $owner_uid,
-            'updatetime' => datetime(),
-        );
-        return self::doInsert('paper', $arrIns);
+    public static function getPaper($pid) {
+        DAssert::assertNumeric($pid);
+        $sql = "SELECT *
+                FROM paper
+                WHERE pid=$pid";
+        return self::rs2rowline($sql);
     }
 
     public static function getPaperList($arrPids) {
@@ -34,6 +30,18 @@ class DalPaper extends MysqlDal {
                 WHERE $wherein
                 ORDER BY FIELD(pid, $order_by_field)";
         return self::rs2keyarray($sql, 'pid');
+    }
+
+    public static function addPaper($papername, $paperintro, $papertype, $owner_uid) {
+        DAssert::assertNumeric($owner_uid);
+        $arrIns = array(
+            'papername' => $papername,
+            'paperintro' => $paperintro,
+            'papertype' => $papertype,
+            'owner_uid' => $owner_uid,
+            'updatetime' => datetime(),
+        );
+        return self::doInsert('paper', $arrIns);
     }
 
 }

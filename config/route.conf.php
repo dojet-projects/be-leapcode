@@ -24,5 +24,6 @@ Dispatcher::loadRoute(
     '/^papers\/new$/' => UI.'paper/NewPaperAction',
     '/^papers\/new\/question$/' => UI.'paper/NewPaperQuestionAction',
     '/^papers\/new\/commit$/' => UI.'paper/NewPaperCommitAction',
+    '/^paper\/(?<pid>\d+)$/' => UI.'paper/PaperAction',
     ]
 );

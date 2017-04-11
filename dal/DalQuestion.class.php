@@ -54,7 +54,8 @@ class DalQuestion extends MysqlDal {
         $qnos = join(',', $arrQno);
         $sql = "SELECT *
                 FROM questions
-                WHERE qno IN ($qnos)";
+                WHERE qno IN ($qnos)
+                ORDER BY FIELD(qno, $qnos)";
         return self::rs2keyarray($sql, 'qno');
     }
 
