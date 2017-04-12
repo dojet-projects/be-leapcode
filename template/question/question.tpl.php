@@ -31,9 +31,9 @@
         <div class="col-xs-12">
           <h2>
             <?php echo safeHtml($tpl_qno.'. '.$tpl_question['title'])?>
-            <a href="/question/pick-one" class="btn btn-default pull-right">
-              <i class="glyphicon glyphicon-random" style="margin-right: .7em;"></i>换一个
-            </a>
+            <div class="pull-right">
+              <button class="btn btn-default" data-toggle="modal" data-target="#modal">邀请他人作答</button>
+            </div>
           </h2>
 
           <hr />
@@ -64,8 +64,11 @@
           <?php endif ?>
         </div>
       </div> <!-- / row brief -->
-      <div class="row">
+      <div class="row" style="margin-top: 2em;">
         <div class="col-xs-12">
+            <a href="/question/pick-one" class="btn btn-default">
+              <i class="glyphicon glyphicon-random" style="margin-right: .7em;"></i>换一个
+            </a>
           <hr />
         </div>
       </div>
@@ -151,6 +154,29 @@
         </div> <!-- -->
       </div> <!-- / row code -->
     </div><!-- /.container -->
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">邀请他人作答</h4>
+      </div>
+      <div class="modal-body">
+        <div class="input-group">
+          <input type="text" id="input-invite-to" class="form-control" placeholder="被邀请人email">
+          <span class="input-group-btn">
+            <button class="btn btn-primary" id="btn-invite" type="button">邀请</button>
+          </span>
+        </div><!-- /input-group -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
     <?php include TEMPLATE.'mod/footer.tpl.php'; ?>
 
@@ -321,4 +347,38 @@ function change_code(code, lang) {
       scrollBeyondLastLine: false
   });
 }
+
+$().ready(function() {
+  $("#btn-invite").click(function() {
+    var data = new FormData();
+    data.append('invite_to', $("#input-invite-to").val());
+    data.append('qno', <?=safeHtml($tpl_qno)?>);
+    $.ajax({
+      url: "/exam/invite",
+      type: 'POST',
+      data: data,
+      mimeType: "multipart/form-data",
+      cache: false,
+      contentType: false,
+      processData: false,
+      context: null,
+      success: function (data, textStatus, jqXHR) {
+        try {
+          var result = JSON.parse(data);
+          if (result.errno === 0) {
+            var data = result.data;
+            console.log(data);
+          } else {
+            console.warn(result);
+          }
+        } catch (e) {
+          alert('八阿哥驾到，请联系研发\n' + data);
+          console.log(e);
+        }
+      },
+      complete: function (jqXHR, textStatus) {
+      }
+    });
+  });
+});
 </script>

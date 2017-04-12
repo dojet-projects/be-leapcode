@@ -25,5 +25,8 @@ Dispatcher::loadRoute(
     '/^papers\/new\/question$/' => UI.'paper/NewPaperQuestionAction',
     '/^papers\/new\/commit$/' => UI.'paper/NewPaperCommitAction',
     '/^paper\/(?<pid>\d+)$/' => UI.'paper/PaperAction',
+
+    '/^exam\/(?<eid>\d+)$/' => UI.'exam/ExamAction',
+    '/^exam\/invite$/' => UI.'exam/AjaxExamInviteAction',
     ]
 );
