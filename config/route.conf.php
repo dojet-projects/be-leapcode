@@ -28,5 +28,7 @@ Dispatcher::loadRoute(
 
     '/^exam\/(?<eid>\d+)$/' => UI.'exam/ExamAction',
     '/^exam\/invite$/' => UI.'exam/AjaxExamInviteAction',
+    '/^ajax\/exam\/record$/' => UI.'exam/AjaxExamRecordAction',
+
     ]
 );

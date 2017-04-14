@@ -14,6 +14,7 @@ Config::loadConfig(CONFIG.'const');
 Config::loadConfig(CONFIG.'runtime');
 Config::loadConfig(CONFIG.'global');
 Config::loadConfig(CONFIG.'database/database');
+Config::loadConfig(CONFIG.'redis/redis');
 Config::loadConfig(CONFIG.'route');
 
 DAutoloader::getInstance()->addAutoloadPathArray(
@@ -31,6 +32,16 @@ ModuleSimpleUser::config('delegate.signin', SingletonFactory::getInstance('Signi
 ModuleSimpleUser::config('delegate.signincommit', SingletonFactory::getInstance('SigninDelegate'));
 ModuleSimpleUser::config('delegate.signup', SingletonFactory::getInstance('SignupDelegate'));
 ModuleSimpleUser::config('delegate.signupcommit', SingletonFactory::getInstance('SignupDelegate'));
+
+$rc = Config::runtimeConfigForKeyPath('redis.server');
+DRedis::init(array(
+    'host' => $rc['hosts'][0],
+    'port' => $rc['port'],
+    'password' => $rc['password'],
+    'timeout' => $rc['timeout'],
+    'key_prefix' => 'lp:',
+    )
+);
 
 // Dojet::addModule(__DIR__.'/../mod-simplecms');
 // ModuleSimpleCMS::module()->setDatabase(DBDEMO);

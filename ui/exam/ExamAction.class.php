@@ -11,8 +11,8 @@ use \Michelf\Markdown;
 class ExamAction extends SigninPageBaseAction {
 
     protected function signinPageExecute(MLeapUser $me) {
-        $eiid = MRequest::param('eid');
-        $invite = DalExamInvite::getInvite($eiid);
+        $eid = MRequest::param('eid');
+        $invite = DalExamInvite::getInvite($eid);
         if (is_null($invite)) {
             print 'exam not exists';
             return;
@@ -56,13 +56,18 @@ class ExamAction extends SigninPageBaseAction {
         $path = sprintf("%squestions/codes/%d/code/%s/solution/solution.php", $coderoot, $qno, $lang);
         $code = file_get_contents($path);
 
+        // comet key
+        $ck = md5(json_encode([microtime(), uniqid(), $me->uid(), $eid]));
+
         $this->assign('qno', $qno);
         $this->assign('question', $question);
         $this->assign('lang_list', $lang_list);
         $this->assign('lang', $lang);
         $this->assign('code', $code);
         $this->assign('brief', $brief);
-        $this->displayTemplate('exam/exam.tpl.php');
+        $this->assign('ck', $ck);
+
+        $this->displayTemplate('exam/test.tpl.php');
     }
 
     protected function topmenu() {

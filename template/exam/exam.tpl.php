@@ -14,6 +14,7 @@
     <!-- Bootstrap core CSS -->
     <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/css/sticky-footer.css" rel="stylesheet">
+    <link href="/static/CodeMirror/lib/codemirror.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -57,7 +58,7 @@
       </div>
     </div>
 
-    <div class="container hidden" id="container-coding">
+    <div class="container" id="container-coding">
       <?php
           $arrLang = array(
             'php' => 'PHP',
@@ -78,6 +79,7 @@
       </div>
       <div class="row"> <!-- row code -->
         <div class="col-md-12">
+          <textarea id="demotext"></textarea>
           <div id="container" style="height:30em; border: solid 1px lightgrey; margin-bottom:1em;"></div>
           <div class="clearfix">
             <?php if ($tpl_is_signin) : ?>
@@ -168,13 +170,23 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="/static/jquery/jquery-3.1.1.min.js"></script>
     <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/CodeMirror/lib/codemirror.js"></script>
   </body>
 </html>
-<script src="/static/monaco-editor/min/vs/loader.js"></script>
+<!-- Create a simple CodeMirror instance -->
+<script>
+</script>
 <script type="text/javascript">
-$().ready(function() {
+var ck = "<?php echo addslashes($tpl_ck);?>";
 
-  $('<p class="lead text-muted text-center" id="loading">载入中...</p>').insertBefore("#container-coding");
+$().ready(function() {
+  console.log($('#demotext')[0]);
+  var myCodeMirror = CodeMirror($("#demotext")[0], {
+    value: "function myScript(){return 100;}\n",
+    mode:  "javascript"
+  });
+
+  // $('<p class="lead text-muted text-center" id="loading">载入中...</p>').insertBefore("#container-coding");
 
   function changeLang(lang) {
     var data = new FormData();
@@ -211,13 +223,14 @@ $().ready(function() {
 
   $('#sel-lang').val('<?php echo $tpl_lang?>');
 
-  require.config({ paths: { 'vs': '/static/monaco-editor/min/vs' }});
+  // require.config({ paths: { 'vs': '/static/monaco-editor/min/vs' }});
 
-  require(['vs/editor/editor.main'], function() {
-    $('#loading').remove();
-    $('#container-coding').removeClass("hidden");
-    change_code('<?php echo str_replace("\r\n", '\r\n', $tpl_code) ?>', '<?php echo $tpl_lang ?>');
-  });
+  // require(['vs/editor/editor.main'], function() {
+  //   $('#loading').remove();
+  //   $('#container-coding').removeClass("hidden");
+  //   change_code('<?php echo str_replace("\r\n", '\r\n', $tpl_code) ?>', '<?php echo $tpl_lang ?>');
+  // });
+
 
   $('#sel-lang').change(function() {
     var lang = $(this).val();
